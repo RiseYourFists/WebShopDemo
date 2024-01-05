@@ -1,0 +1,29 @@
+@model LoginModel
+@{
+    ViewBag.Title = "Log in";
+}
+
+<div class="small-window-field">
+    <div class="title-holder">
+        <h1 class="title">Log In</h1>
+    </div>
+
+    <form class="form-list" action="post" method="post">
+        <div class="text-danger" asp-validation-summary="All"></div>
+        <div class="form-field">
+            <label asp-for="Email"></label>
+            <input asp-for="Email">
+        </div>
+        <div class="form-field">
+            <label asp-for="Password"></label>
+            <input asp-for="Password">
+        </div>
+        <div class="form-field centered">
+            <button class="btn-confirm" type="submit">Log in</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

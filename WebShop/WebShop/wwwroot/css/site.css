@@ -1,11 +1,127 @@
-html {
-  font-size: 14px;
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Signika:wght@300;400;500;600;700&display=swap');
+*,
+*::after,
+*::before{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+html {
+  font-size: 18px;
+  font-weight: 300;
+  font-family: "Signika";
+}
+
+body{
+  background-color: #3e3e3e;
+}
+
+header *{
+  color: white;
+  text-decoration-color: white;
+}
+
+main{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  min-height: 100dvh;
+  max-width: 100dvw;
+}
+
+a{
+  text-decoration: none;
+}
+
+a:hover{
+  color: unset;
+}
+
+.title{
+  font-family: "Rubik Doodle Shadow";
+}
+
+.title-holder{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.form-list{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.form-list > *{
+  width: 100%;
+}
+
+.form-field{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.form-field.centered{
+  justify-content: center;
+}
+
+.form-field label{
+  width: 40%;
+  font-size: 24px;
+}
+
+.form-field input{
+  width: 60%;
+  min-height: 24px;
+  padding: 8px;
+  font-size: 22px;
+  border-radius: 4px;
+  border: 2px solid black;
+}
+
+.form-field input:focus{
+  
+  outline: solid lightblue 2px;
+}
+
+.form-field span{
+  width: 100%;
+}
+
+.form-field > .btn-confirm{
+  font-size: 1.3rem;
+}
+
+.btn-confirm{
+  padding: 5px 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  background-color: green;
+  transition: all 0.3s;
+}
+
+.btn-confirm:hover{
+  background-color: rgb(12, 172, 12);
+}
+
+.small-window-field{
+  width: 45%;
+  border-radius: 16px;
+  box-shadow: 2px 2px 15px black;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 1.2rem 1.5rem;
+  background-color: #ccc;
+  transition: width 0.25s;
 }
 
 html {
@@ -15,4 +131,30 @@ html {
 
 body {
   margin-bottom: 60px;
+}
+
+@media (max-width: 1200px) {
+  .small-window-field{
+    width: 75%;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+
+  .small-window-field{
+    width: 85%;
+  }
+}
+
+@media(max-width: 425px){
+  .small-window-field{
+    width: 95%;
+  }
+
+  .form-field :is(input, label){
+    width: 100%;
+  }
 }

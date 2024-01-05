@@ -1,0 +1,51 @@
+@model RegisterModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class="small-window-field">
+    <div class="title-holder">
+        <h1 class="title">Register</h1>
+    </div>
+
+    <form class="form-list" method="post">
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <div class="form-field">
+            <label asp-for="FirstName">First name</label>
+            <input asp-for="FirstName">
+            <span class="text-danger" asp-validation-for="FirstName"></span>
+        </div>
+        <div class="form-field">
+            <label asp-for="LastName">Last name</label>
+            <input asp-for="LastName">
+            <span class="text-danger" asp-validation-for="LastName"></span>
+        </div>
+        <div class="form-field">
+            <label asp-for="Email">Email</label>
+            <input asp-for="Email">
+            <span class="text-danger" asp-validation-for="Email"></span>
+        </div>
+        <div class="form-field">
+            <label asp-for="Password">Password</label>
+            <input asp-for="Password">
+            <span class="text-danger" asp-validation-for="Password"></span>
+        </div>
+        <div class="form-field">
+            <label asp-for="ConfirmPassword">Confirm password</label>
+            <input asp-for="ConfirmPassword">
+            <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+        </div>
+        <div class="form-field">
+            <label asp-for="PhoneNumber">Phone number</label>
+            <input asp-for="PhoneNumber">
+            <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+        </div>
+        <div class="form-field centered">
+            <button class="btn-confirm" type="submit">Create</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
