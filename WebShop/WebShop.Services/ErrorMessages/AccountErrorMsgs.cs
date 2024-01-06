@@ -20,6 +20,10 @@
             public const string FirstNameLength = "First name must be between {2} and {1} characters long.";
 
             public const string LastNameLength = "Last name must be between {2} and {1} characters long.";
+
+            public const string UsernameLength = "Username must be between {2} and {1} characters long.";
+
+            public const string UserNameFormat = "Username can only have letter and digits.";
         }
 
         public static class LoginErrors

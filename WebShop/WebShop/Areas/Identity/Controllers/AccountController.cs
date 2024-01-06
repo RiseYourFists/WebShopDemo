@@ -87,6 +87,7 @@ namespace WebShop.App.Areas.Identity.Controllers
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
+                UserName = model.Username,
                 Email = model.Email,
                 PhoneNumber = model.PhoneNumber,
                 IsActive = true
@@ -105,14 +106,14 @@ namespace WebShop.App.Areas.Identity.Controllers
             }
 
             await _signInManager.SignInAsync(user, false);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
 
         [HttpGet]
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
     }
 }

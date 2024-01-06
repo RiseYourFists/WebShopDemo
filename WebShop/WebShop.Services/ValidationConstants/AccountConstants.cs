@@ -14,6 +14,12 @@ namespace WebShop.Services.ValidationConstants
             public const int LastNameMinLen = 2;
 
             public const int LastNameMaxLen = LastNameMaxLength;
+
+            public const int UsernameMinLen = 5;
+
+            public const int UsernameMaxLen = 256;
+
+            public const string UsernameValidationFormat = @"^[\w\d]+$";
         }
     }
 }

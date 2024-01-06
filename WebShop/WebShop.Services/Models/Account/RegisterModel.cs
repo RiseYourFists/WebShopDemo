@@ -15,6 +15,11 @@ namespace WebShop.Services.Models.Account
         [StringLength(LastNameMaxLen, MinimumLength = LastNameMinLen, ErrorMessage = LastNameLength)]
         public string LastName { get; set; } = null!;
 
+        [Required]
+        [StringLength(UsernameMaxLen, MinimumLength = UsernameMinLen, ErrorMessage = UsernameLength)]
+        [RegularExpression(UsernameValidationFormat, ErrorMessage = UserNameFormat)]
+        public string Username { get; set; } = null!;
+
         [Required(ErrorMessage = EmailRequired)]
         [EmailAddress]
         [DataType(DataType.EmailAddress)]
