@@ -15,6 +15,13 @@ namespace WebShop.App.ProgramOptionExtensions
                 options.SlidingExpiration = true;
 
             });
+
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(5);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
             return builder;
         }
     }

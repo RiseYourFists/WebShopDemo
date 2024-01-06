@@ -1,24 +1,31 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@inject IHttpContextAccessor HttpContextAccessor
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
 <ul class="navbar-nav gap-2">
-@if (SignInManager.IsSignedIn(User))
-{
-    <li class="nav-item">
-        <span>Hello @User.Identity?.Name!</span>
-    </li>
-    <li class="nav-item">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        var name = HttpContextAccessor?.HttpContext?.Session.GetString("UserFullName");
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            name = "user";
+        }
+
+        <li class="nav-item">
+            <span>Hello @name!</span>
+        </li>
+        <li class="nav-item">
             <a asp-area="Identity" asp-controller="Account" asp-action="LogOut">Log Out</a>
-    </li>
-}
-else
-{
-    <li class="nav-item">
-        <a asp-area="Identity" asp-controller="Account" asp-action="Register">Register</a>
-    </li>
-    <li class="nav-item">
-            <a asp-area="Identity" asp-controller="Account" asp-action="Login" >Log In</a>
-    </li>
-}
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a asp-area="Identity" asp-controller="Account" asp-action="Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a asp-area="Identity" asp-controller="Account" asp-action="Login">Log In</a>
+        </li>
+    }
 </ul>

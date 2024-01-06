@@ -58,12 +58,16 @@ namespace WebShop.App.Areas.Identity.Controllers
                 return View(model);
             }
 
+            var fullname = $"{user.FirstName} {user.LastName}";
+
+            HttpContext.Session.SetString("UserFullName", fullname);
+
             if (returnUrl != null)
             {
                 return Redirect(returnUrl);
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home", new {area = ""});
         }
 
         [HttpGet]
