@@ -1,0 +1,18 @@
+﻿<aside class="aside-wrapper">
+    <input type="checkbox" class="aside-toggle" id="aside-toggle">
+    <label class="aside-toggle-btn" for="aside-toggle">
+        <img src="/images/book.png" class="logo-icon"></img>
+    </label>
+    <div class="side-menu">
+        <div class="site-name">
+            <a class="title logo" asp-area="" asp-controller="Home" asp-action="Index">Book Shop</a>
+        </div>
+        <ul class="gap-2">
+            @await Html.PartialAsync("Components/_SideMenuItemPartial", new List<SideMenuModel>
+                   {
+                       new("Home", "", "Home", "Index", "fas fa-home")
+                   })
+        </ul>
+        <partial name="_LoginPartial"/>
+    </div>
+</aside>

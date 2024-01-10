@@ -1,4 +1,21 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿const elementMapping = {
+    dropdownElements: document.querySelectorAll('.dropdown-wrapper'),
+    scrollSideMenu: document.querySelector('.side-menu ul:nth-child(even)')
+}
 
-// Write your JavaScript code.
+elementMapping.dropdownElements.forEach(element => {
+    const container = element.querySelector('.dropdown-container');
+    const content = element.querySelector('.dropdown-content');
+    container.addEventListener('transitionend', () => {
+
+        if (container.clientHeight >= 298) {
+            content.style.overflowY = 'scroll';
+        }
+    })
+});
+
+function checkContent(){
+    if(elementMapping.scrollSideMenu.scrollHeight < elementMapping.scrollSideMenu.clientHeight){
+        elementMapping.scrollSideMenu.style.overflowY = "hidden"
+    }
+}

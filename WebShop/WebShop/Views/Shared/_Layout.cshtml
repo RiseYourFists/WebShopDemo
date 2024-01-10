@@ -3,22 +3,25 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WebShop</title>
+    <title>@ViewData["Title"] - Book Shop</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebShop.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <partial name="_HeaderPartial" />
-
-    <div class="container">
+    <partial name="_SidemenuPartial"/>
+    <section class="main-content">
+        <partial name="_HeaderPartial" />
         <main role="main" class="pb-3">
+            <div class="bg-image-wrapper">
+                <img src="~/images/Books.jpeg" alt="">
+            </div>
             @RenderBody()
         </main>
-    </div>
+        <partial name="_FooterPartial" />
+        <partial name="_LibrariesPartial" />
+    </section>
 
-    <partial name="_FooterPartial" />
-    <partial name="_LibrariesPartial" />
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

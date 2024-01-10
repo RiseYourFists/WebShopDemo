@@ -1,0 +1,25 @@
+﻿@model DropdownModel;
+
+@{
+    var hasHeading = Model.Heading != null;
+    
+    <div class="dropdown-wrapper">
+        <button class="unfold-btn @Model.UnfoldButtonClasses">@Model.UnfoldButtonContent</button>
+        <div class="dropdown-container">
+            @if (hasHeading)
+            {
+                <div class="dropdown-header">
+                    <p>@Model.Heading</p>
+                </div>
+            }
+            <div class="dropdown-content">
+                @{
+                    foreach (var element in Model.ElementList)
+                    {
+                        <a class="@element.ButtonClasses" asp-area="@element.Area" asp-controller="@element.Controller" asp-action="@element.Action">@element.ButtonContent</a>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+}

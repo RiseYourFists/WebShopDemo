@@ -12,11 +12,11 @@
         <div class="text-danger" asp-validation-summary="All"></div>
         <div class="form-field">
             <label asp-for="Email"></label>
-            <input asp-for="Email">
+            <input asp-for="Email" autocomplete="username">
         </div>
         <div class="form-field">
             <label asp-for="Password"></label>
-            <input type="password" asp-for="Password">
+            <input type="password" asp-for="Password" autocomplete="current-password">
         </div>
         <div class="form-field centered">
             <button class="btn-confirm" type="submit">Log in</button>
