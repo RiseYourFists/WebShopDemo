@@ -1,19 +1,18 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject IHttpContextAccessor HttpContextAccessor
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
 <ul class="gap-2 bottom-list">
     @if (SignInManager.IsSignedIn(User))
     {
-        var name = HttpContextAccessor?.HttpContext?.Session.GetString("UserFullName");
+        var name = Context.Session.GetString("UserFullName");
         if (string.IsNullOrWhiteSpace(name))
         {
             name = "user";
         }
 
         <li>
-            <span>Hello @name!</span>
+            <span class="foldable">Hello @name!</span>
         </li>
         <li>
             <a asp-area="Identity" asp-controller="Account" asp-action="LogOut">
@@ -24,10 +23,11 @@
     }
     else
     {
-        @await Html.PartialAsync("Components/_SideMenuItemPartial", new List<SideMenuModel>()
-               {
-                   new ("Register", "Identity", "Account", "Register", "fas fa-file-signature"),
-                   new ("Log In", "Identity", "Account", "Login", "fas fa-sign-in-alt")
-               })
+        @await Html.PartialAsync("Components/_SideMenuItemPartial",
+            new List<SideMenuModel>()
+            {
+                new ("Register", "Identity", "Account", "Register", "fas fa-file-signature"),
+                new ("Log In", "Identity", "Account", "Login", "fas fa-sign-in-alt")
+            })
     }
 </ul>
