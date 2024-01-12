@@ -34,6 +34,8 @@ namespace WebShop.Core.Data
 
         public DbSet<Promotion> Promotions { get; set; }
 
+        public DbSet<Photo> Photos { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

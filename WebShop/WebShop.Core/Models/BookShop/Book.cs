@@ -32,11 +32,6 @@ namespace WebShop.Core.Models.BookShop
         public decimal CurrentPrice { get; set; }
 
         [Required]
-        [MaxLength(UrlMaxLength)]
-        [Comment("Book's cover photo")]
-        public string CoverPhoto { get; set; } = null!;
-
-        [Required]
         [Comment("Genre key identifier")]
         public int GenreId { get; set; }
 
@@ -49,6 +44,8 @@ namespace WebShop.Core.Models.BookShop
 
         [ForeignKey(nameof(AuthorId))]
         public Author Author { get; set; } = null!;
+
+        public virtual ICollection<Photo> Photos { get; set; } = new HashSet<Photo>();
 
         public virtual ICollection<PlacedOrderBook> PlacedOrderBooks { get; set; } = new HashSet<PlacedOrderBook>();
     }
