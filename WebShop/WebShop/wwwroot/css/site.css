@@ -208,6 +208,7 @@ a{
 }
 
 .side-menu li.selected > *{
+  pointer-events: none;
   color: rgba(232, 184, 87, 0.8) !important;
 }
 

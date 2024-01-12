@@ -39,7 +39,7 @@ namespace WebShop.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Authors");
+                    b.ToTable("Authors", (string)null);
 
                     b.HasComment("Author table");
                 });
@@ -58,7 +58,7 @@ namespace WebShop.Core.Migrations
 
                     b.HasIndex("PromotionId");
 
-                    b.ToTable("AuthorPromotions");
+                    b.ToTable("AuthorPromotions", (string)null);
 
                     b.HasComment("Author targeted promotion");
                 });
@@ -79,6 +79,12 @@ namespace WebShop.Core.Migrations
                     b.Property<decimal>("BasePrice")
                         .HasColumnType("decimal(18,2)")
                         .HasComment("Book's non-promotional price");
+
+                    b.Property<string>("CoverPhoto")
+                        .IsRequired()
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)")
+                        .HasComment("Book's cover photo");
 
                     b.Property<decimal>("CurrentPrice")
                         .HasColumnType("decimal(18,2)")
@@ -106,7 +112,7 @@ namespace WebShop.Core.Migrations
 
                     b.HasIndex("GenreId");
 
-                    b.ToTable("Books");
+                    b.ToTable("Books", (string)null);
 
                     b.HasComment("Book table");
                 });
@@ -128,7 +134,7 @@ namespace WebShop.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genres");
+                    b.ToTable("Genres", (string)null);
 
                     b.HasComment("Genre table");
                 });
@@ -147,51 +153,9 @@ namespace WebShop.Core.Migrations
 
                     b.HasIndex("PromotionId");
 
-                    b.ToTable("GenrePromotions");
+                    b.ToTable("GenrePromotions", (string)null);
 
                     b.HasComment("Promotion targeting genres");
-                });
-
-            modelBuilder.Entity("WebShop.Core.Models.BookShop.Photo", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasComment("Key Identifier");
-
-                    b.Property<int>("BookId")
-                        .HasColumnType("int")
-                        .HasComment("Book key identifier");
-
-                    b.Property<byte[]>("Bytes")
-                        .IsRequired()
-                        .HasMaxLength(2097152)
-                        .HasColumnType("varbinary(max)")
-                        .HasComment("Photo data");
-
-                    b.Property<string>("FileExtension")
-                        .IsRequired()
-                        .HasMaxLength(4)
-                        .HasColumnType("nvarchar(4)")
-                        .HasComment("Photo extension");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
-                        .HasComment("Photo name");
-
-                    b.Property<long>("Size")
-                        .HasColumnType("bigint")
-                        .HasComment("Photo size");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BookId");
-
-                    b.ToTable("Photos");
-
-                    b.HasComment("Photo Container");
                 });
 
             modelBuilder.Entity("WebShop.Core.Models.BookShop.PlacedOrder", b =>
@@ -219,7 +183,7 @@ namespace WebShop.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PlacedOrders");
+                    b.ToTable("PlacedOrders", (string)null);
 
                     b.HasComment("Placed order");
                 });
@@ -238,7 +202,7 @@ namespace WebShop.Core.Migrations
 
                     b.HasIndex("PlacedOrderId");
 
-                    b.ToTable("PlacedOrderBooks");
+                    b.ToTable("PlacedOrderBooks", (string)null);
 
                     b.HasComment("Collection of all books that are ordered");
                 });
@@ -272,7 +236,7 @@ namespace WebShop.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Promotions");
+                    b.ToTable("Promotions", (string)null);
 
                     b.HasComment("Promotion table");
                 });
@@ -547,17 +511,6 @@ namespace WebShop.Core.Migrations
                     b.Navigation("Promotion");
                 });
 
-            modelBuilder.Entity("WebShop.Core.Models.BookShop.Photo", b =>
-                {
-                    b.HasOne("WebShop.Core.Models.BookShop.Book", "Book")
-                        .WithMany("Photos")
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Book");
-                });
-
             modelBuilder.Entity("WebShop.Core.Models.BookShop.PlacedOrderBook", b =>
                 {
                     b.HasOne("WebShop.Core.Models.BookShop.Book", "Book")
@@ -647,8 +600,6 @@ namespace WebShop.Core.Migrations
 
             modelBuilder.Entity("WebShop.Core.Models.BookShop.Book", b =>
                 {
-                    b.Navigation("Photos");
-
                     b.Navigation("PlacedOrderBooks");
                 });
 

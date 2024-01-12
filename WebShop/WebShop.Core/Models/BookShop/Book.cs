@@ -45,8 +45,6 @@ namespace WebShop.Core.Models.BookShop
         [ForeignKey(nameof(AuthorId))]
         public Author Author { get; set; } = null!;
 
-        public virtual ICollection<Photo> Photos { get; set; } = new HashSet<Photo>();
-
         public virtual ICollection<PlacedOrderBook> PlacedOrderBooks { get; set; } = new HashSet<PlacedOrderBook>();
     }
 }
