@@ -203,7 +203,7 @@ a{
   border-radius: 4px;
 }
 
-.side-menu ul > *:hover{
+.side-menu ul > *:hover:not(.selected){
   background-color: rgba(255, 255, 255, .3);
 }
 

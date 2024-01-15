@@ -1,0 +1,362 @@
+﻿[
+  {
+    "BookId": 1,
+    "Title": "The Lost City",
+    "Description": "A thrilling adventure in an ancient city buried in the jungle.",
+    "BasePrice": 24.99,
+    "CurrentPrice": 24.99,
+    "GenreId": 1,
+    "AuthorId": 1
+  },
+  {
+    "BookId": 2,
+    "Title": "Murder on the Orient Express",
+    "Description": "Hercule Poirot solves a murder mystery on a luxurious train.",
+    "BasePrice": 19.99,
+    "CurrentPrice": 19.99,
+    "GenreId": 2,
+    "AuthorId": 2
+  },
+  {
+    "BookId": 3,
+    "Title": "Pride and Prejudice",
+    "Description": "A classic novel exploring the themes of love and social expectations.",
+    "BasePrice": 14.99,
+    "CurrentPrice": 14.99,
+    "GenreId": 3,
+    "AuthorId": 3
+  },
+  {
+    "BookId": 4,
+    "Title": "Dune",
+    "Description": "Epic science fiction saga set in a distant future on the desert planet Arrakis.",
+    "BasePrice": 29.99,
+    "CurrentPrice": 29.99,
+    "GenreId": 4,
+    "AuthorId": 4
+  },
+  {
+    "BookId": 5,
+    "Title": "The History of Ancient Rome",
+    "Description": "An in-depth exploration of the rise and fall of the Roman Empire.",
+    "BasePrice": 22.99,
+    "CurrentPrice": 22.99,
+    "GenreId": 5,
+    "AuthorId": 5
+  },
+  {
+    "BookId": 6,
+    "Title": "The Great Gatsby",
+    "Description": "A portrayal of the decadence of the Roaring Twenties in America.",
+    "BasePrice": 18.99,
+    "CurrentPrice": 18.99,
+    "GenreId": 1,
+    "AuthorId": 1
+  },
+  {
+    "BookId": 7,
+    "Title": "To Kill a Mockingbird",
+    "Description": "A powerful story addressing racial injustice in the American South.",
+    "BasePrice": 16.99,
+    "CurrentPrice": 16.99,
+    "GenreId": 2,
+    "AuthorId": 2
+  },
+  {
+    "BookId": 8,
+    "Title": "Neuromancer",
+    "Description": "Cyberpunk novel depicting a hacker's quest in a dystopian future.",
+    "BasePrice": 27.99,
+    "CurrentPrice": 27.99,
+    "GenreId": 4,
+    "AuthorId": 4
+  },
+  {
+    "BookId": 9,
+    "Title": "War and Peace",
+    "Description": "A monumental work chronicling the impact of the Napoleonic Wars.",
+    "BasePrice": 26.99,
+    "CurrentPrice": 26.99,
+    "GenreId": 5,
+    "AuthorId": 3
+  },
+  {
+    "BookId": 10,
+    "Title": "The Catcher in the Rye",
+    "Description": "A coming-of-age novel capturing the disillusionment of adolescence.",
+    "BasePrice": 20.99,
+    "CurrentPrice": 20.99,
+    "GenreId": 1,
+    "AuthorId": 5
+  },
+  {
+    "BookId": 11,
+    "Title": "The Hobbit",
+    "Description": "A fantasy adventure novel set in the fictional world of Middle-earth.",
+    "BasePrice": 28.50,
+    "CurrentPrice": 28.50,
+    "GenreId": 1,
+    "AuthorId": 1
+  },
+  {
+    "BookId": 12,
+    "Title": "The Girl with the Dragon Tattoo",
+    "Description": "A gripping mystery involving a journalist and a hacker.",
+    "BasePrice": 23.75,
+    "CurrentPrice": 23.75,
+    "GenreId": 2,
+    "AuthorId": 2
+  },
+  {
+    "BookId": 13,
+    "Title": "Sense and Sensibility",
+    "Description": "Jane Austen's novel exploring the challenges of love and societal expectations.",
+    "BasePrice": 17.25,
+    "CurrentPrice": 17.25,
+    "GenreId": 3,
+    "AuthorId": 3
+  },
+  {
+    "BookId": 14,
+    "Title": "2001: A Space Odyssey",
+    "Description": "A space exploration odyssey that delves into the mysteries of the cosmos.",
+    "BasePrice": 31.20,
+    "CurrentPrice": 31.20,
+    "GenreId": 4,
+    "AuthorId": 4
+  },
+  {
+    "BookId": 15,
+    "Title": "The Art of War",
+    "Description": "An ancient Chinese treatise on military strategy and tactics.",
+    "BasePrice": 19.80,
+    "CurrentPrice": 19.80,
+    "GenreId": 5,
+    "AuthorId": 5
+  },
+  {
+    "BookId": 16,
+    "Title": "Brave New World",
+    "Description": "A dystopian novel depicting a futuristic world with advanced technology.",
+    "BasePrice": 24.90,
+    "CurrentPrice": 24.90,
+    "GenreId": 1,
+    "AuthorId": 1
+  },
+  {
+    "BookId": 17,
+    "Title": "The Grapes of Wrath",
+    "Description": "A classic novel portraying the struggles of a family during the Great Depression.",
+    "BasePrice": 21.30,
+    "CurrentPrice": 21.30,
+    "GenreId": 2,
+    "AuthorId": 2
+  },
+  {
+    "BookId": 18,
+    "Title": "Snow Crash",
+    "Description": "A science fiction novel exploring the virtual and real worlds.",
+    "BasePrice": 29.45,
+    "CurrentPrice": 29.45,
+    "GenreId": 4,
+    "AuthorId": 4
+  },
+  {
+    "BookId": 19,
+    "Title": "Les Misérables",
+    "Description": "Victor Hugo's epic novel following the lives of several characters in post-revolutionary France.",
+    "BasePrice": 27.60,
+    "CurrentPrice": 27.60,
+    "GenreId": 5,
+    "AuthorId": 3
+  },
+  {
+    "BookId": 20,
+    "Title": "The Lord of the Rings",
+    "Description": "A trilogy narrating the journey to destroy the One Ring and save Middle-earth.",
+    "BasePrice": 30.75,
+    "CurrentPrice": 30.75,
+    "GenreId": 1,
+    "AuthorId": 5
+  },
+  {
+    "BookId": 21,
+    "Title": "The Shining",
+    "Description": "A psychological horror novel set in an isolated, haunted hotel.",
+    "BasePrice": 26.85,
+    "CurrentPrice": 26.85,
+    "GenreId": 2,
+    "AuthorId": 1
+  },
+  {
+    "BookId": 22,
+    "Title": "Emma",
+    "Description": "Jane Austen's novel portraying the humorous adventures of a young woman.",
+    "BasePrice": 18.55,
+    "CurrentPrice": 18.55,
+    "GenreId": 3,
+    "AuthorId": 3
+  },
+  {
+    "BookId": 23,
+    "Title": "Foundation",
+    "Description": "The first book in Isaac Asimov's Foundation series, exploring the collapse of a galactic empire.",
+    "BasePrice": 32.10,
+    "CurrentPrice": 32.10,
+    "GenreId": 4,
+    "AuthorId": 4
+  },
+  {
+    "BookId": 24,
+    "Title": "The Prince",
+    "Description": "A political treatise by Niccolò Machiavelli on leadership and power.",
+    "BasePrice": 20.15,
+    "CurrentPrice": 20.15,
+    "GenreId": 5,
+    "AuthorId": 5
+  },
+  {
+    "BookId": 25,
+    "Title": "The Great Expectations",
+    "Description": "Charles Dickens' novel following the life and education of an orphan.",
+    "BasePrice": 22.40,
+    "CurrentPrice": 22.40,
+    "GenreId": 1,
+    "AuthorId": 2
+  },
+  {
+    "BookId": 26,
+    "Title": "1984",
+    "Description": "A dystopian novel depicting a totalitarian society and the consequences of thought control.",
+    "BasePrice": 25.15,
+    "CurrentPrice": 25.15,
+    "GenreId": 2,
+    "AuthorId": 2
+  },
+  {
+    "BookId": 27,
+    "Title": "The Scarlet Letter",
+    "Description": "Nathaniel Hawthorne's novel exploring themes of sin and redemption.",
+    "BasePrice": 16.70,
+    "CurrentPrice": 16.70,
+    "GenreId": 3,
+    "AuthorId": 3
+  },
+  {
+    "BookId": 28,
+    "Title": "Altered Carbon",
+    "Description": "A cyberpunk novel where consciousness can be transferred between bodies.",
+    "BasePrice": 28.30,
+    "CurrentPrice": 28.30,
+    "GenreId": 4,
+    "AuthorId": 4
+  },
+  {
+    "BookId": 29,
+    "Title": "The Odyssey",
+    "Description": "An ancient Greek epic poem attributed to Homer, chronicling the adventures of Odysseus.",
+    "BasePrice": 24.65,
+    "CurrentPrice": 24.65,
+    "GenreId": 5,
+    "AuthorId": 1
+  },
+  {
+    "BookId": 30,
+    "Title": "The Adventures of Huckleberry Finn",
+    "Description": "Mark Twain's novel following Huck's journey down the Mississippi River.",
+    "BasePrice": 19.35,
+    "CurrentPrice": 19.35,
+    "GenreId": 1,
+    "AuthorId": 5
+  },
+  {
+    "BookId": 31,
+    "Title": "One Hundred Years of Solitude",
+    "Description": "Gabriel García Márquez's magical realist novel spanning seven generations.",
+    "BasePrice": 26.25,
+    "CurrentPrice": 26.25,
+    "GenreId": 2,
+    "AuthorId": 1
+  },
+  {
+    "BookId": 32,
+    "Title": "Wuthering Heights",
+    "Description": "Emily Brontë's novel depicting the passionate and destructive love between Heathcliff and Catherine.",
+    "BasePrice": 21.95,
+    "CurrentPrice": 21.95,
+    "GenreId": 3,
+    "AuthorId": 3
+  },
+  {
+    "BookId": 33,
+    "Title": "The Hitchhikers Guide to the Galaxy",
+    "Description": "A comedic science fiction series following the misadventures of Arthur Dent.",
+    "BasePrice": 29.80,
+    "CurrentPrice": 29.80,
+    "GenreId": 4,
+    "AuthorId": 4
+  },
+  {
+    "BookId": 34,
+    "Title": "Meditations",
+    "Description": "A series of personal writings by Roman Emperor Marcus Aurelius.",
+    "BasePrice": 27.15,
+    "CurrentPrice": 27.15,
+    "GenreId": 5,
+    "AuthorId": 5
+  },
+  {
+    "BookId": 35,
+    "Title": "A Tale of Two Cities",
+    "Description": "Charles Dickens' historical novel set in London and Paris before and during the French Revolution.",
+    "BasePrice": 30.40,
+    "CurrentPrice": 30.40,
+    "GenreId": 1,
+    "AuthorId": 2
+  },
+  {
+    "BookId": 36,
+    "Title": "The Road",
+    "Description": "A post-apocalyptic novel following a father and son's journey through a desolate landscape.",
+    "BasePrice": 23.50,
+    "CurrentPrice": 23.50,
+    "GenreId": 2,
+    "AuthorId": 2
+  },
+  {
+    "BookId": 37,
+    "Title": "Anna Karenina",
+    "Description": "Leo Tolstoy's novel exploring themes of love, infidelity, and societal expectations.",
+    "BasePrice": 18.75,
+    "CurrentPrice": 18.75,
+    "GenreId": 3,
+    "AuthorId": 3
+  },
+  {
+    "BookId": 38,
+    "Title": "The Martian",
+    "Description": "A science fiction novel depicting an astronaut's struggle for survival on Mars.",
+    "BasePrice": 32.00,
+    "CurrentPrice": 32.00,
+    "GenreId": 4,
+    "AuthorId": 4
+  },
+  {
+    "BookId": 39,
+    "Title": "Crime and Punishment",
+    "Description": "Fyodor Dostoevsky's psychological novel exploring guilt and redemption.",
+    "BasePrice": 20.60,
+    "CurrentPrice": 20.60,
+    "GenreId": 5,
+    "AuthorId": 1
+  },
+  {
+    "BookId": 40,
+    "Title": "The Picture of Dorian Gray",
+    "Description": "Oscar Wilde's novel exploring the consequences of a man's pursuit of eternal youth and beauty.",
+    "BasePrice": 22.90,
+    "CurrentPrice": 22.90,
+    "GenreId": 1,
+    "AuthorId": 5
+  }
+]

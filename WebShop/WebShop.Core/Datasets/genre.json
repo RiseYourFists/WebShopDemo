@@ -1,0 +1,22 @@
+﻿[
+  {
+    "id": 1,
+    "name": "Fiction"
+  },
+  {
+    "id": 2,
+    "name": "Mystery"
+  },
+  {
+    "id": 3,
+    "name": "Romance"
+  },
+  {
+    "id": 4,
+    "name": "Science Fiction"
+  },
+  {
+    "id": 5,
+    "name": "History"
+  }
+]
