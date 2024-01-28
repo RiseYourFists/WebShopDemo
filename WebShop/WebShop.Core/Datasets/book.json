@@ -4,7 +4,8 @@
     "Title": "The Lost City",
     "Description": "A thrilling adventure in an ancient city buried in the jungle.",
     "BasePrice": 24.99,
-    "CurrentPrice": 24.99,
+    "CurrentPrice": 12.48,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1681419689l/62792245.jpg",
     "GenreId": 1,
     "AuthorId": 1
   },
@@ -14,6 +15,7 @@
     "Description": "Hercule Poirot solves a murder mystery on a luxurious train.",
     "BasePrice": 19.99,
     "CurrentPrice": 19.99,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1686001523l/123416690.jpg",
     "GenreId": 2,
     "AuthorId": 2
   },
@@ -23,6 +25,7 @@
     "Description": "A classic novel exploring the themes of love and social expectations.",
     "BasePrice": 14.99,
     "CurrentPrice": 14.99,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1684911482l/127280062.jpg",
     "GenreId": 3,
     "AuthorId": 3
   },
@@ -31,7 +34,8 @@
     "Title": "Dune",
     "Description": "Epic science fiction saga set in a distant future on the desert planet Arrakis.",
     "BasePrice": 29.99,
-    "CurrentPrice": 29.99,
+    "CurrentPrice": 14.99,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1543687940l/42046112.jpg",
     "GenreId": 4,
     "AuthorId": 4
   },
@@ -41,6 +45,7 @@
     "Description": "An in-depth exploration of the rise and fall of the Roman Empire.",
     "BasePrice": 22.99,
     "CurrentPrice": 22.99,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1478144278i/2203._SX50_.jpg",
     "GenreId": 5,
     "AuthorId": 5
   },
@@ -50,6 +55,7 @@
     "Description": "A portrayal of the decadence of the Roaring Twenties in America.",
     "BasePrice": 18.99,
     "CurrentPrice": 18.99,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1679758198l/122757697.jpg",
     "GenreId": 1,
     "AuthorId": 1
   },
@@ -59,6 +65,7 @@
     "Description": "A powerful story addressing racial injustice in the American South.",
     "BasePrice": 16.99,
     "CurrentPrice": 16.99,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1687766651l/71872869.jpg",
     "GenreId": 2,
     "AuthorId": 2
   },
@@ -68,6 +75,7 @@
     "Description": "Cyberpunk novel depicting a hacker's quest in a dystopian future.",
     "BasePrice": 27.99,
     "CurrentPrice": 27.99,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1696146860l/60531420._SY475_.jpg",
     "GenreId": 4,
     "AuthorId": 4
   },
@@ -76,7 +84,8 @@
     "Title": "War and Peace",
     "Description": "A monumental work chronicling the impact of the Napoleonic Wars.",
     "BasePrice": 26.99,
-    "CurrentPrice": 26.99,
+    "CurrentPrice": 13.48,
+    "BookCover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1657555929i/27323.jpg",
     "GenreId": 5,
     "AuthorId": 3
   },
@@ -86,6 +95,7 @@
     "Description": "A coming-of-age novel capturing the disillusionment of adolescence.",
     "BasePrice": 20.99,
     "CurrentPrice": 20.99,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1598823299l/42844155._SY475_.jpg",
     "GenreId": 1,
     "AuthorId": 5
   },
@@ -95,6 +105,7 @@
     "Description": "A fantasy adventure novel set in the fictional world of Middle-earth.",
     "BasePrice": 28.50,
     "CurrentPrice": 28.50,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1682375874l/123136728.jpg",
     "GenreId": 1,
     "AuthorId": 1
   },
@@ -104,6 +115,7 @@
     "Description": "A gripping mystery involving a journalist and a hacker.",
     "BasePrice": 23.75,
     "CurrentPrice": 23.75,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1672016255l/65213197.jpg",
     "GenreId": 2,
     "AuthorId": 2
   },
@@ -113,6 +125,7 @@
     "Description": "Jane Austen's novel exploring the challenges of love and societal expectations.",
     "BasePrice": 17.25,
     "CurrentPrice": 17.25,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1684816198l/75665914.jpg",
     "GenreId": 3,
     "AuthorId": 3
   },
@@ -122,6 +135,7 @@
     "Description": "A space exploration odyssey that delves into the mysteries of the cosmos.",
     "BasePrice": 31.20,
     "CurrentPrice": 31.20,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1686092541l/62919162._SY475_.jpg",
     "GenreId": 4,
     "AuthorId": 4
   },
@@ -131,6 +145,7 @@
     "Description": "An ancient Chinese treatise on military strategy and tactics.",
     "BasePrice": 19.80,
     "CurrentPrice": 19.80,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1676201263i/2199._SY75_.jpg",
     "GenreId": 5,
     "AuthorId": 5
   },
@@ -140,6 +155,7 @@
     "Description": "A dystopian novel depicting a futuristic world with advanced technology.",
     "BasePrice": 24.90,
     "CurrentPrice": 24.90,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1680211580l/65213204._SY475_.jpg",
     "GenreId": 1,
     "AuthorId": 1
   },
@@ -149,6 +165,7 @@
     "Description": "A classic novel portraying the struggles of a family during the Great Depression.",
     "BasePrice": 21.30,
     "CurrentPrice": 21.30,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1680363772l/124935364.jpg",
     "GenreId": 2,
     "AuthorId": 2
   },
@@ -158,6 +175,7 @@
     "Description": "A science fiction novel exploring the virtual and real worlds.",
     "BasePrice": 29.45,
     "CurrentPrice": 29.45,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1678479483l/62923490.jpg",
     "GenreId": 4,
     "AuthorId": 4
   },
@@ -167,6 +185,7 @@
     "Description": "Victor Hugo's epic novel following the lives of several characters in post-revolutionary France.",
     "BasePrice": 27.60,
     "CurrentPrice": 27.60,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1617037342i/40779082._SY75_.jpg",
     "GenreId": 5,
     "AuthorId": 3
   },
@@ -176,6 +195,7 @@
     "Description": "A trilogy narrating the journey to destroy the One Ring and save Middle-earth.",
     "BasePrice": 30.75,
     "CurrentPrice": 30.75,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1675867491l/101161005.jpg",
     "GenreId": 1,
     "AuthorId": 5
   },
@@ -185,6 +205,7 @@
     "Description": "A psychological horror novel set in an isolated, haunted hotel.",
     "BasePrice": 26.85,
     "CurrentPrice": 26.85,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1664729357l/62848145._SY475_.jpg",
     "GenreId": 2,
     "AuthorId": 1
   },
@@ -194,6 +215,7 @@
     "Description": "Jane Austen's novel portraying the humorous adventures of a young woman.",
     "BasePrice": 18.55,
     "CurrentPrice": 18.55,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1685353278l/123199658.jpg",
     "GenreId": 3,
     "AuthorId": 3
   },
@@ -203,6 +225,7 @@
     "Description": "The first book in Isaac Asimov's Foundation series, exploring the collapse of a galactic empire.",
     "BasePrice": 32.10,
     "CurrentPrice": 32.10,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1677109121l/75260734._SY475_.jpg",
     "GenreId": 4,
     "AuthorId": 4
   },
@@ -212,6 +235,7 @@
     "Description": "A political treatise by Niccolò Machiavelli on leadership and power.",
     "BasePrice": 20.15,
     "CurrentPrice": 20.15,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1617037342i/40779082._SY75_.jpg",
     "GenreId": 5,
     "AuthorId": 5
   },
@@ -221,6 +245,7 @@
     "Description": "Charles Dickens' novel following the life and education of an orphan.",
     "BasePrice": 22.40,
     "CurrentPrice": 22.40,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1691467586l/157560224._SY475_.jpg",
     "GenreId": 1,
     "AuthorId": 2
   },
@@ -230,6 +255,7 @@
     "Description": "A dystopian novel depicting a totalitarian society and the consequences of thought control.",
     "BasePrice": 25.15,
     "CurrentPrice": 25.15,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1668782119l/40097951._SY475_.jpg",
     "GenreId": 2,
     "AuthorId": 2
   },
@@ -239,6 +265,7 @@
     "Description": "Nathaniel Hawthorne's novel exploring themes of sin and redemption.",
     "BasePrice": 16.70,
     "CurrentPrice": 16.70,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1677050625l/75293479.jpg",
     "GenreId": 3,
     "AuthorId": 3
   },
@@ -247,7 +274,8 @@
     "Title": "Altered Carbon",
     "Description": "A cyberpunk novel where consciousness can be transferred between bodies.",
     "BasePrice": 28.30,
-    "CurrentPrice": 28.30,
+    "CurrentPrice": 14.15,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1589475583l/53205854._SY475_.jpg",
     "GenreId": 4,
     "AuthorId": 4
   },
@@ -257,6 +285,7 @@
     "Description": "An ancient Greek epic poem attributed to Homer, chronicling the adventures of Odysseus.",
     "BasePrice": 24.65,
     "CurrentPrice": 24.65,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1327861115i/8664353._SY75_.jpg",
     "GenreId": 5,
     "AuthorId": 1
   },
@@ -266,6 +295,7 @@
     "Description": "Mark Twain's novel following Huck's journey down the Mississippi River.",
     "BasePrice": 19.35,
     "CurrentPrice": 19.35,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1680590876l/124944200.jpg",
     "GenreId": 1,
     "AuthorId": 5
   },
@@ -275,6 +305,7 @@
     "Description": "Gabriel García Márquez's magical realist novel spanning seven generations.",
     "BasePrice": 26.25,
     "CurrentPrice": 26.25,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1545494980l/40916679._SY475_.jpg",
     "GenreId": 2,
     "AuthorId": 1
   },
@@ -284,6 +315,7 @@
     "Description": "Emily Brontë's novel depicting the passionate and destructive love between Heathcliff and Catherine.",
     "BasePrice": 21.95,
     "CurrentPrice": 21.95,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1681790985l/123239368.jpg",
     "GenreId": 3,
     "AuthorId": 3
   },
@@ -293,6 +325,7 @@
     "Description": "A comedic science fiction series following the misadventures of Arthur Dent.",
     "BasePrice": 29.80,
     "CurrentPrice": 29.80,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1600789291l/40864002._SY475_.jpg",
     "GenreId": 4,
     "AuthorId": 4
   },
@@ -302,6 +335,7 @@
     "Description": "A series of personal writings by Roman Emperor Marcus Aurelius.",
     "BasePrice": 27.15,
     "CurrentPrice": 27.15,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1388185755i/35100._SY75_.jpg",
     "GenreId": 5,
     "AuthorId": 5
   },
@@ -311,6 +345,7 @@
     "Description": "Charles Dickens' historical novel set in London and Paris before and during the French Revolution.",
     "BasePrice": 30.40,
     "CurrentPrice": 30.40,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1685350627l/123280215.jpg",
     "GenreId": 1,
     "AuthorId": 2
   },
@@ -320,6 +355,7 @@
     "Description": "A post-apocalyptic novel following a father and son's journey through a desolate landscape.",
     "BasePrice": 23.50,
     "CurrentPrice": 23.50,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1642696843l/60168787._SY475_.jpg",
     "GenreId": 2,
     "AuthorId": 2
   },
@@ -329,6 +365,7 @@
     "Description": "Leo Tolstoy's novel exploring themes of love, infidelity, and societal expectations.",
     "BasePrice": 18.75,
     "CurrentPrice": 18.75,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1678532327l/123211121.jpg",
     "GenreId": 3,
     "AuthorId": 3
   },
@@ -338,6 +375,7 @@
     "Description": "A science fiction novel depicting an astronaut's struggle for survival on Mars.",
     "BasePrice": 32.00,
     "CurrentPrice": 32.00,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1626710416l/58446227.jpg",
     "GenreId": 4,
     "AuthorId": 4
   },
@@ -347,6 +385,7 @@
     "Description": "Fyodor Dostoevsky's psychological novel exploring guilt and redemption.",
     "BasePrice": 20.60,
     "CurrentPrice": 20.60,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1435759367i/19400._SY75_.jpg",
     "GenreId": 5,
     "AuthorId": 1
   },
@@ -356,6 +395,7 @@
     "Description": "Oscar Wilde's novel exploring the consequences of a man's pursuit of eternal youth and beauty.",
     "BasePrice": 22.90,
     "CurrentPrice": 22.90,
+    "BookCover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1685351764l/123505439.jpg",
     "GenreId": 1,
     "AuthorId": 5
   }

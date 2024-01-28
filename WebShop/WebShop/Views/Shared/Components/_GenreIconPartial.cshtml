@@ -1,0 +1,13 @@
+﻿@model List<GenreCategoryIcon>
+
+@{
+    foreach (var icon in Model)
+    {
+        <a href="@Url.Action("All", "Home", new{ GenreId = icon.Id })">
+            <img src="@icon.IconLink" alt="">
+            <div class="title">
+                <p>@icon.Name</p>
+            </div>
+        </a>
+    }
+}

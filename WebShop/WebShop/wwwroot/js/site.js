@@ -1,21 +1,7 @@
-﻿const elementMapping = {
-    dropdownElements: document.querySelectorAll('.dropdown-wrapper'),
-    scrollSideMenu: document.querySelector('.side-menu ul:nth-child(even)')
-}
+﻿var checkbox = document.getElementById('aside-toggle');
 
-elementMapping.dropdownElements.forEach(element => {
-    const container = element.querySelector('.dropdown-container');
-    const content = element.querySelector('.dropdown-content');
-    container.addEventListener('transitionend', () => {
+checkbox.checked = localStorage.getItem('checkboxState') === 'true';
 
-        if (container.clientHeight >= 298) {
-            content.style.overflowY = 'scroll';
-        }
-    })
+checkbox.addEventListener('click', function () {
+    localStorage.setItem('checkboxState', checkbox.checked);
 });
-
-function checkContent(){
-    if(elementMapping.scrollSideMenu.scrollHeight < elementMapping.scrollSideMenu.clientHeight){
-        elementMapping.scrollSideMenu.style.overflowY = "hidden"
-    }
-}

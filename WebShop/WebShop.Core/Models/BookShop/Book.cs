@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Newtonsoft.Json;
-
-namespace WebShop.Core.Models.BookShop
+﻿namespace WebShop.Core.Models.BookShop
 {
+    using Microsoft.EntityFrameworkCore;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using Newtonsoft.Json;
+
     using static ValidationConstants.BookShopValidation.BookConstants;
     using static ValidationConstants.BookShopValidation.Shared;
 
@@ -37,6 +37,12 @@ namespace WebShop.Core.Models.BookShop
         [Comment("Book's price with or without promotion")]
         [JsonProperty]
         public decimal CurrentPrice { get; set; }
+
+        [Required]
+        [MaxLength(UrlMaxLength)]
+        [Comment("Url for book cover")]
+        [JsonProperty]
+        public string BookCover { get; set; } = null!;
 
         [Required]
         [Comment("Genre key identifier")]

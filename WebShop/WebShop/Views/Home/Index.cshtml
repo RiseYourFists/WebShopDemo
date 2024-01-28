@@ -1,8 +1,22 @@
-﻿@{
+﻿@model IndexPage;
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="carousel">
+    <div class="title">
+        <h1>Top 5 Offers</h1>
+    </div>
+    <input class="radio" type="radio" name="position" id="">
+    <input class="radio" type="radio" name="position" id="">
+    <input class="radio" type="radio" name="position" id="" checked>
+    <input class="radio" type="radio" name="position" id="">
+    <input class="radio" type="radio" name="position" id="">
+    <div id="content">
+        @await Html.PartialAsync("Components/_ItemCardPartial", Model.TopFive)
+    </div>
+</section>
+
+<section id="genres">
+    @await Html.PartialAsync("Components/_GenreIconPartial", Model.Genres)
+</section>

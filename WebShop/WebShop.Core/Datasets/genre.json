@@ -1,22 +1,27 @@
 ﻿[
   {
     "id": 1,
-    "name": "Fiction"
+    "name": "Fiction",
+    "iconlink": "https://cdn.iconscout.com/icon/premium/png-256-thumb/fantasy-1709964-1452291.png"
   },
   {
     "id": 2,
-    "name": "Mystery"
+    "name": "Mystery",
+    "iconlink": "https://storage.cloud.google.com/book-shop-web-proj/mystery-icon.png"
   },
   {
     "id": 3,
-    "name": "Romance"
+    "name": "Romance",
+    "iconlink": "https://storage.cloud.google.com/book-shop-web-proj/romance-icon.png"
   },
   {
     "id": 4,
-    "name": "Science Fiction"
+    "name": "Science Fiction",
+    "iconlink": "https://cdn3.iconfinder.com/data/icons/movie-genres-1/500/movie-category-genres-categories_11-512.png"
   },
   {
     "id": 5,
-    "name": "History"
+    "name": "History",
+    "iconlink": "https://storage.cloud.google.com/book-shop-web-proj/history-icon-v2.png"
   }
 ]

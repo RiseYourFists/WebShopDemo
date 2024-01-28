@@ -1,0 +1,27 @@
+﻿@model List<ItemCard>;
+
+@{
+    foreach (var card in Model)
+    {
+        <a href="#@card.Id" class="item-card">
+            <div class="img-wrapper">
+                <img src="@card.BookCover" alt="cover-image">
+            </div>
+            <div class="content-wrapper">
+                <p class="title">@card.Title</p>
+                <div class="pricing">
+                    @{
+                        <span>@card.CurrentPrice</span>
+
+                        if (card.BasePrice != card.CurrentPrice)
+                        {
+                            <span class="promotion">@card.BasePrice</span>
+                        }
+                    }
+                </div>
+            </div>
+        </a>
+    }
+}
+
+

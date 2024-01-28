@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebShop.Core.Data;
 
@@ -11,9 +12,10 @@ using WebShop.Core.Data;
 namespace WebShop.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240124142517_Book Cover Change")]
+    partial class BookCoverChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -623,13 +625,13 @@ namespace WebShop.Core.Migrations
                         new
                         {
                             Id = 2,
-                            IconLink = "https://storage.cloud.google.com/book-shop-web-proj/mystery-icon.png",
+                            IconLink = "https://thenounproject.com/api/private/icons/3395015/edit/?backgroundShape=SQUARE&backgroundShapeColor=%23000000&backgroundShapeOpacity=0&exportSize=752&flipX=false&flipY=false&foregroundColor=%23353535&foregroundOpacity=1&imageFormat=png&rotation=0",
                             Name = "Mystery"
                         },
                         new
                         {
                             Id = 3,
-                            IconLink = "https://storage.cloud.google.com/book-shop-web-proj/romance-icon.png",
+                            IconLink = "https://thenounproject.com/api/private/icons/429438/edit/?backgroundShape=SQUARE&backgroundShapeColor=%23000000&backgroundShapeOpacity=0&exportSize=752&flipX=false&flipY=false&foregroundColor=%23353535&foregroundOpacity=1&imageFormat=png&rotation=0",
                             Name = "Romance"
                         },
                         new
@@ -641,7 +643,7 @@ namespace WebShop.Core.Migrations
                         new
                         {
                             Id = 5,
-                            IconLink = "https://storage.cloud.google.com/book-shop-web-proj/history-icon-v2.png",
+                            IconLink = "https://thenounproject.com/api/private/icons/2484315/edit/?backgroundShape=SQUARE&backgroundShapeColor=%23000000&backgroundShapeOpacity=0&exportSize=752&flipX=false&flipY=false&foregroundColor=%23353535&foregroundOpacity=1&imageFormat=png&rotation=0",
                             Name = "History"
                         });
                 });

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebShop.Core.Data;
 
@@ -11,9 +12,10 @@ using WebShop.Core.Data;
 namespace WebShop.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240124115740_Added Individual Images to Genres and Books")]
+    partial class AddedIndividualImagestoGenresandBooks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -237,7 +239,7 @@ namespace WebShop.Core.Migrations
                             Id = 9,
                             AuthorId = 3,
                             BasePrice = 26.99m,
-                            BookCover = "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1657555929i/27323.jpg",
+                            BookCover = "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1306787560i/1067._SY75_.jpg",
                             CurrentPrice = 13.48m,
                             Description = "A monumental work chronicling the impact of the Napoleonic Wars.",
                             GenreId = 5,
@@ -623,13 +625,13 @@ namespace WebShop.Core.Migrations
                         new
                         {
                             Id = 2,
-                            IconLink = "https://storage.cloud.google.com/book-shop-web-proj/mystery-icon.png",
+                            IconLink = "https://cdn.iconscout.com/icon/premium/png-256-thumb/mystery-2760841-2298220.png",
                             Name = "Mystery"
                         },
                         new
                         {
                             Id = 3,
-                            IconLink = "https://storage.cloud.google.com/book-shop-web-proj/romance-icon.png",
+                            IconLink = "https://e7.pngegg.com/pngimages/12/127/png-clipart-computer-icons-romance-film-amor-love-miscellaneous.png",
                             Name = "Romance"
                         },
                         new
@@ -641,7 +643,7 @@ namespace WebShop.Core.Migrations
                         new
                         {
                             Id = 5,
-                            IconLink = "https://storage.cloud.google.com/book-shop-web-proj/history-icon-v2.png",
+                            IconLink = "https://cdn1.iconfinder.com/data/icons/material-core/21/history-512.png",
                             Name = "History"
                         });
                 });
