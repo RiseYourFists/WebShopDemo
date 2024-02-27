@@ -9,6 +9,14 @@
         {
             this.CreateMap<Book, ItemCard>();
             this.CreateMap<Genre, GenreCategoryIcon>();
+
+            this.CreateMap<Book, BookDetail>()
+                .ForMember(p => p.Genre, 
+                    dest => dest.MapFrom(
+                        opt => opt.Genre.Name))
+                .ForMember(p => p.Author,
+                    dest => dest.MapFrom(
+                        opt => opt.Author.Name));
         }
     }
 }

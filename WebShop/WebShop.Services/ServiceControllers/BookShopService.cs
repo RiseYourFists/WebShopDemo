@@ -1,10 +1,11 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Microsoft.EntityFrameworkCore;
-using WebShop.Services.Contracts;
-
-namespace WebShop.Services.ServiceControllers
+﻿namespace WebShop.Services.ServiceControllers
 {
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
+
+    using Microsoft.EntityFrameworkCore;
+
+    using Contracts;
     using Core.Contracts;
     using Models.BookShop;
     using System.Globalization;
@@ -62,7 +63,7 @@ namespace WebShop.Services.ServiceControllers
 
             if (!string.IsNullOrEmpty(searchTerm))
             {
-                books = books.Where(b => 
+                books = books.Where(b =>
                     EF.Functions.Like(b.Title.ToLower(), $"%{searchTerm}%")
                     || EF.Functions.Like(b.Description.ToLower(), $"%{searchTerm}%")
                     || EF.Functions.Like(b.Author.Name.ToLower(), $"%{searchTerm}%"));
@@ -115,6 +116,15 @@ namespace WebShop.Services.ServiceControllers
             double items = await books.CountAsync();
             double itemCount = Math.Ceiling(items / itemsOnPage);
             return int.Parse(itemCount.ToString(CultureInfo.InvariantCulture));
+        }
+
+        public async Task<BookDetail?> GetBookInfo(int id)
+        {
+            return await _repo
+                .AllReadonly<Book>()
+                .Where(b => b.Id == id)
+                .ProjectTo<BookDetail>(_mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync();
         }
     }
 }

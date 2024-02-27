@@ -1,11 +1,20 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
-
-namespace WebShop.App.ProgramOptionExtensions
+﻿namespace WebShop.App.ProgramOptionExtensions
 {
+    using ModelBinders;
+
     public static class OtherConfigurations
     {
         public static WebApplicationBuilder AddConfigurations(this WebApplicationBuilder builder)
         {
+
+            builder.Services
+                .AddControllersWithViews()
+                .AddMvcOptions(options =>
+                {
+                    options.ModelBinderProviders.Insert(0, new FloatingPointBinderProvider());
+                    options.ModelBinderProviders.Insert(0, new SanitizerProvider());
+                });
+
             builder.Services.ConfigureApplicationCookie(options =>
             {
                 options.Cookie.HttpOnly = true;

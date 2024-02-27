@@ -160,50 +160,13 @@
             <div class="bg-image-wrapper">
                 <img src="../../wwwroot/images/Books.jpeg" alt="">
             </div>
-            <section id="search-result">
-                <form class="search-header">
-                    <section class="page-bar">
-                        <ul>
-                            <li><a aria-disabled="true" class="fas fa-angle-double-left" href="#"></a></li>
-                            <li><a class="fas fa-angle-left" href="#"></a></li>
-                            <li><a class="" href="#">1</a></li>
-                            <li><a class="" href="#">2</a></li>
-                            <li><a class="selected" href="#">3</a></li>
-                            <li><a class="" href="#">4</a></li>
-                            <li><a class="" href="#">5</a></li>
-                            <li><a class="fas fa-angle-right" href="#"></a></li>
-                            <li><a class="fas fa-angle-double-right" href="#"></a></li>
-                        </ul>
-                    </section>
-                    <section class="filter-bar">
-                        <div class="select-input">
-                            <label for="sort">Sort by:</label>
-                            <select name="" id="sort">
-                                <option value="">Alphabetical (A-Z)</option>
-                                <option value="">Alphabetical (Z-A)</option>
-                                <option value="">Price (Low-High)</option>
-                                <option value="">Price (High-Low)</option>
-                            </select>
-                        </div>
-                        <div class="select-input">
-                            <label for="items-on-page">Books on page:</label>
-                            <select name="" id="items-on-page">
-                                <option value="">6</option>
-                                <option value="">12</option>
-                                <option value="">24</option>
-                            </select>
-                        </div>
-                        <div>
-                            <button class="fas fa-check" type="submit"></button>
-                        </div>
-                    </section>
-                </form>
-                <nav class="top">
-                    <a href="#top" class="fas fa-arrow-up"></a>
-                </nav>
-                <div class="content">
-                    <p class="search-error">Nothing found</p>
-                </div>
+            <section id="error-page" class="text-danger">
+                <div class="icon fas fa-exclamation-triangle"></div>
+                <h1>Error</h1>
+                <strong>This is an error message
+
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aperiam porro earum, rem quam temporibus voluptate illum magni, ea omnis suscipit eum voluptas voluptatem ipsam aliquam sed ducimus eligendi consequatur sunt.
+                </strong>
             </section>
         </main>
 
@@ -219,5 +182,4 @@
     <script src="../../wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../wwwroot/js/site.js" asp-append-version="true"></script>
 </body>
-
 </html>

@@ -1,9 +1,12 @@
-﻿@model List<ItemCard>;
+﻿@using Microsoft.AspNetCore.Http.Extensions
+@model List<ItemCard>;
 
 @{
     foreach (var card in Model)
     {
-        <a href="#@card.Id" class="item-card">
+        string currentUrl = Context.Request.GetEncodedUrl().Replace("https://localhost:7295", "");
+
+        <a id="@card.Id" class="item-card" href="@Url.Action("Details", "Home", new { ItemId = card.Id, ReturnRoute = currentUrl})">
             <div class="img-wrapper">
                 <img src="@card.BookCover" alt="cover-image">
             </div>

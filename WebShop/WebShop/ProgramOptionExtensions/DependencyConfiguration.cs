@@ -1,4 +1,5 @@
-﻿using WebShop.Core.Contracts;
+﻿using Ganss.Xss;
+using WebShop.Core.Contracts;
 using WebShop.Core.Data;
 using WebShop.Core.Repository;
 using WebShop.Services.ServiceControllers;
@@ -11,8 +12,10 @@ namespace WebShop.App.ProgramOptionExtensions
         {
             services.AddAutoMapper(typeof(MappingProfile));
             services.AddScoped<ApplicationDbContext>();
-            services.AddScoped<IBookShopRepository, BookShopRepository>();
             services.AddScoped<BookShopService>();
+
+            services.AddScoped<IBookShopRepository, BookShopRepository>();
+            services.AddScoped<IHtmlSanitizer, HtmlSanitizer>();
             return services;
         }
     }

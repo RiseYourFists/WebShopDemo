@@ -1,19 +1,16 @@
-﻿
-using Microsoft.DotNet.MSIdentity.Shared;
-using WebShop.Services.Contracts;
-using WebShop.Services.Models.BookShop;
-using WebShop.Services.ServiceControllers;
-
-namespace WebShop.App.Controllers
+﻿namespace WebShop.App.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
 
     using System.Diagnostics;
-    using Models;
 
-    [Authorize]
-    public class HomeController : Controller
+    using Models;
+    using Services.Contracts;
+    using Services.Models.BookShop;
+    using Services.ServiceControllers;
+
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
         private readonly BookShopService _bookShopService;
@@ -37,11 +34,11 @@ namespace WebShop.App.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> All(int genreId, string sortClause, int itemsOnPage = 6, string searchTerm = "",  int currentPage = 1 )
+        public async Task<IActionResult> All(int genreId, string sortClause, int itemsOnPage = 6, string searchTerm = "", int currentPage = 1)
         {
             var model = new Catalogue();
             var hasParse = Enum.TryParse(typeof(ItemSortClause), sortClause, out var sort);
-            var sortBy = sort != null? (ItemSortClause)sort : ItemSortClause.NameAsc;
+            var sortBy = sort != null ? (ItemSortClause)sort : ItemSortClause.NameAsc;
 
             model.CurrentPage = currentPage;
             model.GenreId = genreId;
@@ -58,10 +55,18 @@ namespace WebShop.App.Controllers
             return View(model);
         }
 
-        [Authorize]
-        public IActionResult Privacy()
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int itemId, string returnRoute)
         {
-            return View();
+            ViewBag.ReturnRoute = returnRoute;
+            var model = await _bookShopService.GetBookInfo(itemId);
+            if (model == null)
+            {
+                return NotFound();
+            }
+
+            return View(model);
         }
 
         [AllowAnonymous]
