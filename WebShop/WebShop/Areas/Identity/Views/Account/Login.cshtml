@@ -10,7 +10,7 @@
 
     <form class="form-list" method="post">
         <div class="text-danger" asp-validation-summary="All"></div>
-        
+        <input type="hidden" asp-for="ReturnUrl"/>
         <div class="form-field">
             <label asp-for="Email"></label>
             <input asp-for="Email" autocomplete="username">

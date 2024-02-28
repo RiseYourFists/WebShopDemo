@@ -1,0 +1,31 @@
+﻿@model Cart;
+
+<div class="shopping-cart-wrapper">
+    <div class="shopping-cart">
+        <input checked type="checkbox" id="show-cart" class="toggle">
+        <label for="show-cart" class="show-cart fas fa-shopping-cart"></label>
+        <div class="content">
+            @{
+                var isCartEmpty = Model.Items.Count == 0;
+                var disabled = isCartEmpty ? "disabled" : string.Empty;
+
+                <div class="item-list">
+                    @if (!isCartEmpty)
+                    {
+                        @await Html.PartialAsync("Components/_CartListItemPartial", Model.Items)
+                    }
+                    else
+                    {
+                        <div class="list-row">
+                            <p>The cart is currently empty.</p>
+                        </div>
+                    }
+                </div>
+                <div class="bottom-bar">
+                    <span class="total">Total: @Model.TotalPrice$</span>
+                    <a @disabled href="#" class="checkout-btn"><i class="fas fa-money-check-alt"></i>Check out</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>

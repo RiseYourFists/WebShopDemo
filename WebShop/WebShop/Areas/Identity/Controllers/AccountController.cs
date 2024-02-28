@@ -8,6 +8,7 @@ namespace WebShop.App.Areas.Identity.Controllers
     using WebShop.Core.Models.Identity;
     using WebShop.Services.Models.Account;
     using static Services.ErrorMessages.AccountErrorMsgs.LoginErrors;
+    using System.Web;
 
     [Authorize]
     [Area(nameof(Identity))]
@@ -26,16 +27,19 @@ namespace WebShop.App.Areas.Identity.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Login()
+        public IActionResult Login(string? returnUrl)
         {
             var model = new LoginModel();
-
+            if (!string.IsNullOrWhiteSpace(returnUrl))
+            {
+                model.ReturnUrl = returnUrl;
+            }
             return View(model);
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(LoginModel model, string? returnUrl)
+        public async Task<IActionResult> Login(LoginModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -62,12 +66,16 @@ namespace WebShop.App.Areas.Identity.Controllers
 
             HttpContext.Session.SetString("UserFullName", fullname);
 
-            if (returnUrl != null)
+            if (model.ReturnUrl != null)
             {
-                return Redirect(returnUrl);
+                string decodedReturnUrl = HttpUtility.UrlDecode(model.ReturnUrl).Replace("amp;", "");
+                if (decodedReturnUrl.StartsWith("/"))
+                {
+                    return Redirect(decodedReturnUrl);
+                }
             }
 
-            return RedirectToAction("Index", "Home", new {area = ""});
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
 
         [HttpGet]

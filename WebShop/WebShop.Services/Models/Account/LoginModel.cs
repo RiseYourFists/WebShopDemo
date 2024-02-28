@@ -10,5 +10,7 @@ namespace WebShop.Services.Models.Account
 
         [PasswordPropertyText]
         public string Password { get; set; } = null!;
+
+        public string? ReturnUrl { get; set; } = string.Empty;
     }
 }

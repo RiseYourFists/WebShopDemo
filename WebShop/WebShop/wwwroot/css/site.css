@@ -319,13 +319,16 @@ a {
   display: flex;
 }
 
-.shopping-cart>button {
+.shopping-cart > label {
   border: none;
   padding: 5px;
   width: 37px;
   height: 37px;
   border-radius: 3px;
   background-color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /*End Main Header*/
@@ -1187,6 +1190,124 @@ html {
 }
 
 /*End Error Page*/
+
+/*Shopping cart*/
+
+.shopping-cart .toggle{
+  position: absolute;
+  width: 37px;
+  height: 37px;
+  z-index: -1;
+  opacity: 0.3;
+}
+
+.shopping-cart .show-cart{
+  outline: 2px solid darkgray;
+}
+
+.shopping-cart .content{
+  position: absolute;
+  top: 100%;
+  right: 5px;
+  z-index: 999;
+  border: 1px solid darkgray;
+  transition: all 0.3s ease-in-out;
+  width: 20rem;
+  max-height: 80dvh;
+  background-color: var(--main-bg-color);
+}
+
+.shopping-cart .toggle:checked ~ .content{
+  transform: translateX(102%);
+}
+
+.shopping-cart .toggle:checked + .show-cart{
+  outline: 0px solid darkgray;
+}
+
+.shopping-cart .list-row{
+  height: 7rem;
+  overflow: hidden;
+  display: flex;
+  padding: 5px;
+  border-bottom: 1px solid gray;
+}
+
+.shopping-cart .item-list{
+  overflow-y: scroll;
+  max-height: 70dvh;
+}
+
+.shopping-cart .list-row .img-wrapper{
+  display: flex;
+  height: 100%;
+  width: 4rem;
+}
+
+.shopping-cart .list-row .action-holder{
+  width: fit-content;
+}
+
+.shopping-cart .list-row .action-holder form{
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.shopping-cart .list-row .action-holder .remove-btn{
+  background-color: transparent;
+  border: none;
+  padding: 5px;
+  height: 100%;
+  background-color: rgba(255, 55, 55, 0.886);
+}
+
+.shopping-cart .list-row .action-holder .remove-btn:hover{
+  background-color: rgb(255, 55, 55);
+}
+
+.shopping-cart .list-row .item-info{
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.shopping-cart .list-row .item-info span{
+  align-self: flex-end;
+}
+
+.shopping-cart .list-row .item-info h3{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.shopping-cart .bottom-bar{
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.shopping-cart .total{
+  font-weight: 500;
+}
+
+.shopping-cart .checkout-btn{
+  background-color: var(--primary-color);
+  padding: 4px;
+  border-radius: 4px;
+  color: white;
+}
+
+.shopping-cart .checkout-btn:hover{
+  background-color: var(--primary-color-highlight);
+}
+
+.shopping-cart .checkout-btn i{
+  margin-right: 5px;
+}
+/*End Shopping cart*/
 
 @media (max-width: 1200px) {
   .small-window-field {

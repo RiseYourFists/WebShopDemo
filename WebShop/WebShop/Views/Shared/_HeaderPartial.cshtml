@@ -1,13 +1,37 @@
-﻿<header class="main-header" id="top">
-    <div class="search-bar">
-        <form class="search-bar-wrapper" asp-controller="Home" asp-action="All" method="get">
-            <input type="search" name="searchTerm" placeholder="Search..." value="@ViewBag.SearchTerm">
-            <button class="fas fa-search"></button>
-        </form>
-    </div>
-    <div class="shopping-cart-wrapper">
-        <div class="shopping-cart">
-            <button class="fas fa-shopping-cart"></button>
+﻿@using WebShop.Services.ServiceControllers
+@using Newtonsoft.Json
+@inject CartService CartService;
+
+@{
+    var centered = !User.Identity!.IsAuthenticated ? "style=justify-content:center;" : string.Empty;
+    <header @centered class="main-header" id="top">
+        <div class="search-bar">
+            <form class="search-bar-wrapper" asp-controller="Home" asp-action="All" method="get">
+                <input type="search" name="searchTerm" placeholder="Search..." value="@ViewBag.SearchTerm">
+                <button class="fas fa-search"></button>
+            </form>
         </div>
-    </div>
-</header>
+        @if (User.Identity!.IsAuthenticated)
+        {
+            var data = Context.Session.GetString("Cart");
+            var model = new Cart();
+
+            if (!string.IsNullOrWhiteSpace(data))
+            {
+                var cart = JsonConvert.DeserializeObject<Dictionary<int, int>>(data);
+
+                if (cart != null)
+                {
+                    model.Items = await CartService.GetShopItems(cart);
+                    model.TotalPrice = model.Items.Sum(i => i.TotalPrice);
+                }
+                else
+                {
+                    model.Items = new List<CartListItem>();
+                }
+            }
+
+            @await Html.PartialAsync("_CartPartial", model)
+        }
+    </header>
+}

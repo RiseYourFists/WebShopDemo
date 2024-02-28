@@ -13,6 +13,7 @@ namespace WebShop.App.ProgramOptionExtensions
             services.AddAutoMapper(typeof(MappingProfile));
             services.AddScoped<ApplicationDbContext>();
             services.AddScoped<BookShopService>();
+            services.AddScoped<CartService>();
 
             services.AddScoped<IBookShopRepository, BookShopRepository>();
             services.AddScoped<IHtmlSanitizer, HtmlSanitizer>();

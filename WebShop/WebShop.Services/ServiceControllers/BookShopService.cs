@@ -126,5 +126,12 @@
                 .ProjectTo<BookDetail>(_mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync();
         }
+
+        public async Task<bool> AnyBook(int id)
+        {
+            return await _repo
+                .AllReadonly<Book>()
+                .AnyAsync(b => b.Id == id);
+        }
     }
 }
