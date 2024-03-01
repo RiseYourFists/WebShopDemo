@@ -2,7 +2,18 @@
 
 <div class="shopping-cart-wrapper">
     <div class="shopping-cart">
-        <input checked type="checkbox" id="show-cart" class="toggle">
+        @{
+            var isTrue = (bool?)TempData["UnfoldCart"];
+            var unfold = isTrue == true ? "unfolded" : string.Empty;
+            var items = Model.Items.Sum(i => i.Quantity);
+
+            if (items > 0)
+            {
+                var display = (items > 99)? "99+" : items.ToString();
+                <span class="cart-count">@display</span>
+            }
+            <input checked type="checkbox" id="show-cart" class="toggle @unfold">
+        }
         <label for="show-cart" class="show-cart fas fa-shopping-cart"></label>
         <div class="content">
             @{

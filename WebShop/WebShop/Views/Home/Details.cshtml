@@ -2,46 +2,49 @@
     ViewData["Title"] = "Item";
 }
 @model BookDetail;
+@{
+    var returnRoute = ViewBag.ReturnRoute;
 
-<section id="book-info">
-    <article class="wrapper">
-        <a class="fas fa-arrow-left back" href="@ViewBag.ReturnRoute"></a>
-        <div>
-            <div class="img-wrapper">
-                <img src="@Model.BookCover" alt="Book cover">
-            </div>
-            <div class="meta-info">
-                <div class="tags">
-                    <span class="label">Tags:</span>
-                    <span>@Model.Genre</span>
+                      <section id="book-info">
+        <article class="wrapper">
+            <a class="fas fa-arrow-left back" href="@returnRoute"></a>
+            <div>
+                <div class="img-wrapper">
+                    <img src="@Model.BookCover" alt="Book cover">
                 </div>
-                <div class="author">
-                    <span class="label">Written by:</span>
-                    <span>@Model.Author</span>
+                <div class="meta-info">
+                    <div class="tags">
+                        <span class="label">Tags:</span>
+                        <span>@Model.Genre</span>
+                    </div>
+                    <div class="author">
+                        <span class="label">Written by:</span>
+                        <span>@Model.Author</span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="content">
-            <div class="content-wrapper">
-                <header class="title">
-                    <h2>@Model.Title</h2>
-                </header>
-                <div class="description">@Model.Description</div>
-            </div>
-            <div class="action-bar">
-                <div class="pricing">
-                    @if (Model.BasePrice != Model.CurrentPrice)
-                    {
-                        <p class="promotion">@Model.BasePrice$</p>
-                    }
-                    <p>@Model.CurrentPrice$</p>
+            <div class="content">
+                <div class="content-wrapper">
+                    <header class="title">
+                        <h2>@Model.Title</h2>
+                    </header>
+                    <div class="description">@Model.Description</div>
                 </div>
-                <form asp-controller="Cart" asp-action="Add" method="get">
-                    <input type="hidden" name="id" value="@Model.Id"/>
-                    <input name="quantity" type="number" value="1" min="1" max="999">
-                    <button class="fas fa-shopping-cart add-to-cart" type="submit">Add to cart</button>
-                </form>
+                <div class="action-bar">
+                    <div class="pricing">
+                        @if (Model.BasePrice != Model.CurrentPrice)
+                        {
+                            <p class="promotion">@Model.BasePrice$</p>
+                        }
+                        <p>@Model.CurrentPrice$</p>
+                    </div>
+                    <form asp-controller="Cart" asp-action="Add" method="get">
+                        <input type="hidden" name="id" value="@Model.Id"/>
+                        <input name="quantity" type="number" value="1" min="1" max="999">
+                        <input type="hidden" name="returnRoute" value="@returnRoute"/>
+                        <button class="fas fa-shopping-cart add-to-cart" type="submit">Add to cart</button>
+                    </form>
+                </div>
             </div>
-        </div>
-    </article>
-</section>
+        </article>
+    </section>}

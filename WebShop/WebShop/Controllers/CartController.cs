@@ -14,7 +14,7 @@ namespace WebShop.App.Controllers
         }
 
         [HttpPost]
-        public IActionResult Remove(int id)
+        public IActionResult Remove(int id, string returnUrl)
         {
             var data = HttpContext.Session.GetString("Cart");
             if (string.IsNullOrWhiteSpace(data))
@@ -39,12 +39,12 @@ namespace WebShop.App.Controllers
             }
 
             HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(cart));
-
-            return RedirectToAction("Index", "Home");
+            returnUrl = returnUrl.Replace("amp;", "");
+            return Redirect(returnUrl);
         }
 
         [HttpGet]
-        public async Task<IActionResult> Add(int id, int quantity)
+        public async Task<IActionResult> Add(int id, int quantity, string returnRoute)
         {
             var data = HttpContext.Session.GetString("Cart");
             var cart = (!string.IsNullOrWhiteSpace(data))
@@ -70,10 +70,15 @@ namespace WebShop.App.Controllers
                 cart.Add(id, quantity);
             }
 
+            if (cart.Count == 1)
+            {
+                TempData["UnfoldCart"] = true;
+            }
+
 
             HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(cart));
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Details", "Home", new{ ItemId = id, ReturnRoute = returnRoute });
         }
 
         public async Task<IActionResult> Checkout()

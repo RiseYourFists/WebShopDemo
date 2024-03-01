@@ -1,11 +1,13 @@
 ﻿@model List<CartListItem>;
 
 @{
+    var returnUrl = Context.Request.Path + Context.Request.QueryString;
     foreach (var item in Model)
     {
         <div class="list-row">
             <div class="action-holder">
                 <form asp-controller="Cart" asp-action="Remove" asp-route-id="@item.Id" method="post">
+                    <input type="hidden" name="returnUrl" value="@returnUrl"/>
                     <button type="submit" class="remove-btn far fa-times-circle"></button>
                 </form>
             </div>
