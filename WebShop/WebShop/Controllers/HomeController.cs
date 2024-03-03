@@ -34,7 +34,12 @@
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> All(int genreId, string sortClause, int itemsOnPage = 6, string searchTerm = "", int currentPage = 1)
+        public async Task<IActionResult> All(
+            int genreId,
+            string sortClause,
+            int itemsOnPage = 6,
+            string searchTerm = "",
+            int currentPage = 1)
         {
             var model = new Catalogue();
             var hasParse = Enum.TryParse(typeof(ItemSortClause), sortClause, out var sort);
