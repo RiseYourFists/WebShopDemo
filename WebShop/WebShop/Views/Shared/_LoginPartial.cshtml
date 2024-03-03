@@ -11,22 +11,12 @@
             name = "user";
         }
 
-         @*<li>
-             <span class="foldable">Hello @name!</span>
-         </li>
-         <li>
-             <a asp-area="Identity" asp-controller="Account" asp-action="LogOut">
-                 <i class="fas fa-sign-out-alt"></i>
-                 <span class="foldable">Log Out</span>
-             </a>
-         </li>*@
-
         @await Html.PartialAsync("Components/_SideMenuItemPartial",
             new List<SideMenuModel>
-        {
-            new(name, "", "", "", "fas fa-user"),
-            new("Log Out", "Identity", "Account", "LogOut", "fas fa-sign-out-alt")
-        })
+            {
+                new(name, "", "", "", "fas fa-user"),
+                new("Log Out", "Identity", "Account", "LogOut", "fas fa-sign-out-alt")
+            })
     }
     else
     {

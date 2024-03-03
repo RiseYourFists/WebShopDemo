@@ -257,7 +257,7 @@ a {
 }
 
 .aside-toggle:checked~.side-menu ul li>a>.foldable,
-.aside-toggle:checked~.side-menu ul li>.foldable {
+.aside-toggle:checked~.side-menu ul li .foldable {
   display: none;
   opacity: 0;
 }
@@ -432,7 +432,6 @@ a:hover {
 
 .small-window-field {
   width: 70%;
-  max-height: 70%;
   height: fit-content;
   border-radius: 16px;
   box-shadow: 2px 2px 15px black;
@@ -440,8 +439,16 @@ a:hover {
   flex-wrap: wrap;
   justify-content: center;
   padding: 1.2rem 1.5rem;
-  background-color: #ccc;
+  background-color: var(--secondary-bg-color);
   transition: width 0.25s;
+}
+
+.small-window-field label{
+  color: white;
+}
+
+.small-window-field h1{
+  color: var(--primary-color);
 }
 
 html {

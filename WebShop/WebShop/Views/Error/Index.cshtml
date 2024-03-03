@@ -5,6 +5,11 @@
 
 <section id="error-page" class="text-danger">
     <div class="icon fas fa-exclamation-triangle"></div>
-    <h1>@Model.StatusCode</h1>
+    @{
+        if (Model.StatusCode.HasValue)
+        {
+            <h1>@Model.StatusCode</h1>
+        }
+    }
     <strong>@Model.Error</strong>
 </section>

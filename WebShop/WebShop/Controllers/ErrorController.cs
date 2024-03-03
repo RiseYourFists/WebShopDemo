@@ -26,5 +26,16 @@
             };
             return View(model);
         }
+
+        [AllowAnonymous]
+        [Route("DetailedError/{message}")]
+        public IActionResult DetailedError(string message)
+        {
+            var model = new GenericErrorViewModel()
+            {
+                Error = message
+            };
+            return View("Index", model);
+        }
     }
 }

@@ -2,7 +2,7 @@
 {
     public class GenericErrorViewModel
     {
-        public int StatusCode { get; set; }
+        public int? StatusCode { get; set; }
 
         public string? Error { get; set; }
     }

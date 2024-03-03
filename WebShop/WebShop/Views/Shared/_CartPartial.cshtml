@@ -9,7 +9,7 @@
 
             if (items > 0)
             {
-                var display = (items > 99)? "99+" : items.ToString();
+                var display = (items > 99) ? "99+" : items.ToString();
                 <span class="cart-count">@display</span>
             }
             <input checked type="checkbox" id="show-cart" class="toggle @unfold">
@@ -32,10 +32,13 @@
                         </div>
                     }
                 </div>
-                <div class="bottom-bar">
-                    <span class="total">Total: @Model.TotalPrice$</span>
-                    <a @disabled href="#" class="checkout-btn"><i class="fas fa-money-check-alt"></i>Check out</a>
-                </div>
+                @if (!isCartEmpty)
+                {
+                    <div class="bottom-bar">
+                        <span class="total">Total: @Model.TotalPrice$</span>
+                        <a @disabled href="#" class="checkout-btn"><i class="fas fa-money-check-alt"></i>Check out</a>
+                    </div>
+                }
             }
         </div>
     </div>
