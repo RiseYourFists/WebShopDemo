@@ -8,18 +8,30 @@
 
     foreach (var menuItem in Model)
     {
-        var isSelected = 
-            (action == menuItem.Action 
+        var isSelected =
+            (action == menuItem.Action
              && (area == menuItem.Area || string.IsNullOrWhiteSpace(area) == string.IsNullOrWhiteSpace(menuItem.Area))
              && controller == menuItem.Controller)
         ? "selected"
         : string.Empty;
 
         <li class="@isSelected">
-            <a asp-area="@menuItem.Area" asp-controller="@menuItem.Controller" asp-action="@menuItem.Action">
-                <i class="@menuItem.ClassIcon"></i>
-                <span class="foldable">@menuItem.ItemDescription</span>
-            </a>
+            @{
+                if (string.IsNullOrWhiteSpace(menuItem.Action))
+                {
+                    <div>
+                        <i class="@menuItem.ClassIcon"></i>
+                        <span class="foldable">@menuItem.ItemDescription</span>
+                    </div>
+                }
+                else
+                {
+                    <a asp-area="@menuItem.Area" asp-controller="@menuItem.Controller" asp-action="@menuItem.Action">
+                        <i class="@menuItem.ClassIcon"></i>
+                        <span class="foldable">@menuItem.ItemDescription</span>
+                    </a>
+                }
+            }
         </li>
     }
 }

@@ -4,6 +4,7 @@
 @model BookDetail;
 @{
     var returnRoute = ViewBag.ReturnRoute;
+    returnRoute = returnRoute.Replace("amp;", "");
 
                       <section id="book-info">
         <article class="wrapper">

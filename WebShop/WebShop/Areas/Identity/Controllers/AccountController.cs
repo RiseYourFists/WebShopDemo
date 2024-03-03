@@ -68,7 +68,10 @@ namespace WebShop.App.Areas.Identity.Controllers
 
             if (model.ReturnUrl != null)
             {
-                string decodedReturnUrl = HttpUtility.UrlDecode(model.ReturnUrl).Replace("amp;", "");
+                string decodedReturnUrl = HttpUtility
+                    .UrlDecode(model.ReturnUrl)
+                    .Replace("amp;", "");
+
                 if (decodedReturnUrl.StartsWith("/"))
                 {
                     return Redirect(decodedReturnUrl);

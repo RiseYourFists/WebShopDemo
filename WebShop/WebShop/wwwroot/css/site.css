@@ -183,13 +183,13 @@ a {
   font-size: 2.2em;
 }
 
-.side-menu li a {
+.side-menu li * {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.side-menu li a:hover {
+.side-menu li *:hover {
   color: inherit;
 }
 
