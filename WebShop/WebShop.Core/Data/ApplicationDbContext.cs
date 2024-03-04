@@ -1,10 +1,8 @@
-﻿
-using Microsoft.AspNetCore.Identity;
-using WebShop.Core.Models.BookShop;
-using WebShop.Core.Models.Identity;
-
-namespace WebShop.Core.Data
+﻿namespace WebShop.Core.Data
 {
+    using Models.Identity;
+    using Models.BookShop;
+
     using Microsoft.EntityFrameworkCore;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 

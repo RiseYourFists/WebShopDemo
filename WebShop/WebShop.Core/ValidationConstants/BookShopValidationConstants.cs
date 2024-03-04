@@ -25,11 +25,11 @@
             public const int NameMaxLen = 50;
         }
 
-        public static class Photo
+        public static class PlacedOrderConstants
         {
-            public const int NameMaxLen = 255;
-            public const int FormatMaxLen = 4;
-            public const int PhotoMaxSize = 2097152; //2 MBs
+            public const int CountryMaxLen = 100;
+            public const int CityMaxLen = 100;
+            public const int AddressMaxLen = 250;
         }
 
         public static class Shared

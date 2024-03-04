@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
-
-namespace WebShop.Core.Models.BookShop
+﻿namespace WebShop.Core.Models.BookShop
 {
+    using Microsoft.EntityFrameworkCore;
+    using System.ComponentModel.DataAnnotations;
+
+    using static ValidationConstants.BookShopValidation.PlacedOrderConstants;
     [Comment("Placed order")]
     public class PlacedOrder
     {
@@ -20,6 +21,25 @@ namespace WebShop.Core.Models.BookShop
 
         [Comment("Date of the order fulfillment")]
         public DateTime? DateFulfilled { get; set; }
+
+        [Required]
+        [Comment("Indication if the order is fulfilled. Default value is set to false.")]
+        public bool IsFulfilled { get; set; } = false;
+
+        [Required]
+        [MaxLength(CountryMaxLen)]
+        [Comment("Country of delivery.")]
+        public string CountryId { get; set; } = null!;
+
+        [Required]
+        [MaxLength(CityMaxLen)]
+        [Comment("City of delivery.")]
+        public string CityId { get; set; } = null!;
+
+        [Required]
+        [MaxLength(AddressMaxLen)]
+        [Comment("Address of delivery.")]
+        public string Address { get; set; } = null!;
 
         [Required]
         [Comment("Total price for the order")]
