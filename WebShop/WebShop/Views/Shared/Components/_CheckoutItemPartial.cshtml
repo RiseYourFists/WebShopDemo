@@ -1,0 +1,21 @@
+﻿@model List<CartListItem>;
+
+@{
+    foreach (var item in Model)
+    {
+        <div class="item-row">
+            <form asp-controller="Cart" asp-action="Remove" asp-route-id="@item.Id" class="action-bar">
+                <input type="hidden" value="/Cart/Checkout" name="returnUrl"/>
+                <button type="submit" class="far fa-times-circle remove-btn"></button>
+            </form>
+            <div class="item-cover-wrapper">
+                <img src="@item.CoverPhoto" alt="cover-image">
+            </div>
+            <div class="item-info">
+                <h3>@item.Title</h3>
+                <p>Quantity: @item.Quantity</p>
+                <p class="price-tag">@item.TotalPrice$</p>
+            </div>
+        </div>
+    }
+}

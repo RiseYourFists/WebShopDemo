@@ -18,7 +18,6 @@
         <div class="content">
             @{
                 var isCartEmpty = Model.Items.Count == 0;
-                var disabled = isCartEmpty ? "disabled" : string.Empty;
 
                 <div class="item-list">
                     @if (!isCartEmpty)
@@ -36,7 +35,7 @@
                 {
                     <div class="bottom-bar">
                         <span class="total">Total: @Model.TotalPrice$</span>
-                        <a @disabled href="#" class="checkout-btn"><i class="fas fa-money-check-alt"></i>Check out</a>
+                        <a asp-controller="Cart" asp-action="Checkout" class="checkout-btn"><i class="fas fa-money-check-alt"></i>Check out</a>
                     </div>
                 }
             }

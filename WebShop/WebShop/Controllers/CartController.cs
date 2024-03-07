@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using WebShop.Services.Models.BookShop;
 using WebShop.Services.ServiceControllers;
 
 namespace WebShop.App.Controllers
@@ -7,26 +8,18 @@ namespace WebShop.App.Controllers
     public class CartController : BaseController
     {
         private readonly BookShopService _service;
+        private readonly CartService _cartService;
 
-        public CartController(BookShopService service)
+        public CartController(BookShopService service, CartService cartService)
         {
             _service = service;
+            _cartService = cartService;
         }
 
         [HttpPost]
         public IActionResult Remove(int id, string returnUrl)
         {
-            var data = HttpContext.Session.GetString("Cart");
-            if (string.IsNullOrWhiteSpace(data))
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
-            var cart = JsonConvert.DeserializeObject<Dictionary<int, int>>(data);
-            if (cart == null)
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            var cart = GetCart();
 
             if (cart.Count == 0)
             {
@@ -46,10 +39,7 @@ namespace WebShop.App.Controllers
         [HttpGet]
         public async Task<IActionResult> Add(int id, int quantity, string returnRoute)
         {
-            var data = HttpContext.Session.GetString("Cart");
-            var cart = (!string.IsNullOrWhiteSpace(data))
-                ? JsonConvert.DeserializeObject<Dictionary<int, int>>(data)
-                : new Dictionary<int, int>();
+            var cart = GetCart();
 
             if (quantity <= 0)
             {
@@ -78,12 +68,48 @@ namespace WebShop.App.Controllers
 
             HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(cart));
 
-            return RedirectToAction("Details", "Home", new{ ItemId = id, ReturnRoute = returnRoute });
+            return RedirectToAction("Details", "Home", new { ItemId = id, ReturnRoute = returnRoute });
         }
 
+        public IActionResult Clear()
+        {
+            HttpContext.Session.SetString("Cart", string.Empty);
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Checkout()
         {
-            return Ok();
+            var cart = GetCart();
+            var model = new Cart();
+            model.Items = await _cartService.GetShopItems(cart);
+            model.TotalPrice = model.Items.Sum(i => i.TotalPrice);
+
+            if (model.Items.Count == 0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(model);
+        }
+
+        private Dictionary<int, int> GetCart()
+        {
+            var data = HttpContext.Session.GetString("Cart");
+            if (string.IsNullOrWhiteSpace(data))
+            {
+                return new();
+            }
+
+            var cart = JsonConvert.DeserializeObject<Dictionary<int, int>>(data);
+
+            if (cart == null)
+            {
+                return new();
+            }
+
+            return cart;
         }
     }
 }
