@@ -20,14 +20,23 @@
             _mapper = mapper;
         }
 
-        public async Task<List<ItemCard>> GetTopFiveOffers()
+        public  List<ItemCard> GetTopFiveOffers()
         {
-            var books = await _repo
+            var books = _repo
                 .AllReadonly<Book>()
+                .Where(b => b.StockQuantity > 0)
+                .ToList()
+                .Select(b => new ItemCard
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    BasePrice = b.BasePrice,
+                    CurrentPrice = b.BasePrice / (1 - (GetPromotion(b.GenreId, b.AuthorId).Result / 100)),
+                    BookCover = b.BookCover
+                })
                 .OrderBy(b => b.CurrentPrice)
                 .Take(5)
-                .ProjectTo<ItemCard>(_mapper.ConfigurationProvider)
-                .ToListAsync();
+                .ToList();
 
             return books;
         }
@@ -45,21 +54,13 @@
 
         public async Task<List<ItemCard>> GetCatalogue(string searchTerm, int itemsOnPage, int genreId, ItemSortClause sortBy, int currentPage)
         {
-            var books = _repo.AllReadonly<Book>();
+            var books = _repo.AllReadonly<Book>()
+                .Where(b => b.StockQuantity > 0);
 
             if (await _repo.AllReadonly<Genre>().AnyAsync(g => g.Id == genreId))
             {
                 books = books.Where(b => b.GenreId == genreId);
             }
-
-            books = sortBy switch
-            {
-                ItemSortClause.NameAsc => books.OrderBy(b => b.Title),
-                ItemSortClause.NameDesc => books.OrderByDescending(b => b.Title),
-                ItemSortClause.PriceAsc => books.OrderBy(b => b.CurrentPrice),
-                ItemSortClause.PriceDesc => books.OrderByDescending(b => b.CurrentPrice),
-                _ => books.OrderBy(b => b.Id)
-            };
 
             if (!string.IsNullOrEmpty(searchTerm))
             {
@@ -68,6 +69,32 @@
                     || EF.Functions.Like(b.Description.ToLower(), $"%{searchTerm}%")
                     || EF.Functions.Like(b.Author.Name.ToLower(), $"%{searchTerm}%"));
             }
+
+            var result = books
+                .ToList()
+                .Select(b => new ItemCard
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    BasePrice = b.BasePrice,
+                    CurrentPrice = b.BasePrice / (1 - (GetPromotion(b.GenreId, b.AuthorId).Result / 100)),
+                    BookCover = b.BookCover
+                })
+            .ToList();
+
+
+            result = sortBy switch
+            {
+                ItemSortClause.NameAsc =>
+                    result.OrderBy(b => b.Title).ToList(),
+                ItemSortClause.NameDesc =>
+                    result.OrderByDescending(b => b.Title).ToList(),
+                ItemSortClause.PriceAsc =>
+                    result.OrderBy(b => b.CurrentPrice).ToList(),
+                ItemSortClause.PriceDesc =>
+                    result.OrderByDescending(b => b.CurrentPrice).ToList(),
+                _ => result.OrderBy(b => b.Id).ToList()
+            };
 
             var maxPages = await this.MaxPages(searchTerm, itemsOnPage, genreId);
 
@@ -88,12 +115,12 @@
 
             var skipCount = itemsOnPage * (currentPage - 1);
 
-            books = books
+            result = result
                 .Skip(skipCount)
-                .Take(itemsOnPage);
+                .Take(itemsOnPage)
+                .ToList();
 
-            return await books.ProjectTo<ItemCard>(_mapper.ConfigurationProvider)
-                .ToListAsync();
+            return result;
         }
 
         public async Task<int> MaxPages(string searchTerm, int itemsOnPage, int genreId)
@@ -118,13 +145,26 @@
             return int.Parse(itemCount.ToString(CultureInfo.InvariantCulture));
         }
 
-        public async Task<BookDetail?> GetBookInfo(int id)
+        public BookDetail? GetBookInfo(int id)
         {
-            return await _repo
+            return _repo
                 .AllReadonly<Book>()
-                .Where(b => b.Id == id)
-                .ProjectTo<BookDetail>(_mapper.ConfigurationProvider)
-                .FirstOrDefaultAsync();
+                .Include(b => b.Author)
+                .Include(b => b.Genre)
+                .Where(b => b.Id == id && b.StockQuantity > 0)
+                .ToList()
+                .Select(b => new BookDetail()
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    Description = b.Description,
+                    BasePrice = b.BasePrice,
+                    CurrentPrice = b.BasePrice / (1 - (GetPromotion(b.GenreId, b.AuthorId).Result / 100)),
+                    BookCover = b.BookCover,
+                    Genre = b.Genre.Name,
+                    Author = b.Author.Name
+                })
+                .FirstOrDefault();
         }
 
         public async Task<bool> AnyBook(int id)
@@ -132,6 +172,23 @@
             return await _repo
                 .AllReadonly<Book>()
                 .AnyAsync(b => b.Id == id);
+        }
+
+        private async Task<decimal> GetPromotion(int genreId, int authorId)
+        {
+            return await _repo
+                .AllReadonly<Promotion>()
+                .Include(p => p.AuthorPromotions)
+                .Include(p => p.GenrePromotions)
+                .Where(p =>
+                    (p.StartDate >= DateTime.Now && p.EndDate <= DateTime.Now) &&
+                    (p.GenrePromotions
+                         .Any(gp => gp.GenreId == genreId) ||
+                     p.AuthorPromotions
+                         .Any(ap => ap.AuthorId == authorId))
+                )
+                .Select(p => (decimal?)p.DiscountPercent)
+                .FirstOrDefaultAsync() ?? 0;
         }
     }
 }

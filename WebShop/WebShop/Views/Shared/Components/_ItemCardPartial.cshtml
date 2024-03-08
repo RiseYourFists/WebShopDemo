@@ -14,11 +14,13 @@
                 <p class="title">@card.Title</p>
                 <div class="pricing">
                     @{
-                        <span>@card.CurrentPrice</span>
+                        var current = $"{card.CurrentPrice:f2}";
+                        var basePrice = $"{card.CurrentPrice:f2}";
+                        <span>@current</span>
 
                         if (card.BasePrice != card.CurrentPrice)
                         {
-                            <span class="promotion">@card.BasePrice</span>
+                            <span class="promotion">@basePrice</span>
                         }
                     }
                 </div>

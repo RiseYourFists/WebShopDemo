@@ -7,7 +7,6 @@
     {
         public MappingProfile()
         {
-            this.CreateMap<Book, ItemCard>();
             this.CreateMap<Genre, GenreCategoryIcon>();
 
             this.CreateMap<Book, BookDetail>()

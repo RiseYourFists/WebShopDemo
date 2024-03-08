@@ -1,4 +1,6 @@
-﻿namespace WebShop.Core.Models.BookShop
+﻿using System.ComponentModel;
+
+namespace WebShop.Core.Models.BookShop
 {
     using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations;
@@ -33,10 +35,13 @@
         [JsonProperty]
         public decimal BasePrice { get; set; }
 
-        [Required]
-        [Comment("Book's price with or without promotion")]
-        [JsonProperty]
+        [NotMapped]
         public decimal CurrentPrice { get; set; }
+
+        [Required]
+        [Comment("Total quantity available")]
+        [JsonProperty]
+        public int StockQuantity { get; set; }
 
         [Required]
         [MaxLength(UrlMaxLength)]

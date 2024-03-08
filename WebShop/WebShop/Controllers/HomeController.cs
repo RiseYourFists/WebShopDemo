@@ -26,7 +26,7 @@
         {
             var model = new IndexPage()
             {
-                TopFive = await _bookShopService.GetTopFiveOffers(),
+                TopFive = _bookShopService.GetTopFiveOffers(),
                 Genres = await _bookShopService.GetCategoryIcons()
             };
             return View(model);
@@ -62,10 +62,10 @@
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Details(int itemId, string returnRoute)
+        public IActionResult Details(int itemId, string returnRoute)
         {
             ViewBag.ReturnRoute = returnRoute;
-            var model = await _bookShopService.GetBookInfo(itemId);
+            var model = _bookShopService.GetBookInfo(itemId);
             if (model == null)
             {
                 return NotFound();

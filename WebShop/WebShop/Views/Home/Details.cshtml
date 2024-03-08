@@ -6,7 +6,7 @@
     var returnRoute = ViewBag.ReturnRoute;
     returnRoute = returnRoute.Replace("amp;", "");
 
-                      <section id="book-info">
+    <section id="book-info">
         <article class="wrapper">
             <a class="fas fa-arrow-left back" href="@returnRoute"></a>
             <div>
@@ -33,19 +33,25 @@
                 </div>
                 <div class="action-bar">
                     <div class="pricing">
-                        @if (Model.BasePrice != Model.CurrentPrice)
-                        {
-                            <p class="promotion">@Model.BasePrice$</p>
+                        @{
+                            var basePrice = $"{Model.BasePrice:f2}";
+                            var current = $"{Model.CurrentPrice:f2}";
+
+                            @if (Model.BasePrice != Model.CurrentPrice)
+                            {
+                                <p class="promotion">@basePrice$</p>
+                            }
+                            <p>@current$</p>
                         }
-                        <p>@Model.CurrentPrice$</p>
                     </div>
                     <form asp-controller="Cart" asp-action="Add" method="get">
-                        <input type="hidden" name="id" value="@Model.Id"/>
+                        <input type="hidden" name="id" value="@Model.Id" />
                         <input name="quantity" type="number" value="1" min="1" max="999">
-                        <input type="hidden" name="returnRoute" value="@returnRoute"/>
+                        <input type="hidden" name="returnRoute" value="@returnRoute" />
                         <button class="fas fa-shopping-cart add-to-cart" type="submit">Add to cart</button>
                     </form>
                 </div>
             </div>
         </article>
-    </section>}
+    </section>
+}

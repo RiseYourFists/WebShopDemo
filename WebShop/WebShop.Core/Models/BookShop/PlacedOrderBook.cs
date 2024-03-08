@@ -20,5 +20,13 @@ namespace WebShop.Core.Models.BookShop
 
         [ForeignKey(nameof(BookId))]
         public Book Book { get; set; } = null!;
+
+        [Required]
+        [Comment("Quantity of books ordered")]
+        public int Quantity { get; set; }
+
+        [Required]
+        [Comment("Purchase price for single book")]
+        public decimal SingleItemPrice { get; set; }
     }
 }
