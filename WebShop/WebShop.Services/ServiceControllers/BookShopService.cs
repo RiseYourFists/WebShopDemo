@@ -31,7 +31,7 @@
                     Id = b.Id,
                     Title = b.Title,
                     BasePrice = b.BasePrice,
-                    CurrentPrice = b.BasePrice / (1 - (GetPromotion(b.GenreId, b.AuthorId).Result / 100)),
+                    CurrentPrice = b.BasePrice * (1 - (GetPromotion(b.GenreId, b.AuthorId).Result / 100)),
                     BookCover = b.BookCover
                 })
                 .OrderBy(b => b.CurrentPrice)
@@ -77,7 +77,7 @@
                     Id = b.Id,
                     Title = b.Title,
                     BasePrice = b.BasePrice,
-                    CurrentPrice = b.BasePrice / (1 - (GetPromotion(b.GenreId, b.AuthorId).Result / 100)),
+                    CurrentPrice = b.BasePrice * (1 - (GetPromotion(b.GenreId, b.AuthorId).Result / 100)),
                     BookCover = b.BookCover
                 })
             .ToList();
@@ -159,7 +159,7 @@
                     Title = b.Title,
                     Description = b.Description,
                     BasePrice = b.BasePrice,
-                    CurrentPrice = b.BasePrice / (1 - (GetPromotion(b.GenreId, b.AuthorId).Result / 100)),
+                    CurrentPrice = (b.BasePrice * (1 - (GetPromotion(b.GenreId, b.AuthorId).Result / 100))),
                     BookCover = b.BookCover,
                     Genre = b.Genre.Name,
                     Author = b.Author.Name
@@ -176,19 +176,21 @@
 
         private async Task<decimal> GetPromotion(int genreId, int authorId)
         {
-            return await _repo
+
+            var promotion = await _repo
                 .AllReadonly<Promotion>()
                 .Include(p => p.AuthorPromotions)
                 .Include(p => p.GenrePromotions)
                 .Where(p =>
-                    (p.StartDate >= DateTime.Now && p.EndDate <= DateTime.Now) &&
+                    (p.StartDate <= DateTime.Now && p.EndDate >= DateTime.Now) &&
                     (p.GenrePromotions
                          .Any(gp => gp.GenreId == genreId) ||
                      p.AuthorPromotions
                          .Any(ap => ap.AuthorId == authorId))
                 )
                 .Select(p => (decimal?)p.DiscountPercent)
-                .FirstOrDefaultAsync() ?? 0;
+                .FirstOrDefaultAsync();
+            return  promotion != null? promotion.Value : 0;
         }
     }
 }

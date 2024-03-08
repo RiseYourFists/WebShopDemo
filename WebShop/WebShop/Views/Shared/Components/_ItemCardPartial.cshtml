@@ -15,7 +15,7 @@
                 <div class="pricing">
                     @{
                         var current = $"{card.CurrentPrice:f2}";
-                        var basePrice = $"{card.CurrentPrice:f2}";
+                        var basePrice = $"{card.BasePrice:f2}";
                         <span>@current</span>
 
                         if (card.BasePrice != card.CurrentPrice)

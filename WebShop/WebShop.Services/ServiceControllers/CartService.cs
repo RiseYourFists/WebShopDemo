@@ -26,7 +26,7 @@
                     Id = b.Id,
                     Title = b.Title,
                     CoverPhoto = b.BookCover,
-                    TotalPrice = (b.BasePrice / 1 - (GetPromotion(_repository, b.GenreId, b.AuthorId) / 100) ) * items[b.Id],
+                    TotalPrice = (b.BasePrice * 1 - (GetPromotion(_repository, b.GenreId, b.AuthorId) / 100) ) * items[b.Id],
                     Quantity = items[b.Id]
                 })
                 .ToList();
