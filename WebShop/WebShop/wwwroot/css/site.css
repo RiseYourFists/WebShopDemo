@@ -1049,6 +1049,7 @@ html {
   background-color: var(--main-bg-color);
   height: fit-content;
   min-width: 390px;
+  padding-bottom: 2rem;
 }
 
 #book-info .img-wrapper {
@@ -1067,6 +1068,7 @@ html {
 
 #book-info :is(.content, .img-wrapper) {
   padding: 2rem;
+  padding-bottom: .5rem;
 }
 
 #book-info .title {
