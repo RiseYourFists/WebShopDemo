@@ -33,8 +33,9 @@
                 </div>
                 @if (!isCartEmpty)
                 {
+                    var price = $"{Model.TotalPrice:f2}";
                     <div class="bottom-bar">
-                        <span class="total">Total: @Model.TotalPrice$</span>
+                        <span class="total">Total: @price$</span>
                         <a asp-controller="Cart" asp-action="Checkout" class="checkout-btn"><i class="fas fa-money-check-alt"></i>Check out</a>
                     </div>
                 }

@@ -7,7 +7,7 @@
         <div class="list-row">
             <div class="action-holder">
                 <form asp-controller="Cart" asp-action="Remove" asp-route-id="@item.Id" method="post">
-                    <input type="hidden" name="returnUrl" value="@returnUrl"/>
+                    <input type="hidden" name="returnUrl" value="@returnUrl" />
                     <button type="submit" class="remove-btn far fa-times-circle"></button>
                 </form>
             </div>
@@ -15,9 +15,13 @@
                 <img src="@item.CoverPhoto" alt="cover-image">
             </div>
             <div class="item-info">
-                <h3>@item.Title</h3>
-                <p>Quantity: @item.Quantity</p>
-                <span>@item.TotalPrice$</span>
+                @{
+                    var price = $"{item.TotalPrice:f2}";
+
+                    <h3>@item.Title</h3>
+                    <p>Quantity: @item.Quantity</p>
+                    <span>@price$</span>
+                }
             </div>
         </div>
     }

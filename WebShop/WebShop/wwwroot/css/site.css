@@ -670,6 +670,11 @@ html {
   animation: radioPop 0.6s;
 }
 
+.radio:hover:not(:checked):after {
+  width: 10px;
+  height: 10px;
+}
+
 @keyframes radioPop {
   0% {
     width: 0px;

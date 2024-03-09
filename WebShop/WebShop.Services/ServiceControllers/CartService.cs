@@ -26,28 +26,29 @@
                     Id = b.Id,
                     Title = b.Title,
                     CoverPhoto = b.BookCover,
-                    TotalPrice = (b.BasePrice * 1 - (GetPromotion(_repository, b.GenreId, b.AuthorId) / 100) ) * items[b.Id],
+                    TotalPrice = (b.BasePrice * (1 - (GetPromotion(_repository, b.GenreId, b.AuthorId).Result / 100)) ) * items[b.Id],
                     Quantity = items[b.Id]
                 })
                 .ToList();
 
         }
 
-        private static  decimal GetPromotion(IRepository repository, int genreId, int authorId)
+        private async Task<decimal> GetPromotion(IRepository repository, int genreId, int authorId)
         {
-            return repository
+            var promotion = await repository
                 .AllReadonly<Promotion>()
                 .Include(p => p.AuthorPromotions)
                 .Include(p => p.GenrePromotions)
                 .Where(p =>
-                    (p.StartDate >= DateTime.Now && p.EndDate <= DateTime.Now) &&
+                    (p.StartDate <= DateTime.Now && p.EndDate >= DateTime.Now) &&
                     (p.GenrePromotions
                          .Any(gp => gp.GenreId == genreId) ||
                      p.AuthorPromotions
                          .Any(ap => ap.AuthorId == authorId))
                 )
                 .Select(p => (decimal?)p.DiscountPercent)
-                .FirstOrDefault() ?? 0;
+                .FirstOrDefaultAsync();
+            return promotion != null ? promotion.Value : 0;
         }
     }
 }

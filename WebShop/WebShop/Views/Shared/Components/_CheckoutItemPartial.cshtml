@@ -12,9 +12,13 @@
                 <img src="@item.CoverPhoto" alt="cover-image">
             </div>
             <div class="item-info">
+                @{
+                    var price = $"{item.TotalPrice:f2}";
+
                 <h3>@item.Title</h3>
                 <p>Quantity: @item.Quantity</p>
-                <p class="price-tag">@item.TotalPrice$</p>
+                <p class="price-tag">@price$</p>
+                }
             </div>
         </div>
     }

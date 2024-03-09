@@ -9,7 +9,11 @@
         @await Html.PartialAsync("Components/_CheckoutItemPartial", Model.Items)
     </div>
     <div class="overall-info">
-        <p>Total: @Model.TotalPrice$</p>
+        @{
+            var price = $"{Model.TotalPrice:f2}";
+
+            <p>Total: @price$</p>
+        }
     </div>
     <div class="action-list">
         <a asp-controller="Home" asp-action="Index" class="generic-action fas fa-home">Home</a>
