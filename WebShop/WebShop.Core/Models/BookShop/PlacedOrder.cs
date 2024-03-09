@@ -29,12 +29,12 @@
         [Required]
         [MaxLength(CountryMaxLen)]
         [Comment("Country of delivery.")]
-        public string CountryId { get; set; } = null!;
+        public string Country { get; set; } = null!;
 
         [Required]
         [MaxLength(CityMaxLen)]
         [Comment("City of delivery.")]
-        public string CityId { get; set; } = null!;
+        public string City { get; set; } = null!;
 
         [Required]
         [MaxLength(AddressMaxLen)]
@@ -42,8 +42,8 @@
         public string Address { get; set; } = null!;
 
         [Required]
-        [Comment("Total price for the order")]
-        public decimal TotalPrice { get; set; }
+        [Comment("Indication of order stage")]
+        public bool IsShipped { get; set; }
 
         public virtual ICollection<PlacedOrderBook> PlacedOrderBooks { get; set; } = new HashSet<PlacedOrderBook>();
     }

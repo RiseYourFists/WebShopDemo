@@ -94,6 +94,13 @@ namespace WebShop.App.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Order()
+        {
+            //TODO: Implement functionality.
+            return View();
+        }
+
         private Dictionary<int, int> GetCart()
         {
             var data = HttpContext.Session.GetString("Cart");

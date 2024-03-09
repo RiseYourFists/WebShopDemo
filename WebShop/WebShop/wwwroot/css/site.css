@@ -1433,7 +1433,7 @@ html {
   font-weight: 500;
 }
 
-#checkout .action-list{
+.action-list{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   width: 100%;
@@ -1441,38 +1441,38 @@ html {
   margin-top: 10px;
 }
 
-#checkout .action-list a{
+.action-list a{
   padding: 1rem;
   color: white;
   justify-self: stretch;
   text-align: left;
 }
 
-#checkout .action-list a::before{
+.action-list a::before{
   margin-right: 5px;
 }
 
-#checkout .cancel{
+.cancel{
   background-color: var(--cancel-color);
 }
 
-#checkout .cancel:hover{
+.cancel:hover{
   background-color: var(--cancel-color-highlight);
 }
 
-#checkout .confirm{
+.confirm{
 background-color: var(--confirm-color);
 }
 
-#checkout .confirm:hover{
+.confirm:hover{
 background-color: var(--confirm-color-highlight);
 }
 
-#checkout .generic-action{
+.generic-action{
   background-color: var(--generic-action-color);
 }
 
-#checkout .generic-action:hover{
+.generic-action:hover{
   background-color: var(--generic-action-color-highlight);
 }
 
@@ -1487,6 +1487,31 @@ background-color: var(--confirm-color-highlight);
 }
 
 /*End Checkout*/
+
+/*Order*/
+
+#order .pricing{
+  width: 100%;
+  font-size: 25px;
+  color: white;
+  font-weight: 700;
+  text-shadow: 1px 1px 10px black;
+  text-align: right;
+  margin: 1rem;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#order .action-list{
+  display: flex;
+  justify-content: center;
+}
+
+#order .action-list > *{
+  border-radius: 4px;
+}
+
+/*End Order*/
 
 @media (max-width: 1200px) {
   .small-window-field {

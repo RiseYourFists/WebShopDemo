@@ -15,7 +15,7 @@
         ? "selected"
         : string.Empty;
 
-        <li class="@isSelected">
+        <li class="@isSelected" title="@menuItem.ItemDescription">
             @{
                 if (string.IsNullOrWhiteSpace(menuItem.Action))
                 {

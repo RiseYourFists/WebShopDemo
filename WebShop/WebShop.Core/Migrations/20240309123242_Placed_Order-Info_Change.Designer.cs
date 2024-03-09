@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebShop.Core.Data;
 
@@ -11,9 +12,10 @@ using WebShop.Core.Data;
 namespace WebShop.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240309123242_Placed_Order-Info_Change")]
+    partial class Placed_OrderInfo_Change
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -678,13 +680,13 @@ namespace WebShop.Core.Migrations
                         .HasColumnType("nvarchar(250)")
                         .HasComment("Address of delivery.");
 
-                    b.Property<string>("City")
+                    b.Property<string>("CityId")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasComment("City of delivery.");
 
-                    b.Property<string>("Country")
+                    b.Property<string>("CountryId")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
