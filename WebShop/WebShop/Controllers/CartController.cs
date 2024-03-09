@@ -79,11 +79,11 @@ namespace WebShop.App.Controllers
         }
 
         [HttpGet]
-        public IActionResult Checkout()
+        public async Task<IActionResult> Checkout()
         {
             var cart = GetCart();
             var model = new Cart();
-            model.Items = _cartService.GetShopItems(cart);
+            model.Items = await _cartService.GetShopItems(cart);
             model.TotalPrice = model.Items.Sum(i => i.TotalPrice);
 
             if (model.Items.Count == 0)

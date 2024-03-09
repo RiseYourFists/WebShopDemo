@@ -20,12 +20,14 @@
             _mapper = mapper;
         }
 
-        public  List<ItemCard> GetTopFiveOffers()
+        public async Task<List<ItemCard>> GetTopFiveOffers()
         {
-            var books = _repo
+            var books = await _repo
                 .AllReadonly<Book>()
                 .Where(b => b.StockQuantity > 0)
-                .ToList()
+                .ToListAsync();
+
+            var result = books
                 .Select(b => new ItemCard
                 {
                     Id = b.Id,
@@ -34,11 +36,11 @@
                     CurrentPrice = b.BasePrice * (1 - (GetPromotion(b.GenreId, b.AuthorId).Result / 100)),
                     BookCover = b.BookCover
                 })
-                .OrderBy(b => b.CurrentPrice)
-                .Take(5)
-                .ToList();
+             .OrderBy(b => b.CurrentPrice)
+             .Take(5)
+             .ToList();
 
-            return books;
+            return result;
         }
 
         public async Task<List<GenreCategoryIcon>> GetCategoryIcons()
@@ -145,14 +147,16 @@
             return int.Parse(itemCount.ToString(CultureInfo.InvariantCulture));
         }
 
-        public BookDetail? GetBookInfo(int id)
+        public async Task<BookDetail?> GetBookInfo(int id)
         {
-            return _repo
+            var book = await _repo
                 .AllReadonly<Book>()
                 .Include(b => b.Author)
                 .Include(b => b.Genre)
                 .Where(b => b.Id == id && b.StockQuantity > 0)
-                .ToList()
+                .ToListAsync();
+
+            var result = book
                 .Select(b => new BookDetail()
                 {
                     Id = b.Id,
@@ -165,6 +169,8 @@
                     Author = b.Author.Name
                 })
                 .FirstOrDefault();
+
+            return result;
         }
 
         public async Task<bool> AnyBook(int id)
@@ -190,7 +196,7 @@
                 )
                 .Select(p => (decimal?)p.DiscountPercent)
                 .FirstOrDefaultAsync();
-            return  promotion != null? promotion.Value : 0;
+            return promotion != null ? promotion.Value : 0;
         }
     }
 }

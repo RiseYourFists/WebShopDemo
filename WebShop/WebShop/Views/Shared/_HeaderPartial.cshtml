@@ -22,7 +22,7 @@
 
                 if (cart != null)
                 {
-                    model.Items = CartService.GetShopItems(cart);
+                    model.Items = await CartService.GetShopItems(cart);
                     model.TotalPrice = model.Items.Sum(i => i.TotalPrice);
                 }
                 else

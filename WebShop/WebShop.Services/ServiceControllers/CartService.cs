@@ -15,21 +15,25 @@
             _repository = repository;
         }
 
-        public List<CartListItem> GetShopItems(Dictionary<int, int> items)
+        public async Task<List<CartListItem>> GetShopItems(Dictionary<int, int> items)
         {
-            return _repository
+            var books = await _repository
                 .All<Book>()
                 .Where(b => items.Keys.Contains(b.Id))
-                .ToList()
+                .ToListAsync();
+
+            var result = books
                 .Select(b => new CartListItem()
                 {
                     Id = b.Id,
                     Title = b.Title,
                     CoverPhoto = b.BookCover,
-                    TotalPrice = (b.BasePrice * (1 - (GetPromotion(_repository, b.GenreId, b.AuthorId).Result / 100)) ) * items[b.Id],
+                    TotalPrice = (b.BasePrice * (1 - (GetPromotion(_repository, b.GenreId, b.AuthorId).Result / 100))) * items[b.Id],
                     Quantity = items[b.Id]
                 })
                 .ToList();
+
+            return result;
 
         }
 
