@@ -10,8 +10,8 @@
         <ul class="gap-2">
             @await Html.PartialAsync("Components/_SideMenuItemPartial", new List<SideMenuModel>
             {
-                new("Home", "", "Home", "Index", "fas fa-home"),
-                new("Catalogue", "", "Home", "All", "fas fa-search")
+                new("Home", "", "Home", "Index", "fas fa-home", false),
+                new("Catalogue", "", "Home", "All", "fas fa-search", false)
             })
         </ul>
         @await Html.PartialAsync("_LoginPartial")

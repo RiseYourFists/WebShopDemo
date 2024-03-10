@@ -18,6 +18,6 @@
     <div class="action-list">
         <a asp-controller="Home" asp-action="Index" class="generic-action fas fa-home">Home</a>
         <a asp-controller="Cart" asp-action="Clear" class="cancel fas fa-trash">Clear cart</a>
-        <a href="#" class="confirm fas fa-angle-double-right">Proceed to payment</a>
+        <a asp-controller="Cart" asp-action="Order" class="confirm fas fa-angle-double-right">Proceed to payment</a>
     </div>
 </section>

@@ -51,6 +51,16 @@ body {
   min-width: 414px;
 }
 
+.primary-btn{
+  background-color: var(--primary-color);
+  border-radius: 4px;
+  border: none;
+}
+
+.primary-btn:hover{
+  background-color: var(--primary-color-highlight);
+}
+
 .bg-image-wrapper {
   top: 0;
   left: 0;
@@ -1441,11 +1451,16 @@ html {
   margin-top: 10px;
 }
 
-.action-list a{
+.action-list form button{
+  width: 100%;
+}
+
+.action-list :is(a, button){
   padding: 1rem;
   color: white;
   justify-self: stretch;
   text-align: left;
+  border: none;
 }
 
 .action-list a::before{
@@ -1511,6 +1526,54 @@ background-color: var(--confirm-color-highlight);
   border-radius: 4px;
 }
 
+#order-status{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+#order-status .info{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  font-size: 20px;
+}
+
+#order-status .info .fas{
+  margin-right: 15px;
+  width: 20px;
+  font-size: 20px;
+  color: var(--primary-color);
+}
+
+#order-status .fas::before{
+  display: flex;
+  justify-content: center;
+}
+
+#order-status span{
+  color: white;
+}
+
+#order-status .status-icon.far{
+  color: green;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 2.5rem;
+  text-shadow: 1px 1px 1px var(--main-bg-color);
+  padding: 20px;
+  border-radius: 16px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 2px dashed green;
+  width: 80%;
+}
+
+#order-status .action-list{
+  display: flex;
+  justify-content: center;
+}
 /*End Order*/
 
 @media (max-width: 1200px) {

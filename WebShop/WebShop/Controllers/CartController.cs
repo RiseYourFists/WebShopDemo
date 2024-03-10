@@ -1,19 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using WebShop.Services.Models.BookShop;
-using WebShop.Services.ServiceControllers;
-
-namespace WebShop.App.Controllers
+﻿namespace WebShop.App.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+    using Newtonsoft.Json;
+    using WebShop.Services.Models.BookShop;
+    using Services.ServiceControllers;
+    using WebShop.Core.Models.Identity;
+
     public class CartController : BaseController
     {
         private readonly BookShopService _service;
         private readonly CartService _cartService;
+        private readonly UserHelper<ApplicationUser, Guid> _userHelper;
 
-        public CartController(BookShopService service, CartService cartService)
+        public CartController(BookShopService service, CartService cartService, UserHelper<ApplicationUser, Guid> userHelper)
         {
             _service = service;
             _cartService = cartService;
+            _userHelper = userHelper;
         }
 
         [HttpPost]
@@ -73,7 +76,7 @@ namespace WebShop.App.Controllers
 
         public IActionResult Clear()
         {
-            HttpContext.Session.SetString("Cart", string.Empty);
+           ClearCart();
 
             return RedirectToAction("Index", "Home");
         }
@@ -97,8 +100,56 @@ namespace WebShop.App.Controllers
         [HttpGet]
         public async Task<IActionResult> Order()
         {
-            //TODO: Implement functionality.
-            return View();
+            var order = new OrderModel()
+            {
+                TotalPrice = await _cartService.GetTotalPrice(GetCart())
+            };
+            return View(order);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Order(OrderModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var userId = await _userHelper.GetUserId(User);
+            try
+            {
+
+                var cart = GetCart();
+
+                if (cart.Count == 0)
+                {
+                    ModelState.AddModelError("All", "Invalid cart data!");
+                    return View(model);
+                }
+
+                await _cartService.AddNewOrder(cart, model, userId);
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("All", e.Message);
+                return View(model);
+            }
+
+            ClearCart();
+            var invoice = await _cartService.GetCurrentInvoice(userId);
+
+            return View(nameof(OrderDetails), invoice);
+        }
+
+        [HttpGet]
+        public IActionResult OrderDetails(Invoice model)
+        {
+            return View(model);
+        }
+
+        private void ClearCart()
+        {
+            HttpContext.Session.SetString("Cart", string.Empty);
         }
 
         private Dictionary<int, int> GetCart()

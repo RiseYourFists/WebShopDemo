@@ -8,6 +8,11 @@
 
     foreach (var menuItem in Model)
     {
+        if (menuItem.RequireAuthentication && !User.Identity!.IsAuthenticated)
+        {
+            continue;
+        }
+
         var isSelected =
             (action == menuItem.Action
              && (area == menuItem.Area || string.IsNullOrWhiteSpace(area) == string.IsNullOrWhiteSpace(menuItem.Area))

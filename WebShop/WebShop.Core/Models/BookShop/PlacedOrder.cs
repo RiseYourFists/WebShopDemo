@@ -1,4 +1,7 @@
-﻿namespace WebShop.Core.Models.BookShop
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using WebShop.Core.Models.Identity;
+
+namespace WebShop.Core.Models.BookShop
 {
     using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations;
@@ -16,15 +19,16 @@
         public Guid UserId { get; set; }
 
         [Required]
+        [ForeignKey(nameof(UserId))]
+        [Comment("Mapping property.")]
+        public ApplicationUser User { get; set; } = null!;
+
+        [Required]
         [Comment("Date of order")]
         public DateTime DatePlaced { get; set; }
 
         [Comment("Date of the order fulfillment")]
         public DateTime? DateFulfilled { get; set; }
-
-        [Required]
-        [Comment("Indication if the order is fulfilled. Default value is set to false.")]
-        public bool IsFulfilled { get; set; } = false;
 
         [Required]
         [MaxLength(CountryMaxLen)]

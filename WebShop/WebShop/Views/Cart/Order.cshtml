@@ -7,7 +7,7 @@
     <div class="title-holder">
         <h1 class="title">Order placement</h1>
     </div>
-    <form action="" class="form-list">
+    <form asp-controller="Cart" asp-action="Order" method="post" class="form-list">
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="form-field">
             <label asp-for="Country"></label>
@@ -25,7 +25,10 @@
             <span asp-validation-for="Address" class="text-danger"></span>
         </div>
         <div class="pricing">
-            <p>Total: @Model.TotalPrice$</p>
+            @{
+                var price = $"{Model.TotalPrice:f2}";
+                <p>Total: @price$</p>
+            }
         </div>
         <div class="centered action-list">
             <a asp-controller="Cart" asp-action="Checkout" class="cancel"><i class="fas fa-caret-left"></i> Go Back</a>

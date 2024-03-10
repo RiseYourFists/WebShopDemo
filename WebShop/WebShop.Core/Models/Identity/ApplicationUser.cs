@@ -1,11 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-
-namespace WebShop.Core.Models.Identity
+﻿namespace WebShop.Core.Models.Identity
 {
     using static ValidationConstants.IdentityConstants;
-    public class ApplicationUser : IdentityUser<Guid>
+    using System.ComponentModel.DataAnnotations;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
+    using Contracts;
+    public class ApplicationUser : IdentityUser<Guid>, IUserIdentity<Guid>
     {
         [Required]
         [MaxLength(FirstNameMaxLength)]
