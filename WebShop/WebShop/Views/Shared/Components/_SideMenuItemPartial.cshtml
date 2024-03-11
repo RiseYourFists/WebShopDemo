@@ -59,6 +59,15 @@
                         <span class="foldable">@menuItem.ItemDescription</span>
                     </a>
                 }
+
+                if (menuItem.Notifications > 0)
+                {
+                    var notifications = menuItem.Notifications > 99 
+                        ? "99+" 
+                        : menuItem.Notifications.ToString();
+
+                    <span class="notification">@notifications</span>
+                }
             }
         </li>
     }

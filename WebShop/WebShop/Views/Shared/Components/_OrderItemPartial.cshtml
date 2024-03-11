@@ -1,0 +1,20 @@
+﻿@model List<OrderItem>;
+
+@{
+    foreach (var item in Model)
+    {
+
+        <a class="item-card" href="/Home/Details?ItemId=@item.Id&ReturnRoute=/MyOrders/">
+            <div class="img-wrapper">
+                <img src="@item.BookCover" alt="cover-image">
+            </div>
+            <div class="content-wrapper">
+                <p class="title" title="@item.Title">@item.Title</p>
+                <div class="pricing">
+                    <span class="quantity">@item.Quantity x</span>
+                    <span>@item.Price</span>
+                </div>
+            </div>
+        </a>
+    }
+}

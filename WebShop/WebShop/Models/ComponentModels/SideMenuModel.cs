@@ -8,7 +8,8 @@
             string controller = "",
             string action = "",
             string classIcon = "",
-            bool requireAuthentication = false)
+            bool requireAuthentication = false,
+            int notifications = 0)
         {
             ItemDescription = itemDescription;
             Area = area;
@@ -17,6 +18,7 @@
             ClassIcon = classIcon;
             RequireAuthentication = requireAuthentication;
             AccessRoles = Array.Empty<string>();
+            Notifications = notifications;
         }
 
         public SideMenuModel(
@@ -50,5 +52,7 @@
         public bool RequireAuthentication { get; set; }
 
         public string[] AccessRoles { get; private set; }
+
+        public int Notifications { get; set; }
     }
 }

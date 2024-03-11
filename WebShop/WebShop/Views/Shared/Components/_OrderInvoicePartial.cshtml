@@ -1,0 +1,45 @@
+﻿ @model List<MyOrder>
+
+@{
+    foreach (var invoice in Model)
+    {
+        var status = invoice.OrderStatus switch
+        {
+            OrderStatus.Pending => string.Empty,
+            OrderStatus.Sending => "processing",
+            _ => "completed"
+        };
+
+        <article class="order">
+            <h2>@invoice.City @invoice.Address</h2>
+            <span class="label status @status">@invoice.OrderStatus.ToString()</span>
+            <p>
+                <span class="label">Ordered on:</span>
+                <span>@invoice.OrderedOn</span>
+            </p>
+            @if(!string.IsNullOrWhiteSpace(invoice.DeliveredOn))
+            {
+                <p>
+                    <span class="label">Delivered on:</span>
+                    <span>@invoice.DeliveredOn</span>
+                </p>
+            }
+            <div class="info">
+                <input type="checkbox" class="toggle" name="" id="@invoice.Id">
+                <label for="@invoice.Id" class="toggle-btn fas fa-angle-right"></label>
+                <div class="mini">
+                    <p>
+                        @string.Join(", ", invoice.Items.Select(i => $"{i.Title}: {i.Quantity}x {i.Price}$"))
+                    </p>
+                </div>
+                <div class="full">
+                    @await Html.PartialAsync("Components/_OrderItemPartial", invoice.Items)
+                </div>
+            </div>
+            <p class="price-tag">
+                <span>Total price:</span>
+                <span class="price-value">@invoice.TotalPrice$</span>
+            </p>
+        </article>
+    }
+}

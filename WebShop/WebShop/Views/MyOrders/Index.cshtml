@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "My orders";
+}
+@model MyOrdersPage
+
+<section id="my-orders">
+    <form class="filter-bar">
+        <div class="display-status">
+            <a href="#" class="selected">Active</a>
+            <a href="#">Shipped</a>
+            <a href="#">Delivered</a>
+            <a href="#">All</a>
+        </div>
+        <div class="date-filter">
+            <label for="from">From</label>
+            <input type="date" name="" id="from">
+            <label for="to">To</label>
+            <input type="date" id="to">
+        </div>
+        <div class="sort">
+            <select name="" id="">
+                <option value="">Date Desc</option>
+                <option value="">Date Asc</option>
+                <option value="">Total Price Desc</option>
+                <option value="">Total Price Asc</option>
+            </select>
+            <button type="submit" class="fas fa-check"></button>
+        </div>
+    </form>
+    <div class="order-list">
+        @await Html.PartialAsync("Components/_OrderInvoicePartial", Model.Orders)
+    </div>
+</section>

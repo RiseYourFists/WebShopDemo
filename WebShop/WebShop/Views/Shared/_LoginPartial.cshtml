@@ -8,7 +8,11 @@
         var name = Context.Session.GetString("UserFullName");
         if (string.IsNullOrWhiteSpace(name))
         {
-            name = "user";
+            var user = await UserManager.GetUserAsync(User);
+            var fullname = $"{user.FirstName} {user.LastName}";
+            Context.Session.SetString("UserFullName", fullname);
+
+            name = fullname;
         }
 
         @await Html.PartialAsync("Components/_SideMenuItemPartial",
