@@ -2,7 +2,13 @@
 {
     public class SideMenuModel
     {
-        public SideMenuModel(string itemDescription, string area, string controller, string action, string classIcon, bool requireAuthentication)
+        public SideMenuModel(
+            string itemDescription = "Element",
+            string area = "",
+            string controller = "",
+            string action = "",
+            string classIcon = "",
+            bool requireAuthentication = false)
         {
             ItemDescription = itemDescription;
             Area = area;
@@ -10,6 +16,25 @@
             Action = action;
             ClassIcon = classIcon;
             RequireAuthentication = requireAuthentication;
+            AccessRoles = Array.Empty<string>();
+        }
+
+        public SideMenuModel(
+            string[] accessRoles,
+            string itemDescription = "Element",
+            string area = "",
+            string controller = "",
+            string action = "",
+            string classIcon = "",
+            bool requireAuthentication = false)
+        {
+            ItemDescription = itemDescription;
+            Area = area;
+            Controller = controller;
+            Action = action;
+            ClassIcon = classIcon;
+            RequireAuthentication = requireAuthentication;
+            AccessRoles = accessRoles;
         }
 
         public string ItemDescription { get; set; }
@@ -23,5 +48,7 @@
         public string ClassIcon { get; set; }
 
         public bool RequireAuthentication { get; set; }
+
+        public string[] AccessRoles { get; private set; }
     }
 }

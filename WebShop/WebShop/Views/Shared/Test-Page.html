@@ -255,22 +255,118 @@
             <div class="bg-image-wrapper">
                 <img src="../../wwwroot/images/Books.jpeg" alt="">
             </div>
-            <section id="order-status" class="small-window-field">
-                <h1 class="title">Order Details</h1>
-                <div class="info">
-                    <p title="Customer name"><i class="fas fa-user"></i><span>Pesho Petrov</span></p>
-                    <p title="Phone number"><i class="fas fa-phone"></i><span>097453553</span></p>
-                    <p title="Country"><i class="fas fa-globe"></i><span>Bulgaria</span></p>
-                    <p title="City"><i class="fas fa-city"></i><span>Sofia</span></p>
-                    <p title="Address"><i class="fas fa-map-marker-alt"></i><span>Center 801 A</span></p>
-                    <p title="Total price"><i class="fas fa-money-bill-alt"></i><span>53.99$</span></p>
-                </div>
-                <div class="status-icon far fa-check-circle">
-                    <p>Successful</p>
-                </div>
-                <div class="action-list">
-                    <a href="#" class="fas fa-home primary-btn">Home Page</a>
-                    <a href="#" class="fas fa-clipboard-list primary-btn">My orders</a>
+            <section id="my-orders">
+                <form class="filter-bar">
+                    <div class="display-status">
+                        <a href="#">Active</a>
+                        <a href="#">Shipped</a>
+                        <a href="#">Delivered</a>
+                        <a href="#">All</a>
+                    </div>
+                    <div class="sort">
+                        <select name="" id="">
+                            <option value="">Date Desc</option>
+                            <option value="">Date Asc</option>
+                            <option value="">Total Price Desc</option>
+                            <option value="">Total Price Asc</option>
+                        </select>
+                    </div>
+                    <div class="date-filter">
+                        <label for="from">From</label>
+                        <input type="date" name="" id="from">
+                        <label for="to">To</label>
+                        <input type="date" id="to">
+                    </div>
+                    <div>
+                        <button type="submit" class="fas fa-check"></button>
+                    </div>
+                </form>
+                <div class="order-list">
+                    <article class="order">
+                        <h2>Sofia Lulin 7</h2>
+                        <span class="label status">Delivered</span>
+                        <p>
+                            <span class="label">Ordered on:</span>
+                            <span>02/03/2024</span>
+                        </p>
+                        <p>
+                            <span class="label">Delivered on:</span>
+                            <span>05/03/2024</span>
+                        </p>
+                        <div class="info">
+                            <label for="toggle" class="fas fa-angle-right"></label>
+                            <input type="checkbox" name="" id="toggle">
+                            <div class="mini">
+                                <p>Harry Potter, Harry Potter, Harry Potter, Harry Potter, Harry Potter, Harry Potter, Harry Potter, </p>
+                            </div>
+                            <div class="full">
+                                <a id="10" class="item-card" href="/Home/Details?ItemId=10&amp;ReturnRoute=%2F">
+                                    <div class="img-wrapper">
+                                        <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1598823299l/42844155._SY475_.jpg" alt="cover-image">
+                                    </div>
+                                    <div class="content-wrapper">
+                                        <p class="title" title="The Catcher in the Rye">The Catcher in the Rye</p>
+                                        <div class="pricing">
+                                                <span>10.50</span>
+                                                    <span class="promotion">20.99</span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a id="10" class="item-card" href="/Home/Details?ItemId=10&amp;ReturnRoute=%2F">
+                                    <div class="img-wrapper">
+                                        <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1598823299l/42844155._SY475_.jpg" alt="cover-image">
+                                    </div>
+                                    <div class="content-wrapper">
+                                        <p class="title" title="The Catcher in the Rye">The Catcher in the Rye</p>
+                                        <div class="pricing">
+                                                <span>10.50</span>
+                                                    <span class="promotion">20.99</span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a id="10" class="item-card" href="/Home/Details?ItemId=10&amp;ReturnRoute=%2F">
+                                    <div class="img-wrapper">
+                                        <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1598823299l/42844155._SY475_.jpg" alt="cover-image">
+                                    </div>
+                                    <div class="content-wrapper">
+                                        <p class="title" title="The Catcher in the Rye">The Catcher in the Rye</p>
+                                        <div class="pricing">
+                                                <span>10.50</span>
+                                                    <span class="promotion">20.99</span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a id="10" class="item-card" href="/Home/Details?ItemId=10&amp;ReturnRoute=%2F">
+                                    <div class="img-wrapper">
+                                        <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1598823299l/42844155._SY475_.jpg" alt="cover-image">
+                                    </div>
+                                    <div class="content-wrapper">
+                                        <p class="title" title="The Catcher in the Rye">The Catcher in the Rye</p>
+                                        <div class="pricing">
+                                                <span>10.50</span>
+                                                    <span class="promotion">20.99</span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a id="10" class="item-card" href="/Home/Details?ItemId=10&amp;ReturnRoute=%2F">
+                                    <div class="img-wrapper">
+                                        <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1598823299l/42844155._SY475_.jpg" alt="cover-image">
+                                    </div>
+                                    <div class="content-wrapper">
+                                        <p class="title" title="The Catcher in the Rye">The Catcher in the Rye</p>
+                                        <div class="pricing">
+                                                <span>10.50</span>
+                                                    <span class="promotion">20.99</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <p class="price-tag">
+                            <span>Total price:</span>
+                            <span class="price-value">30.70$</span>
+                        </p>
+                    </article>
                 </div>
             </section>
         </main>

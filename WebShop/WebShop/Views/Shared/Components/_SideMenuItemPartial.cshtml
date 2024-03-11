@@ -13,6 +13,29 @@
             continue;
         }
 
+        if (menuItem.AccessRoles.Length > 0)
+        {
+            if (!User.Identity!.IsAuthenticated)
+            {
+                continue;
+            }
+
+            var hasRequiredRole = false;
+
+            foreach (var role in menuItem.AccessRoles)
+            {
+                if (User.IsInRole(role))
+                {
+                    hasRequiredRole = true;
+                }
+            }
+
+            if (!hasRequiredRole)
+            {
+                continue;
+            }
+        }
+
         var isSelected =
             (action == menuItem.Action
              && (area == menuItem.Area || string.IsNullOrWhiteSpace(area) == string.IsNullOrWhiteSpace(menuItem.Area))

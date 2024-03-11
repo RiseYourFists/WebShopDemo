@@ -14,7 +14,7 @@
         @await Html.PartialAsync("Components/_SideMenuItemPartial",
             new List<SideMenuModel>
             {
-                new(name, "", "", "", "fas fa-user", true),
+                new(itemDescription: name, classIcon: "fas fa-user", requireAuthentication: true),
                 new("Log Out", "Identity", "Account", "LogOut", "fas fa-sign-out-alt", true)
             })
     }
@@ -23,8 +23,8 @@
         @await Html.PartialAsync("Components/_SideMenuItemPartial",
             new List<SideMenuModel>
             {
-                new ("Register", "Identity", "Account", "Register", "fas fa-file-signature", false),
-                new ("Log In", "Identity", "Account", "Login", "fas fa-sign-in-alt", false)
+                new ("Register", "Identity", "Account", "Register", "fas fa-file-signature"),
+                new ("Log In", "Identity", "Account", "Login", "fas fa-sign-in-alt")
             })
     }
 </ul>

@@ -1,7 +1,7 @@
 ﻿<aside class="aside-wrapper">
     <input type="checkbox" class="aside-toggle" id="aside-toggle">
     <label class="aside-toggle-btn" for="aside-toggle">
-        <img src="/images/book.png" class="logo-icon"/>
+        <img src="/images/book.png" class="logo-icon" alt="logo"/>
     </label>
     <div class="side-menu">
         <div class="site-name">
@@ -10,8 +10,8 @@
         <ul class="gap-2">
             @await Html.PartialAsync("Components/_SideMenuItemPartial", new List<SideMenuModel>
             {
-                new("Home", "", "Home", "Index", "fas fa-home", false),
-                new("Catalogue", "", "Home", "All", "fas fa-search", false)
+                new("Home", "", "Home", "Index", "fas fa-home"),
+                new("Catalogue", "", "Home", "All", "fas fa-search")
             })
         </ul>
         @await Html.PartialAsync("_LoginPartial")
