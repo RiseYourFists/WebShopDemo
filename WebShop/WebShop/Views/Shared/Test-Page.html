@@ -268,7 +268,11 @@
                 <img src="../../wwwroot/images/Books.jpeg" alt="">
             </div>
             <section id="my-orders">
-                <form class="filter-bar">
+                <div class="empty" style="display: none;">
+                    <i class="fas fa-truck icon"></i>
+                    <p>No orders have been made yet.</p>
+                </div>
+                <form class="filter-bar" >
                     <div class="display-status">
                         <a href="#" class="selected">Active</a>
                         <a href="#">Shipped</a>
@@ -291,7 +295,12 @@
                         <button type="submit" class="fas fa-check"></button>
                     </div>
                 </form>
-                <div class="order-list">
+                <div class="nothing-found">
+                    <div class="img-wrapper">
+                        <img src="https://storage.googleapis.com/book-shop-web-proj/not_record_found.png" alt="icon">
+                    </div>
+                </div>
+                <div class="order-list" style="display: none;">
                     <article class="order">
                         <h2>Sofia Lulin 7</h2>
                         <span class="label status completed">Delivered</span>

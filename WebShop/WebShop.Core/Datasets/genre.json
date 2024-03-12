@@ -7,12 +7,12 @@
   {
     "id": 2,
     "name": "Mystery",
-    "iconlink": "https://storage.cloud.google.com/book-shop-web-proj/mystery-icon.png"
+    "iconlink": "https://storage.googleapis.com/book-shop-web-proj/mystery-icon.png"
   },
   {
     "id": 3,
     "name": "Romance",
-    "iconlink": "https://storage.cloud.google.com/book-shop-web-proj/romance-icon.png"
+    "iconlink": "https://storage.googleapis.com/book-shop-web-proj/romance-icon.png"
   },
   {
     "id": 4,
@@ -22,6 +22,6 @@
   {
     "id": 5,
     "name": "History",
-    "iconlink": "https://storage.cloud.google.com/book-shop-web-proj/history-icon-v2.png"
+    "iconlink": "https://storage.googleapis.com/book-shop-web-proj/history-icon-v2.png"
   }
 ]

@@ -10,13 +10,13 @@
 
         public string Address { get; set; } = string.Empty;
 
-        public string OrderedOn { get; set; } = string.Empty;
+        public DateTime OrderedOn { get; set; }
 
-        public string DeliveredOn { get; set; } = string.Empty;
+        public DateTime? DeliveredOn { get; set; }
 
         public List<OrderItem> Items { get; set; } = new();
 
-        public string TotalPrice { get; set; } = string.Empty;
+        public decimal TotalPrice { get; set; }
 
         public OrderStatus OrderStatus { get; set; }
     }

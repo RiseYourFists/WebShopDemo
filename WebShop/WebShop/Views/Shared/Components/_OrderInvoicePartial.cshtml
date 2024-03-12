@@ -6,7 +6,7 @@
         var status = invoice.OrderStatus switch
         {
             OrderStatus.Pending => string.Empty,
-            OrderStatus.Sending => "processing",
+            OrderStatus.Shipped => "processing",
             _ => "completed"
         };
 
@@ -15,13 +15,13 @@
             <span class="label status @status">@invoice.OrderStatus.ToString()</span>
             <p>
                 <span class="label">Ordered on:</span>
-                <span>@invoice.OrderedOn</span>
+                <span>@invoice.OrderedOn.ToString("f")</span>
             </p>
-            @if(!string.IsNullOrWhiteSpace(invoice.DeliveredOn))
+            @if(invoice.DeliveredOn.HasValue)
             {
                 <p>
                     <span class="label">Delivered on:</span>
-                    <span>@invoice.DeliveredOn</span>
+                    <span>@invoice.DeliveredOn.Value.ToString("f")</span>
                 </p>
             }
             <div class="info">
@@ -38,7 +38,7 @@
             </div>
             <p class="price-tag">
                 <span>Total price:</span>
-                <span class="price-value">@invoice.TotalPrice$</span>
+                <span class="price-value">@invoice.TotalPrice.ToString("F")$</span>
             </p>
         </article>
     }

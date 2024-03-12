@@ -4,30 +4,78 @@
 @model MyOrdersPage
 
 <section id="my-orders">
-    <form class="filter-bar">
-        <div class="display-status">
-            <a href="#" class="selected">Active</a>
-            <a href="#">Shipped</a>
-            <a href="#">Delivered</a>
-            <a href="#">All</a>
-        </div>
-        <div class="date-filter">
-            <label for="from">From</label>
-            <input type="date" name="" id="from">
-            <label for="to">To</label>
-            <input type="date" id="to">
-        </div>
-        <div class="sort">
-            <select name="" id="">
-                <option value="">Date Desc</option>
-                <option value="">Date Asc</option>
-                <option value="">Total Price Desc</option>
-                <option value="">Total Price Asc</option>
-            </select>
-            <button type="submit" class="fas fa-check"></button>
-        </div>
-    </form>
-    <div class="order-list">
-        @await Html.PartialAsync("Components/_OrderInvoicePartial", Model.Orders)
-    </div>
+    @{
+        if (!Model.HasAnyOrders)
+        {
+            <div class="empty">
+                <i class="fas fa-truck icon"></i>
+                <p>No orders have been made yet.</p>
+            </div>
+        }
+        else
+        {
+            <form class="filter-bar">
+                <div class="display-status">
+                    @{
+                        var statusList = (OrderStatus[])Enum.GetValues(typeof(OrderStatus));
+                        foreach (var status in statusList)
+                        {
+                            var selection = Model.OrderStatus == status ? "selected" : string.Empty;
+                            var parameters =  new
+                            {
+                                Status = status,
+                                Model.From,
+                                Model.To,
+                                OrderedBy = Model.OrderClause.ToString()
+                            };
+
+                            <a class="@selection" href="@Url.Action("Index", parameters)">@status.ToString()</a>
+                        }
+                    }
+                </div>
+                <div class="date-filter">
+                    <label asp-for="From"></label>
+                    <input type="date" asp-for="From">
+                    <label asp-for="To"></label>
+                    <input type="date" asp-for="To">
+                </div>
+                <div class="sort">
+                    <select asp-for="OrderClause">
+                        @{
+                            var orderList = (OrderClause[])Enum.GetValues(typeof(OrderClause));
+                            var naming = new Dictionary<OrderClause, string>()
+                            {
+                                { OrderClause.OrderDateAsc, "Order date ascending"},
+                                { OrderClause.OrderDateDesc, "Order date descending"},
+                                { OrderClause.TotalPriceAsc, "Total price ascending"},
+                                { OrderClause.TotalPriceDesc, "Total price descending"}
+                            };
+
+                            foreach (var clause in orderList)
+                            {
+                                <option value="@clause">@naming[clause]</option>
+                            }
+                        }
+                    </select>
+                    <input type="hidden" name="status" value="@Model.OrderStatus"/>
+                    <button type="submit" class="fas fa-check"></button>
+                </div>
+            </form>
+
+            if (Model.Orders.Count > 0)
+            {
+                <div class="order-list">
+                    @await Html.PartialAsync("Components/_OrderInvoicePartial", Model.Orders)
+                </div>
+            }
+            else
+            {
+                <div class="nothing-found">
+                    <div class="img-wrapper">
+                        <img src="https://storage.googleapis.com/book-shop-web-proj/not_record_found.png" alt="icon">
+                    </div>
+                </div>
+            }
+        }
+    }
 </section>

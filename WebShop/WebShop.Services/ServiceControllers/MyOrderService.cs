@@ -1,4 +1,7 @@
-﻿namespace WebShop.Services.ServiceControllers
+﻿using System.Globalization;
+using System.Linq.Expressions;
+
+namespace WebShop.Services.ServiceControllers
 {
     using System.Security.Claims;
     using Microsoft.EntityFrameworkCore;
@@ -29,7 +32,14 @@
 
         }
 
-        public async Task<List<MyOrder>> GetUserOrders(ClaimsPrincipal user)
+        public async Task<bool> AnyUserOrdersPresent(ClaimsPrincipal user)
+        {
+            var userId = await _userHelper.GetUserId(user);
+            return await _repository.AllReadonly<PlacedOrder>()
+                .AnyAsync(o => o.UserId == userId);
+        }
+
+        public async Task<List<MyOrder>> GetUserOrders(ClaimsPrincipal user, OrderStatus status, OrderClause orderedBy, DateTime? from, DateTime? to)
         {
             var userId = await _userHelper.GetUserId(user);
 
@@ -44,8 +54,8 @@
                     Id = o.Id,
                     City = o.City,
                     Address = o.Address,
-                    OrderedOn = o.DatePlaced.ToString("g"),
-                    DeliveredOn = o.DateFulfilled!.Value.ToString("g"),
+                    OrderedOn = o.DatePlaced,
+                    DeliveredOn = o.DateFulfilled!.Value,
                     Items = o.PlacedOrderBooks
                         .Select(ob => new OrderItem()
                         {
@@ -58,16 +68,40 @@
                         .ToList(),
 
                     TotalPrice = o.PlacedOrderBooks
-                        .Sum(ob => ob.SingleItemPrice * ob.Quantity)
-                        .ToString("F"),
+                        .Sum(ob => ob.SingleItemPrice * ob.Quantity),
 
                     OrderStatus = !o.IsShipped && !o.DateFulfilled.HasValue
                         ? OrderStatus.Pending
                         : o.IsShipped && !o.DateFulfilled.HasValue
-                        ? OrderStatus.Sending
+                        ? OrderStatus.Shipped
                         : OrderStatus.Delivered
                 })
                 .ToListAsync();
+
+            if (status != OrderStatus.All)
+            {
+                orders = orders
+                    .Where(o => o.OrderStatus == status)
+                    .ToList();
+            }
+
+            if (from.HasValue && to.HasValue && from.Value <= to.Value)
+            {
+                var fromValue = from.Value.Date;
+                var toValue = to.Value.Date;
+
+                orders = orders
+                    .Where(o => o.OrderedOn.Date >= fromValue && o.OrderedOn.Date <= toValue)
+                    .ToList();
+            }
+
+            orders = orderedBy switch
+            {
+                OrderClause.TotalPriceAsc => orders.OrderBy(o => o.TotalPrice).ToList(),
+                OrderClause.TotalPriceDesc => orders.OrderByDescending(o => o.TotalPrice).ToList(),
+                OrderClause.OrderDateAsc => orders.OrderBy(o => o.OrderedOn).ToList(),
+                _ => orders.OrderByDescending(o => o.OrderedOn).ToList()
+            };
 
             return orders;
         }

@@ -1596,6 +1596,10 @@ html {
 
 /*My Orders*/
 
+#my-orders{
+  max-width: 1200px;
+}
+
 #my-orders .filter-bar {
   display: flex;
   gap: 10px;
@@ -1640,6 +1644,7 @@ html {
 #my-orders .selected {
   border: none;
   background-color: var(--primary-color);
+  pointer-events: none;
 }
 
 #my-orders :is(input, select) {
@@ -1781,6 +1786,10 @@ html {
   left: 20px;
 }
 
+#my-orders .order .quantity{
+  color: var(--primary-color);
+}
+
 .status.processing{
   --border-color: var(--generic-action-color);
   --background-color: var(--generic-action-color-highlight-transparent)
@@ -1789,6 +1798,46 @@ html {
 .status.completed{
   --border-color: green;
   --background-color: rgba(0, 128, 0, 0.3);
+}
+
+#my-orders .empty{
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 1px 1px 15px black;
+  background-color: var(--main-bg-color);
+  margin-top: 50%;
+}
+
+.empty .icon{
+  font-size: 7rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 15px black;
+}
+
+.empty > *:not(.icon){
+  color: white;
+}
+
+.nothing-found{
+  width: 100%;
+  margin-top: 5rem;
+  padding-block: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--main-bg-color);
+  border-block: 1px solid gray;
+}
+
+.nothing-found .img-wrapper{
+  width: 300px;
+}
+
+.nothing-found img{
+  width: 100%;
 }
 
 /*End My Orders*/
