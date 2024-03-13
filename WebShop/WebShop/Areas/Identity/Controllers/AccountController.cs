@@ -130,5 +130,11 @@ namespace WebShop.App.Areas.Identity.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home", new { area = "" });
         }
+
+        public IActionResult AccessDenied()
+        {
+            var message = "You don't have permission to access this page.";
+            return RedirectToAction("DetailedError", "Error", new { Message = message });
+        }
     }
 }
