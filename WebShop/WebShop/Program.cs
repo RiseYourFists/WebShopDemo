@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using WebShop.Core.Data;
 using WebShop.Core.Models.Identity;
 using WebShop.App.ProgramOptionExtensions;
+using WebShop.App.MiddlewareConfigurationExtensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,7 @@ builder.Services
 builder.Services
     .AddIdentity<ApplicationUser, ApplicationRole>(options => options.AddOptions(builder.Configuration))
     .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddRoles<ApplicationRole>()
     .AddDefaultTokenProviders();
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -60,5 +62,6 @@ app.UseEndpoints(endpoints =>
     endpoints.AddEndPoints());
 
 app.MapRazorPages();
+await app.AddRolesAsync(builder.Configuration);
 
 await app.RunAsync();

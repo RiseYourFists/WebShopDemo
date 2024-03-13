@@ -1,4 +1,4 @@
-﻿namespace WebShop.App.ProgramOptionExtensions
+﻿namespace WebShop.App.MiddlewareConfigurationExtensions
 {
     public static class EndpointsConfiguration
     {
