@@ -1,12 +1,11 @@
-﻿using Ganss.Xss;
-using WebShop.Core.Contracts;
-using WebShop.Core.Data;
-using WebShop.Core.Models.Identity;
-using WebShop.Core.Repository;
-using WebShop.Services.ServiceControllers;
-
-namespace WebShop.App.ProgramOptionExtensions
+﻿namespace WebShop.App.BuilderConfigurationExtensions
 {
+    using Ganss.Xss;
+    using Core.Data;
+    using Core.Contracts;
+    using Core.Repository;
+    using Services.ServiceControllers;
+    using WebShop.Core.Models.Identity;
     public static class DependencyConfiguration
     {
         public static IServiceCollection AddDependencies(this IServiceCollection services)
@@ -16,11 +15,13 @@ namespace WebShop.App.ProgramOptionExtensions
             services.AddScoped<BookShopService>();
             services.AddScoped<CartService>();
             services.AddScoped<MyOrderService>();
+            services.AddScoped<AdministrationService>();
 
             services.AddScoped<UserHelper<ApplicationUser, Guid>>();
             services.AddScoped<IBookShopRepository, BookShopRepository>();
             services.AddScoped<IHtmlSanitizer, HtmlSanitizer>();
             services.AddScoped<IOrdersRepository, OrdersRepository>();
+            services.AddScoped<IAdminRepository, AdminRepository>();
             return services;
         }
     }

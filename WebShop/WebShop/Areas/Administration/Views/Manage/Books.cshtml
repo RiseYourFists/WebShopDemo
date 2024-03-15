@@ -1,45 +1,33 @@
 ﻿@{
     ViewData["Title"] = "Book management";
 }
+@model BookManageModel;
 
 <section id="administration">
     <div class="tool-bar">
-        @await Html.PartialAsync("Shared/Components/_HeaderNavigationPartial", new List<HeaderNavigation>()
+        @await Html.PartialAsync("Components/_HeaderNavigationPartial", new List<HeaderNavigation>()
         {
             new("Manage Books"),
             new("Manage Promotions", "Promotions"),
             new("Manage Users", "Users")
         })
-        <div class="search-bar">
-            <form action="#">
-                <input type="search" name="search" id="search" placeholder="search">
-                <label for="search">Search</label>
-                <button type="submit" class="fas fa-search"></button>
-            </form>
-        </div>
+        @await Html.PartialAsync("Components/_SearchBarPartial", new SearchBar("Books"))
         <div class="filter-sections">
-            <div class="dropdown-wrapper">
-                <button class="unfold-btn fas fa-angle-down">Authors</button>
-                <div class="dropdown-container">
-                    <div class="dropdown-header">
-                        <p>Authors</p>
-                    </div>
-                    <div class="dropdown-content">
-                        <a><i class="fas fa-user"></i> Some Author</a>
-                    </div>
-                </div>
-            </div>
-            <div class="dropdown-wrapper">
-                <button class="unfold-btn fas fa-angle-down">Genres</button>
-                <div class="dropdown-container">
-                    <div class="dropdown-header">
-                        <p>Genres</p>
-                    </div>
-                    <div class="dropdown-content">
-                        <a class="fas fa-user">Some Genre</a>
-                    </div>
-                </div>
-            </div>
+            @await Html.PartialAsync("Components/_DropdownPartial", new DropdownModel()
+            {
+                Heading = "Authors",
+                UnfoldButtonContent = "Authors",
+                UnfoldButtonClasses = "fas fa-angle-down",
+                ElementList = Model.GetAuthors()
+            })
+
+            @await Html.PartialAsync("Components/_DropdownPartial", new DropdownModel()
+            {
+                Heading = "Genres",
+                UnfoldButtonContent = "Genres",
+                UnfoldButtonClasses = "fas fa-angle-down",
+                ElementList = Model.GetGenres()
+            })
         </div>
     </div>
     <div class="item-list">
@@ -55,25 +43,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="image-wrapper">
-                        <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1598823299l/42844155._SY475_.jpg"
-                             alt="cover-image">
-                    </td>
-                    <td>
-                        <p>Harry Potter</p>
-                    </td>
-                    <td>
-                        <p>39.99$</p>
-                    </td>
-                    <td>
-                        <p>19.98$</p>
-                    </td>
-                    <td>
-                        <p>300</p>
-                    </td>
-                    <td class="action"><a href="#"><i class="fas fa-edit"></i><span class="foldable">Edit</span></a></td>
-                </tr>
+                @await Html.PartialAsync("Components/BookListItem", Model.Books)
             </tbody>
         </table>
         <div class="action-bar">

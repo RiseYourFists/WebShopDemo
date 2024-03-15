@@ -1,7 +1,7 @@
-﻿namespace WebShop.App.ProgramOptionExtensions
-{
-    using ModelBinders;
+﻿using WebShop.App.ModelBinders;
 
+namespace WebShop.App.BuilderConfigurationExtensions
+{
     public static class OtherConfigurations
     {
         public static WebApplicationBuilder AddConfigurations(this WebApplicationBuilder builder)

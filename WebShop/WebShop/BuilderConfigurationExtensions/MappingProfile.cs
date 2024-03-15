@@ -1,13 +1,17 @@
-﻿namespace WebShop.App.ProgramOptionExtensions
+﻿using AutoMapper;
+using WebShop.Core.Models.BookShop;
+using WebShop.Services.Models.Administration;
+using WebShop.Services.Models.BookShop;
+
+namespace WebShop.App.BuilderConfigurationExtensions
 {
-    using AutoMapper;
-    using WebShop.Core.Models.BookShop;
-    using WebShop.Services.Models.BookShop;
     public class MappingProfile : Profile
     {
         public MappingProfile()
         {
             this.CreateMap<Genre, GenreCategoryIcon>();
+            this.CreateMap<Genre, GenreListItem>();
+            this.CreateMap<Author, AuthorListItem>();
 
             this.CreateMap<Book, BookDetail>()
                 .ForMember(p => p.Genre, 

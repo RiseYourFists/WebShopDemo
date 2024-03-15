@@ -1,0 +1,31 @@
+﻿@model List<BookListItem>;
+
+@{
+    foreach (var item in Model)
+    {
+
+        <tr>
+            <td class="image-wrapper">
+                <img src="@item.CoverPhoto" alt="cover-image">
+            </td>
+            <td>
+                <p>@item.Title</p>
+            </td>
+            <td>
+                <p>@item.BasePrice$</p>
+            </td>
+            <td>
+                <p>@item.CurrentPrice.ToString("F")$</p>
+            </td>
+            <td>
+                <p>@item.StockQuantity</p>
+            </td>
+            <td class="action">
+                <a>
+                    <i class="fas fa-edit"></i>
+                    <span class="foldable">Edit</span>
+                </a>
+            </td>
+        </tr>
+    }
+}

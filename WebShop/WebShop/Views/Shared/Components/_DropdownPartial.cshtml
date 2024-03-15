@@ -16,10 +16,28 @@
                 @{
                     foreach (var element in Model.ElementList)
                     {
-                        <a asp-area="@element.Area" asp-controller="@element.Controller" asp-action="@element.Action">
-                            <i class="@element.ButtonClasses"></i>
-                            @element.ButtonContent
-                        </a>
+                        var area = !string.IsNullOrWhiteSpace(element.Area) ? element.Area : string.Empty;
+
+                        if (!string.IsNullOrWhiteSpace(element.Parameters))
+                        {
+                            var data = new
+                            {
+                                element.Parameters,
+                                Area = area
+                            };
+
+                            <a href="@Url.Action(element.Action, element.Controller, data)">
+                                <i class="@element.ButtonClasses"></i>
+                                @element.ButtonContent
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-area="@area" asp-controller="@element.Controller" asp-action="@element.Action">
+                                <i class="@element.ButtonClasses"></i>
+                                @element.ButtonContent
+                            </a>
+                        }
                     }
                 }
             </div>

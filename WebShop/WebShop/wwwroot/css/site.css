@@ -211,7 +211,7 @@ a {
 }
 
 .side-menu .fas {
-  font-size: 2.2em;
+  font-size: 2em;
 }
 
 .side-menu li * {
@@ -2045,7 +2045,11 @@ table .action a{
   justify-content: center;
 }
 
-table .action a:hover{
+table .action a *{
+  color: black;
+}
+
+table .action a *:hover{
   color: #3e3e3e;
 }
 

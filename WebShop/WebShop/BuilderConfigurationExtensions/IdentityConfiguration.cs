@@ -1,6 +1,7 @@
-﻿namespace WebShop.App.ProgramOptionExtensions
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace WebShop.App.BuilderConfigurationExtensions
 {
-    using Microsoft.AspNetCore.Identity;
     public static class IdentityConfiguration
     {
         public static IdentityOptions AddOptions(this IdentityOptions options, ConfigurationManager config)

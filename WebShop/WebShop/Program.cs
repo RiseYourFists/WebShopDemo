@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 using WebShop.Core.Data;
 using WebShop.Core.Models.Identity;
-using WebShop.App.ProgramOptionExtensions;
+using WebShop.App.BuilderConfigurationExtensions;
 using WebShop.App.MiddlewareConfigurationExtensions;
 
 var builder = WebApplication.CreateBuilder(args);
