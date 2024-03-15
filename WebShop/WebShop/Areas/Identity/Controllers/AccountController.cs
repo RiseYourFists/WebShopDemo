@@ -1,14 +1,14 @@
-﻿
-namespace WebShop.App.Areas.Identity.Controllers
+﻿namespace WebShop.App.Areas.Identity.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Authorization;
 
+    using System.Web;
+
     using WebShop.Core.Models.Identity;
     using WebShop.Services.Models.Account;
     using static Services.ErrorMessages.AccountErrorMsgs.LoginErrors;
-    using System.Web;
 
     [Authorize]
     [Area(nameof(Identity))]

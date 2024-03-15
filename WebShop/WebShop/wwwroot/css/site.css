@@ -20,7 +20,7 @@
   --generic-action-color: rgba(46, 168, 250, 0.886);
   --generic-action-color-highlight: rgb(46, 168, 250);
   --generic-action-color-highlight-transparent: rgb(46, 168, 250, 0.3);
-
+  --main-section-padding: 32px;
 }
 
 *,
@@ -30,6 +30,12 @@
   margin: 0;
   padding: 0;
   min-width: 0;
+}
+
+ol,
+ ul{
+  padding: 0;
+  margin: 0;
 }
 
 p {
@@ -106,18 +112,25 @@ header * {
 
 header,
 footer,
-main {
+main{
   width: 100%;
-  padding: 0 32px;
   position: relative;
+}
+
+main > *:not(.bg-image-wrapper){
+  padding-inline: var(--main-section-padding);
 }
 
 main {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 40px;
   min-height: 100dvh;
   justify-content: center;
+  padding-bottom: 3rem;
+}
+
+main > *:not(.bg-image-wrapper){
+  margin-top: 40px;
 }
 
 a {
@@ -518,6 +531,16 @@ html {
   color: white;
 }
 
+.dropdown-content > *::before{
+  margin-right: 5px;
+}
+
+.dropdown-header{
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+}
+
 .dropdown-content>*:hover {
   background-color: rgba(200, 200, 200, 0.5)
 }
@@ -527,20 +550,20 @@ html {
   max-height: 0;
   overflow: hidden;
   transition-property: max-height, border;
-  transition-duration: 0.4s;
+  transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
   background-color: var(--main-bg-color);
-  border: 0px solid darkviolet;
+  border: 0px solid gray;
 }
 
 .unfold-btn~.dropdown-container:focus-within,
 .unfold-btn:focus~.dropdown-container {
   max-height: 300px;
-  border: 1px solid darkviolet;
+  border: 1px solid gray;
 }
 
 .dropdown-container,
@@ -1829,7 +1852,8 @@ html {
   justify-content: center;
   align-items: center;
   background-color: var(--main-bg-color);
-  border-block: 1px solid gray;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
 }
 
 .nothing-found .img-wrapper{
@@ -1841,6 +1865,212 @@ html {
 }
 
 /*End My Orders*/
+
+/*Administration Header*/
+
+#administration{
+  position: relative;
+  margin-top: 0;
+  width: 100%;
+  padding: 0;
+}
+
+#administration > *:not(.tool-bar){
+  padding-inline: var(--main-section-padding);
+}
+
+#administration .tool-bar{
+  top: 0;
+  left: 0;
+  display: flex;
+  position: sticky;
+  flex-direction: column;
+  margin-bottom: 3.5rem;
+}
+
+#adm-header ul{
+  padding: 0px;
+  display: flex;
+  list-style: none;
+  justify-content: space-between;
+  background-color: var(--main-bg-color);
+  border-bottom: 1px solid var(--primary-color);
+}
+
+#adm-header li{
+  flex: 1;
+  height: 100%;
+  display: flex;
+}
+
+#adm-header a{
+  color: white;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-block: 10px;
+  font-weight: 500;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+#adm-header .selected{
+  pointer-events: none;
+  color: var(--primary-color);
+  border-bottom: 4px solid var(--primary-color);
+}
+
+#adm-header a:hover{
+  border-bottom: 4px solid var(--primary-color-highlight);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+#administration .search-bar{
+  width: 100%;
+  display: flex;
+  
+  padding-block: 20px;
+  justify-content: center;
+  background-color: var(--main-bg-color);
+  border-bottom: 1px solid gray;
+}
+
+#administration .search-bar form{
+  width: 80%;
+  max-width: 500px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#administration .search-bar input{
+  min-height: 30px;
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 5px 12px;
+}
+
+#administration .search-bar input::placeholder{
+  color: transparent;
+}
+
+#administration .search-bar label{
+  padding-inline: 5px;
+  left: 2rem;
+  font-weight: 500;
+  border-radius: 4px;
+  background-color: white;
+  position: absolute;
+  transition: all 0.3s ease-in-out;
+}
+
+#administration .search-bar input:focus + label,
+#administration .search-bar input:not(:placeholder-shown) + label{
+  border: 1px solid black;
+  transform: translate(-25%, -75%) scale(0.75);
+}
+
+#administration .search-bar button{
+  border: none;
+  height: 100%;
+  width: 40px;
+  background-color: var(--primary-color);
+  color: white;
+}
+
+#administration .filter-sections{
+  display: flex;
+}
+
+#administration .filter-sections button{
+  border: none;
+  padding: 5px;
+  border-right: 1px solid gray;
+  border-bottom: 1px solid gray;
+  color: white;
+  background-color: var(--primary-color);
+}
+
+#administration .filter-sections button::before{
+  margin-right: 5px;
+}
+
+/*End Administration Header*/
+
+/*Administration*/
+
+
+#administration table{
+  width: 100%;
+}
+
+#administration thead th{
+  padding: 10px;
+  background-color: var(--primary-color-solid);
+}
+
+#administration table tr:not(thead > tr):nth-child(odd){
+  background-color: var(--main-bg-color);
+}
+
+#administration table tr:not(thead > tr):nth-child(even){
+  background-color: var(--secondary-bg-color);
+}
+
+#administration tbody .image-wrapper{
+  width: 100px;
+  min-width: 100px;
+  padding: 15px;
+}
+
+#administration tbody img{
+  width: 100%;
+  object-fit: cover;
+}
+
+table .action{
+  padding: 5px;
+  background-color: yellow;
+  text-align: center;
+}
+
+table .action a{
+  width: 100%;
+  height: 135px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+table .action a:hover{
+  color: #3e3e3e;
+}
+
+table tbody td{
+  color: white;
+  border-bottom: 1px solid gray;
+}
+
+table tbody td:not(:last-child){
+  padding-left: 10px;
+  border-right: 1px solid gray;
+}
+
+#administration .action-bar{
+  display: flex;
+  gap: 10px;
+  justify-content: end;
+  margin-block: 20px;
+}
+
+#administration .action-bar *{
+  color: white;
+  text-shadow: 1px 1px 1px black;
+}
+/*End Administration*/
 
 @media (max-width: 1200px) {
   .small-window-field {
@@ -1959,9 +2189,14 @@ html {
   #my-orders .filter-bar>.date-filter {
     flex-direction: column;
   }
+
+  main > *:not(.bg-image-wrapper),
+  #administration > *:not(.tool-bar){
+    padding-inline: 0;
+  }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 550px) {
 
   .search-bar {
     width: 75%;
@@ -1979,6 +2214,13 @@ html {
     box-shadow: 0px 5px 10px var(--main-bg-color);
     display: none;
   }
+  
+  .aside-toggle-btn {
+    opacity: 0.4;
+    transform: scale(0.65) ;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 0px 4px 2px black;
+  }
 
   .aside-toggle:checked+.aside-toggle-btn+.side-menu {
     width: 100dvw;
@@ -1986,8 +2228,10 @@ html {
     display: flex;
   }
 
-  .aside-toggle-btn {
-    box-shadow: 0px 0px 4px 2px black;
+  .aside-toggle:checked + .aside-toggle-btn,
+  .aside-toggle-btn:hover{
+    opacity: 1;
+    transform: none;
   }
 
   footer,
@@ -2032,6 +2276,17 @@ html {
     width: 10rem;
   }
 
+  table *{
+    font-size: small;
+  }
+
+  table tbody td p{
+    max-width: 70px;
+  }
+
+  table .foldable{
+    display: none;
+  }
 
 }
 

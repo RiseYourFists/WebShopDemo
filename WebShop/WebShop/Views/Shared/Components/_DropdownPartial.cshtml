@@ -16,7 +16,10 @@
                 @{
                     foreach (var element in Model.ElementList)
                     {
-                        <a class="@element.ButtonClasses" asp-area="@element.Area" asp-controller="@element.Controller" asp-action="@element.Action">@element.ButtonContent</a>
+                        <a asp-area="@element.Area" asp-controller="@element.Controller" asp-action="@element.Action">
+                            <i class="@element.ButtonClasses"></i>
+                            @element.ButtonContent
+                        </a>
                     }
                 }
             </div>

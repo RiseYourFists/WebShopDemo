@@ -28,15 +28,16 @@
             string controller = "",
             string action = "",
             string classIcon = "",
-            bool requireAuthentication = false)
+            int notifications = 0)
         {
             ItemDescription = itemDescription;
             Area = area;
             Controller = controller;
             Action = action;
             ClassIcon = classIcon;
-            RequireAuthentication = requireAuthentication;
+            RequireAuthentication = true;
             AccessRoles = accessRoles;
+            Notifications = notifications;
         }
 
         public string ItemDescription { get; set; }
@@ -49,7 +50,7 @@
 
         public string ClassIcon { get; set; }
 
-        public bool RequireAuthentication { get; set; }
+        public bool RequireAuthentication { get; private set; }
 
         public string[] AccessRoles { get; private set; }
 

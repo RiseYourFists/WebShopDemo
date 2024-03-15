@@ -1,0 +1,17 @@
+﻿@model List<HeaderNavigation>;
+
+<header id="adm-header">
+    <nav>
+        <ul>
+            @{
+                var currentAction = Context.Request.RouteValues["action"] as string;
+
+                foreach (var navigation in Model)
+                {
+                    var selection = currentAction == navigation.Action? "selected": string.Empty;
+                    <li><a asp-area="Administration" asp-controller="Manage" asp-action="@navigation.Action" title="@navigation.ButtonDescription" class="@selection">@navigation.Action</a></li>
+                }
+            }
+        </ul>
+    </nav>
+</header>

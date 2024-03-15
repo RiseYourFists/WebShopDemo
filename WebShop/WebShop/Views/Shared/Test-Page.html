@@ -263,135 +263,88 @@
             </div>
         </header>
 
-        <main role="main" class="pb-3">
+        <main role="main">
             <div class="bg-image-wrapper">
                 <img src="../../wwwroot/images/Books.jpeg" alt="">
             </div>
-            <section id="my-orders">
-                <div class="empty" style="display: none;">
-                    <i class="fas fa-truck icon"></i>
-                    <p>No orders have been made yet.</p>
-                </div>
-                <form class="filter-bar" >
-                    <div class="display-status">
-                        <a href="#" class="selected">Active</a>
-                        <a href="#">Shipped</a>
-                        <a href="#">Delivered</a>
-                        <a href="#">All</a>
+            <section id="administration">
+                <div class="tool-bar">
+                    <header id="adm-header">
+                        <nav>
+                            <ul>
+                                <li><a title="Manage Books" class="selected" href="#">Manage Books</a></li>
+                                <li><a title="Manage Promotions" href="#">Manage Promotions</a></li>
+                                <li><a title="Manage Users" href="#">Manage Users</a></li>
+                            </ul>
+                        </nav>
+                    </header>
+                    <div class="search-bar">
+                        <form action="#" >
+                            <input type="search" name="search" id="search" placeholder="search">
+                            <label for="search">Search</label>
+                            <button type="submit" class="fas fa-search"></button>
+                        </form>
                     </div>
-                    <div class="date-filter">
-                        <label for="from">From</label>
-                        <input type="date" name="" id="from">
-                        <label for="to">To</label>
-                        <input type="date" id="to">
-                    </div>
-                    <div class="sort">
-                        <select name="" id="">
-                            <option value="">Date Desc</option>
-                            <option value="">Date Asc</option>
-                            <option value="">Total Price Desc</option>
-                            <option value="">Total Price Asc</option>
-                        </select>
-                        <button type="submit" class="fas fa-check"></button>
-                    </div>
-                </form>
-                <div class="nothing-found">
-                    <div class="img-wrapper">
-                        <img src="https://storage.googleapis.com/book-shop-web-proj/not_record_found.png" alt="icon">
-                    </div>
-                </div>
-                <div class="order-list" style="display: none;">
-                    <article class="order">
-                        <h2>Sofia Lulin 7</h2>
-                        <span class="label status completed">Delivered</span>
-                        <p>
-                            <span class="label">Ordered on:</span>
-                            <span>02/03/2024</span>
-                        </p>
-                        <p>
-                            <span class="label">Delivered on:</span>
-                            <span>05/03/2024</span>
-                        </p>
-                        <div class="info">
-                            <input type="checkbox" class="toggle" name="" id="toggle">
-                            <label for="toggle" class="toggle-btn fas fa-angle-right"></label>
-                            <div class="mini">
-                                <p>Harry Potter, Harry Potter, Harry Potter, Harry Potter, Harry Potter, Harry Potter,
-                                    Harry Potter, </p>
-                            </div>
-                            <div class="full">
-                                <a id="10" class="item-card" href="/Home/Details?ItemId=10&amp;ReturnRoute=%2F">
-                                    <div class="img-wrapper">
-                                        <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1598823299l/42844155._SY475_.jpg"
-                                            alt="cover-image">
-                                    </div>
-                                    <div class="content-wrapper">
-                                        <p class="title" title="The Catcher in the Rye">The Catcher in the Rye</p>
-                                        <div class="pricing">
-                                            <span class="quantity">1x</span>
-                                            <span>10.50</span>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a id="10" class="item-card" href="/Home/Details?ItemId=10&amp;ReturnRoute=%2F">
-                                    <div class="img-wrapper">
-                                        <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1598823299l/42844155._SY475_.jpg"
-                                            alt="cover-image">
-                                    </div>
-                                    <div class="content-wrapper">
-                                        <p class="title" title="The Catcher in the Rye">The Catcher in the Rye</p>
-                                        <div class="pricing">
-                                            <span>10.50</span>
-                                            <span class="promotion">20.99</span>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a id="10" class="item-card" href="/Home/Details?ItemId=10&amp;ReturnRoute=%2F">
-                                    <div class="img-wrapper">
-                                        <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1598823299l/42844155._SY475_.jpg"
-                                            alt="cover-image">
-                                    </div>
-                                    <div class="content-wrapper">
-                                        <p class="title" title="The Catcher in the Rye">The Catcher in the Rye</p>
-                                        <div class="pricing">
-                                            <span>10.50</span>
-                                            <span class="promotion">20.99</span>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a id="10" class="item-card" href="/Home/Details?ItemId=10&amp;ReturnRoute=%2F">
-                                    <div class="img-wrapper">
-                                        <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1598823299l/42844155._SY475_.jpg"
-                                            alt="cover-image">
-                                    </div>
-                                    <div class="content-wrapper">
-                                        <p class="title" title="The Catcher in the Rye">The Catcher in the Rye</p>
-                                        <div class="pricing">
-                                            <span>10.50</span>
-                                            <span class="promotion">20.99</span>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a id="10" class="item-card" href="/Home/Details?ItemId=10&amp;ReturnRoute=%2F">
-                                    <div class="img-wrapper">
-                                        <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1598823299l/42844155._SY475_.jpg"
-                                            alt="cover-image">
-                                    </div>
-                                    <div class="content-wrapper">
-                                        <p class="title" title="The Catcher in the Rye">The Catcher in the Rye</p>
-                                        <div class="pricing">
-                                            <span>10.50</span>
-                                            <span class="promotion">20.99</span>
-                                        </div>
-                                    </div>
-                                </a>
+                    <div class="filter-sections">
+                        <div class="dropdown-wrapper">
+                            <button class="unfold-btn fas fa-angle-down">Authors</button>
+                            <div class="dropdown-container">
+                                <div class="dropdown-header">
+                                    <p>Authors</p>
+                                </div>
+                                <div class="dropdown-content">
+                                    <a><i class="fas fa-user"></i> Some Author</a>
+                                </div>
                             </div>
                         </div>
-                        <p class="price-tag">
-                            <span>Total price:</span>
-                            <span class="price-value">30.70$</span>
-                        </p>
-                    </article>
+                        <div class="dropdown-wrapper">
+                            <button class="unfold-btn fas fa-angle-down">Genres</button>
+                            <div class="dropdown-container">
+                                <div class="dropdown-header">
+                                    <p>Genres</p>
+                                </div>
+                                <div class="dropdown-content">
+                                    <a class="fas fa-user">Some Genre</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-list">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cover Photo</th>
+                                <th>Title</th>
+                                <th>Base Price</th>
+                                <th>Current Price</th>
+                                <th>Stock Quantity</th>
+                                <th><span class="foldable">Action</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="image-wrapper"><img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1598823299l/42844155._SY475_.jpg"
+                                        alt="cover-image"></td>
+                                <td>
+                                    <p>Harry Potter</p>
+                                </td>
+                                <td>
+                                    <p>39.99$</p>
+                                </td>
+                                <td>
+                                    <p>19.98$</p>
+                                </td>
+                                <td>
+                                    <p>300</p>
+                                </td>
+                                <td class="action"><a href="#"><i class="fas fa-edit"></i><span class="foldable">Edit</span></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="action-bar">
+                        <a href="#" class="fas fa-plus">Add new Book</a>
+                    </div>
                 </div>
             </section>
         </main>

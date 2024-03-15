@@ -7,7 +7,17 @@ namespace WebShop.App.Areas.Administration.Controllers
     [Authorize(Roles = "Admin")]
     public class Manage : Controller
     {
-        public IActionResult Index()
+        public IActionResult Books()
+        {
+            return View();
+        }
+
+        public IActionResult Promotions()
+        {
+            return Ok();
+        }
+
+        public IActionResult Users()
         {
             return Ok();
         }
