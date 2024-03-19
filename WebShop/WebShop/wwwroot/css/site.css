@@ -33,7 +33,7 @@
 }
 
 ol,
- ul{
+ul {
   padding: 0;
   margin: 0;
 }
@@ -112,12 +112,12 @@ header * {
 
 header,
 footer,
-main{
+main {
   width: 100%;
   position: relative;
 }
 
-main > *:not(.bg-image-wrapper){
+main>*:not(.bg-image-wrapper) {
   padding-inline: var(--main-section-padding);
 }
 
@@ -129,7 +129,7 @@ main {
   padding-bottom: 3rem;
 }
 
-main > *:not(.bg-image-wrapper){
+main>*:not(.bg-image-wrapper) {
   margin-top: 40px;
 }
 
@@ -224,11 +224,11 @@ a {
   color: inherit;
 }
 
-.side-menu li{
+.side-menu li {
   position: relative;
 }
 
-.side-menu .notification{
+.side-menu .notification {
   position: absolute;
   top: -10px;
   left: 0px;
@@ -531,11 +531,11 @@ html {
   color: white;
 }
 
-.dropdown-content > *::before{
+.dropdown-content>*::before {
   margin-right: 5px;
 }
 
-.dropdown-header{
+.dropdown-header {
   color: white;
   font-size: 20px;
   font-weight: 600;
@@ -1619,7 +1619,7 @@ html {
 
 /*My Orders*/
 
-#my-orders{
+#my-orders {
   max-width: 1200px;
 }
 
@@ -1696,13 +1696,13 @@ html {
   position: relative;
 }
 
-.order h2{
+.order h2 {
   font-size: 3rem;
   font-weight: 500;
   text-shadow: 1px 1px 15px black;
 }
 
-.order .mini{
+.order .mini {
   overflow: hidden;
   transition: all 0.6s ease-in-out;
   position: absolute;
@@ -1711,7 +1711,7 @@ html {
   width: 90%;
 }
 
-.order .full{
+.order .full {
   overflow: hidden;
   transition: max-height 0.3s ease-in-out 0s, padding 0s step-end 0.1s;
 }
@@ -1732,7 +1732,7 @@ html {
   margin-bottom: 20px;
 }
 
-.order .label{
+.order .label {
   font-weight: 500;
 }
 
@@ -1751,7 +1751,7 @@ html {
   position: relative;
 }
 
-.order .toggle-btn{
+.order .toggle-btn {
   width: 30px;
   display: flex;
   font-size: 30px;
@@ -1768,21 +1768,21 @@ html {
   opacity: 0;
 }
 
-.toggle:checked + .toggle-btn{
+.toggle:checked+.toggle-btn {
   rotate: 90deg;
   color: var(--primary-color);
 }
 
-.toggle:checked + .toggle-btn + .mini{
+.toggle:checked+.toggle-btn+.mini {
   width: 0;
 }
 
-.toggle:checked + .toggle-btn + .mini + .full{
+.toggle:checked+.toggle-btn+.mini+.full {
   padding: 10px;
   max-height: 400px;
 }
 
-.order .price-tag{
+.order .price-tag {
   display: flex;
   gap: 10px;
   justify-content: end;
@@ -1790,12 +1790,12 @@ html {
   text-shadow: 1px 1px 15px black;
 }
 
-.order .price-value{
+.order .price-value {
   font-weight: 600;
   font-size: 25px;
 }
 
-.order .status{
+.order .status {
   --border-color: white;
   --background-color: rgba(255, 255, 255, 0.3);
 
@@ -1809,21 +1809,21 @@ html {
   left: 20px;
 }
 
-#my-orders .order .quantity{
+#my-orders .order .quantity {
   color: var(--primary-color);
 }
 
-.status.processing{
+.status.processing {
   --border-color: var(--generic-action-color);
   --background-color: var(--generic-action-color-highlight-transparent)
 }
 
-.status.completed{
+.status.completed {
   --border-color: green;
   --background-color: rgba(0, 128, 0, 0.3);
 }
 
-#my-orders .empty{
+#my-orders .empty {
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -1833,18 +1833,18 @@ html {
   margin-top: 50%;
 }
 
-.empty .icon{
+.empty .icon {
   font-size: 7rem;
   color: var(--primary-color);
   margin-bottom: 1rem;
   text-shadow: 1px 1px 15px black;
 }
 
-.empty > *:not(.icon){
+.empty>*:not(.icon) {
   color: white;
 }
 
-.nothing-found{
+.nothing-found {
   width: 100%;
   margin-top: 5rem;
   padding-block: 2rem;
@@ -1856,11 +1856,11 @@ html {
   border-bottom: 1px solid gray;
 }
 
-.nothing-found .img-wrapper{
+.nothing-found .img-wrapper {
   width: 300px;
 }
 
-.nothing-found img{
+.nothing-found img {
   width: 100%;
 }
 
@@ -1868,18 +1868,18 @@ html {
 
 /*Administration Header*/
 
-#administration{
+#administration {
   position: relative;
   margin-top: 0;
   width: 100%;
   padding: 0;
 }
 
-#administration > *:not(.tool-bar){
+#administration>*:not(.tool-bar) {
   padding-inline: var(--main-section-padding);
 }
 
-#administration .tool-bar{
+#administration .tool-bar {
   top: 0;
   left: 0;
   display: flex;
@@ -1888,7 +1888,7 @@ html {
   margin-bottom: 3.5rem;
 }
 
-#adm-header ul{
+#adm-header ul {
   padding: 0px;
   display: flex;
   list-style: none;
@@ -1897,13 +1897,13 @@ html {
   border-bottom: 1px solid var(--primary-color);
 }
 
-#adm-header li{
+#adm-header li {
   flex: 1;
   height: 100%;
   display: flex;
 }
 
-#adm-header a{
+#adm-header a {
   color: white;
   width: 100%;
   height: 100%;
@@ -1915,28 +1915,28 @@ html {
   overflow: hidden;
 }
 
-#adm-header .selected{
+#adm-header .selected {
   pointer-events: none;
   color: var(--primary-color);
   border-bottom: 4px solid var(--primary-color);
 }
 
-#adm-header a:hover{
+#adm-header a:hover {
   border-bottom: 4px solid var(--primary-color-highlight);
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-#administration .search-bar{
+#administration .search-bar {
   width: 100%;
   display: flex;
-  
+
   padding-block: 20px;
   justify-content: center;
   background-color: var(--main-bg-color);
   border-bottom: 1px solid gray;
 }
 
-#administration .search-bar form{
+#administration .search-bar form {
   width: 80%;
   max-width: 500px;
   position: relative;
@@ -1945,7 +1945,7 @@ html {
   align-items: center;
 }
 
-#administration .search-bar input{
+#administration .search-bar input {
   min-height: 30px;
   width: 100%;
   border: none;
@@ -1953,11 +1953,11 @@ html {
   padding: 5px 12px;
 }
 
-#administration .search-bar input::placeholder{
+#administration .search-bar input::placeholder {
   color: transparent;
 }
 
-#administration .search-bar label{
+#administration .search-bar label {
   padding-inline: 5px;
   left: 2rem;
   font-weight: 500;
@@ -1967,13 +1967,13 @@ html {
   transition: all 0.3s ease-in-out;
 }
 
-#administration .search-bar input:focus + label,
-#administration .search-bar input:not(:placeholder-shown) + label{
+#administration .search-bar input:focus+label,
+#administration .search-bar input:not(:placeholder-shown)+label {
   border: 1px solid black;
   transform: translate(-25%, -75%) scale(0.75);
 }
 
-#administration .search-bar button{
+#administration .search-bar button {
   border: none;
   height: 100%;
   width: 40px;
@@ -1981,11 +1981,11 @@ html {
   color: white;
 }
 
-#administration .filter-sections{
+#administration .filter-sections {
   display: flex;
 }
 
-#administration .filter-sections button{
+#administration .filter-sections button {
   border: none;
   padding: 5px;
   border-right: 1px solid gray;
@@ -1994,7 +1994,7 @@ html {
   background-color: var(--primary-color);
 }
 
-#administration .filter-sections button::before{
+#administration .filter-sections button::before {
   margin-right: 5px;
 }
 
@@ -2003,41 +2003,41 @@ html {
 /*Administration*/
 
 
-#administration table{
+#administration table {
   width: 100%;
 }
 
-#administration thead th{
+#administration thead th {
   padding: 10px;
   background-color: var(--primary-color-solid);
 }
 
-#administration table tr:not(thead > tr):nth-child(odd){
+#administration table tr:not(thead > tr):nth-child(odd) {
   background-color: var(--main-bg-color);
 }
 
-#administration table tr:not(thead > tr):nth-child(even){
+#administration table tr:not(thead > tr):nth-child(even) {
   background-color: var(--secondary-bg-color);
 }
 
-#administration tbody .image-wrapper{
+#administration tbody .image-wrapper {
   width: 100px;
   min-width: 100px;
   padding: 15px;
 }
 
-#administration tbody img{
+#administration tbody img {
   width: 100%;
   object-fit: cover;
 }
 
-table .action{
+table .action {
   padding: 5px;
   background-color: yellow;
   text-align: center;
 }
 
-table .action a{
+table .action a {
   width: 100%;
   height: 135px;
   display: flex;
@@ -2045,36 +2045,223 @@ table .action a{
   justify-content: center;
 }
 
-table .action a *{
+table .action a * {
   color: black;
 }
 
-table .action a *:hover{
+table .action a *:hover {
   color: #3e3e3e;
 }
 
-table tbody td{
+table tbody td {
   color: white;
   border-bottom: 1px solid gray;
 }
 
-table tbody td:not(:last-child){
+table tbody td:not(:last-child) {
   padding-left: 10px;
   border-right: 1px solid gray;
 }
 
-#administration .action-bar{
+#administration .action-bar {
   display: flex;
   gap: 10px;
   justify-content: end;
   margin-block: 20px;
 }
 
-#administration .action-bar *{
+#administration .action-bar * {
   color: white;
   text-shadow: 1px 1px 1px black;
 }
+
 /*End Administration*/
+
+/*Custom Select*/
+.select-wrapper {
+  position: relative;
+  overflow: hidden;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 4px;
+}
+
+.select-wrapper .unfold-btn {
+  border: none;
+  width: 30px;
+  height: 30px;
+  background-color: var(--primary-color);
+  border-right: 1px solid black;
+}
+
+.select-wrapper input[type="radio"] {
+  opacity: 0;
+  flex: 1;
+}
+
+.select-wrapper .list-items {
+  max-height: 0;
+  transition: all .3s ease-in-out;
+  background-color: var(--main-bg-color);
+}
+
+.select-wrapper .unfold-btn:focus+.list-items {
+  max-height: 300px;
+}
+
+.select-wrapper .list-items li :is(label, a) {
+  color: white;
+}
+
+.select-wrapper .list-items .additional a {
+  padding-block: 5px;
+  text-align: center;
+  background-color: var(--primary-color);
+}
+
+.list-items li:not(.additional) a.fas{
+  background-color: yellow;
+  color: black;
+  width: 30px;
+  max-width: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.select-wrapper a.fas::before {
+  margin-right: 5px;
+}
+
+.select-wrapper .list-items li {
+  height: 32px;
+  padding-top: 2px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.select-wrapper .list-items li * {
+  padding-left: 5px;
+}
+
+.select-wrapper .list-items li:hover {
+  background-color: rgba(255, 255, 255, .3);
+}
+
+.select-wrapper .list-items li :is(label, a) {
+  width: 100%;
+}
+
+.select-wrapper .unfold-btn::before {
+  display: flex;
+  justify-content: center;
+  transition: all .3s ease-in-out;
+}
+
+.select-wrapper .unfold-btn:focus:before {
+  rotate: -180deg;
+}
+
+.select-wrapper .unfold-btn:focus+.list-items input[type="radio"]:checked~label {
+  color: var(--primary-color);
+}
+
+.select-wrapper .unfold-btn:not(:focus):not(:active)+.list-items input[type="radio"]:checked+label {
+  position: absolute;
+  inset: 0 40px 0;
+  pointer-events: none;
+  color: black;
+  transform: inset .3s;
+}
+
+/*End Custom Select*/
+
+/*Edit*/
+
+#edit {
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  height: fit-content;
+  align-items: start;
+  border-radius: 16px;
+  box-shadow: 0 0 15px black;
+  background-color: var(--secondary-bg-color);
+}
+#edit .img-wrapper {
+  width: 650px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+#edit .form-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#edit .form-list .form-field {
+  position: relative;
+}
+
+#edit .form-list .form-field *:not(label) {
+  width: 100%;
+  font-size: 20px;
+  padding-inline: 5px;
+}
+
+#edit .form-field {
+  margin-bottom: 1rem;
+}
+
+#edit .form-list .form-field textarea {
+  padding-top: 5px;
+  border: 2px solid black;
+  border-radius: 4px;
+  min-height: 195px;
+}
+
+#edit .form-list .form-field label {
+  position: absolute;
+  top: 0.5rem;
+  left: 10px;
+  font-size: 20px;
+  background-color: white;
+  border-radius: 4px;
+  padding-inline: 5px;
+  white-space: nowrap;
+  width: fit-content;
+  transition: all .3s ease-in-out;
+}
+
+#edit .form-field *:focus+label,
+#edit .form-field *:not(:placeholder-shown)+label {
+  border: 1px solid black;
+  top: -1rem;
+  left: 0;
+  transform: scale(0.75);
+}
+
+#edit form{
+  width: 100%;
+}
+
+form .action-bar{
+  display: flex;
+  gap: 5px;
+  align-self: flex-end;
+}
+
+form .action-bar > *{
+  border: none;
+  text-align: center;
+  color: white;
+  font-weight: 500;
+  flex: 1;
+}
+
+/*End Edit*/
 
 @media (max-width: 1200px) {
   .small-window-field {
@@ -2178,6 +2365,14 @@ table tbody td:not(:last-child){
   #checkout {
     width: 95%;
   }
+
+  #edit{
+    flex-direction: column;
+  }
+
+  #edit .img-wrapper{
+    width: 350px;
+  }
 }
 
 @media (max-width: 713px) {
@@ -2194,8 +2389,8 @@ table tbody td:not(:last-child){
     flex-direction: column;
   }
 
-  main > *:not(.bg-image-wrapper),
-  #administration > *:not(.tool-bar){
+  main>*:not(.bg-image-wrapper),
+  #administration>*:not(.tool-bar) {
     padding-inline: 0;
   }
 }
@@ -2218,10 +2413,10 @@ table tbody td:not(:last-child){
     box-shadow: 0px 5px 10px var(--main-bg-color);
     display: none;
   }
-  
+
   .aside-toggle-btn {
     opacity: 0.4;
-    transform: scale(0.65) ;
+    transform: scale(0.65);
     transition: all 0.3s ease-in-out;
     box-shadow: 0px 0px 4px 2px black;
   }
@@ -2232,8 +2427,8 @@ table tbody td:not(:last-child){
     display: flex;
   }
 
-  .aside-toggle:checked + .aside-toggle-btn,
-  .aside-toggle-btn:hover{
+  .aside-toggle:checked+.aside-toggle-btn,
+  .aside-toggle-btn:hover {
     opacity: 1;
     transform: none;
   }
@@ -2280,15 +2475,15 @@ table tbody td:not(:last-child){
     width: 10rem;
   }
 
-  table *{
+  table * {
     font-size: small;
   }
 
-  table tbody td p{
+  table tbody td p {
     max-width: 70px;
   }
 
-  table .foldable{
+  table .foldable {
     display: none;
   }
 

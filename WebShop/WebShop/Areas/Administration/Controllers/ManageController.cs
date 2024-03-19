@@ -62,7 +62,8 @@ namespace WebShop.App.Areas.Administration.Controllers
             {
                 Authors = await _service.GetAuthors(),
                 Genres = await _service.GetGenres(),
-                Books = await _service.GetBooks(searchTerm, authorId, genreId)
+                Books = await _service.GetBooks(searchTerm, authorId, genreId),
+                SearchTerm = searchTerm
             };
             return View(model);
         }
@@ -77,7 +78,27 @@ namespace WebShop.App.Areas.Administration.Controllers
             return Ok();
         }
 
-        public IActionResult Edit(int id)
+        public IActionResult EditBook(int id)
+        {
+            return Ok();
+        }
+
+        public IActionResult EditGenre(int id)
+        {
+            return Ok();
+        }
+
+        public IActionResult EditAuthor(int id)
+        {
+            return Ok();
+        }
+
+        public IActionResult AddAuthor()
+        {
+            return Ok();
+        }
+
+        public IActionResult AddGenre()
         {
             return Ok();
         }

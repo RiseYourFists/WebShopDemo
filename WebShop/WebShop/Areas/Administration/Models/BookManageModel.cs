@@ -5,6 +5,8 @@
 
     public class BookManageModel
     {
+        public string SearchTerm { get; set; } = string.Empty;
+
         public List<AuthorListItem> Authors { get; set; } = new();
 
         public List<GenreListItem> Genres { get; set; } = new();

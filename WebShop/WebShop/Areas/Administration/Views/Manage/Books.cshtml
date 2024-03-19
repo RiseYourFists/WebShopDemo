@@ -11,7 +11,7 @@
             new("Manage Promotions", "Promotions"),
             new("Manage Users", "Users")
         })
-        @await Html.PartialAsync("Components/_SearchBarPartial", new SearchBar("Books"))
+        @await Html.PartialAsync("Components/_SearchBarPartial", new SearchBar("Books", Model.SearchTerm))
         <div class="filter-sections">
             @await Html.PartialAsync("Components/_DropdownPartial", new DropdownModel()
             {

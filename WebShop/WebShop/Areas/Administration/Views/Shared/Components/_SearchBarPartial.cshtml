@@ -2,7 +2,7 @@
 
 <div class="search-bar">
     <form asp-area="Administration" asp-controller="Manage" asp-action="@Model.Action" method="get">
-        <input type="search" name="searchTerm" id="search" placeholder="search">
+        <input type="search" name="searchTerm" id="search" placeholder="search" value="@Model.Value">
         <label for="search">Search</label>
         <button type="submit" class="fas fa-search"></button>
     </form>
