@@ -1,9 +1,8 @@
-﻿namespace WebShop.Services.Models.Administration
-{
-    public class GenreListItem
-    {
-        public int Id { get; set; }
+﻿namespace WebShop.Services.Models.Administration;
 
-        public string Name { get; set; } = string.Empty;
-    }
+public class GenreListItem
+{
+    public int Id { get; set; }
+
+    public string Name { get; set; } = string.Empty;
 }

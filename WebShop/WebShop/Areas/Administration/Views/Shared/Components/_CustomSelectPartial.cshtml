@@ -1,0 +1,33 @@
+﻿@model CustomSelectModel;
+@{
+    var additionalLink = $"/{Model.AdditionalArea}/{Model.AdditionalController}/{Model.AdditionalAction}";
+    <div class="select-wrapper">
+        <button type="button" tabindex="@Model.TabIndex" class="fas fa-angle-down unfold-btn"></button>
+        <ul class="list-items">
+            @{
+                foreach (var item in Model.Items)
+                {
+                    var url = @Url.Action(
+                        Model.EditAction,
+                        Model.EditController,
+                        new
+                        {
+                            area = Model.EditArea,
+                            id = item.PropertyValue
+                        });
+
+                    var checkedInfo = item.PropertyValue == Model.CheckedByValue? "checked" : string.Empty;
+
+                    <li>
+                        <a href="@url" class="fas fa-edit"></a>
+                        <input type="radio" @checkedInfo name="@Model.ValueName" id="@item.PropertyName" value="@item.PropertyValue">
+                        <label for="@item.PropertyName">@item.PropertyName</label>
+                    </li>
+                }
+                <li class="additional">
+                    <a href="@additionalLink" class="fas fa-plus">New</a>
+                </li>
+            }
+        </ul>
+    </div>
+}

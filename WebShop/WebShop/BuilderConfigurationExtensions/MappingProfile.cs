@@ -12,6 +12,7 @@ namespace WebShop.App.BuilderConfigurationExtensions
             this.CreateMap<Genre, GenreCategoryIcon>();
             this.CreateMap<Genre, GenreListItem>();
             this.CreateMap<Author, AuthorListItem>();
+            this.CreateMap<Book, BookInfoModel>();
 
             this.CreateMap<Book, BookDetail>()
                 .ForMember(p => p.Genre, 

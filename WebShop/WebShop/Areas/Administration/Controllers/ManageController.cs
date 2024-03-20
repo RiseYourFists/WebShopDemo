@@ -1,4 +1,6 @@
 ﻿
+using WebShop.Services.Models.Administration;
+
 namespace WebShop.App.Areas.Administration.Controllers
 {
     using System.Globalization;
@@ -78,8 +80,29 @@ namespace WebShop.App.Areas.Administration.Controllers
             return Ok();
         }
 
-        public IActionResult EditBook(int id)
+        [HttpGet]
+        public async Task<IActionResult> EditBook(int id)
         {
+            var model = await _service.GetBookInfo(id);
+            if (model == null)
+            {
+                return NotFound();
+            }
+
+            model.Authors = await _service.GetAuthorsSelectionItem();
+            model.Genres = await _service.GetGenresSelectionItem();
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> EditBook(BookInfoModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                model.Authors = await _service.GetAuthorsSelectionItem();
+                model.Genres = await _service.GetGenresSelectionItem();
+                return View(model);
+            }
             return Ok();
         }
 
@@ -103,7 +126,7 @@ namespace WebShop.App.Areas.Administration.Controllers
             return Ok();
         }
 
-        public IActionResult AddBook(int id)
+        public IActionResult AddBook()
         {
             return Ok();
         }

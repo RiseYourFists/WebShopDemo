@@ -74,6 +74,44 @@
             return result;
         }
 
+        public async Task<List<SelectionItemModel>> GetGenresSelectionItem()
+        {
+            var genres = await _adminRepository
+                .AllReadonly<Genre>()
+                .Select(g => new SelectionItemModel()
+                {
+                    PropertyName = g.Name,
+                    PropertyValue = g.Id
+                })
+                .ToListAsync();
+
+            return genres;
+        }
+
+        public async Task<List<SelectionItemModel>> GetAuthorsSelectionItem()
+        {
+            var authors = await _adminRepository
+                .AllReadonly<Author>()
+                .Select(a => new SelectionItemModel()
+                {
+                    PropertyName = a.Name,
+                    PropertyValue = a.Id
+                })
+                .ToListAsync();
+
+            return authors;
+        }
+
+        public async Task<BookInfoModel?> GetBookInfo(int id)
+        {
+            var book = await _adminRepository
+                .All<Book>()
+                .ProjectTo<BookInfoModel>(_mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync(b => b.Id == id);
+
+            return book;
+        }
+
         private async Task<decimal> GetPromotion(IRepository repository, int genreId, int authorId)
         {
             var promotion = await repository

@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "Edit book info";
+}
+@model BookInfoModel;
+
+<section id="edit">
+    <div class="img-wrapper">
+        @{
+            var cover = string.IsNullOrWhiteSpace(Model.BookCover)
+                ? "/images/book-template-v2.png"
+                : Model.BookCover;
+        }
+        <img src="@cover"
+             alt="book-cover">
+    </div>
+    <form method="post" asp-action="EditBook" asp-route-id="@Model.Id" class="form-list">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-field">
+            <input type="text" asp-for="Title" tabindex="1" placeholder="">
+            <label asp-for="Title"></label>
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="form-field">
+            <textarea type="text" asp-for="Description" tabindex="2" placeholder=""></textarea>
+            <label asp-for="Description"></label>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-field">
+            <input type="text" asp-for="BasePrice" tabindex="3" placeholder="">
+            <label asp-for="BasePrice"></label>
+            <span asp-validation-for="BasePrice" class="text-danger"></span>
+        </div>
+        <div class="form-field">
+            <input type="text" asp-for="BookCover" tabindex="4" placeholder="">
+            <label asp-for="BookCover"></label>
+            <span asp-validation-for="BookCover" class="text-danger"></span>
+        </div>
+        @{
+            var genreModel = new CustomSelectModel(
+                "Administration",
+                "Manage",
+                "AddGenre",
+                "Administration",
+                "Manage",
+                "EditGenre",
+                "GenreId",
+                Model.GenreId,
+                5);
+
+            var authorModel = new CustomSelectModel(
+                "Administration",
+                "Manage",
+                "AddAuthor",
+                "Administration",
+                "Manage",
+                "EditAuthor",
+                "AuthorId",
+                Model.AuthorId,
+                6);
+
+            genreModel.Items = Model.Genres;
+            authorModel.Items = Model.Authors;
+        }
+        @await Html.PartialAsync("Components/_CustomSelectPartial", genreModel)
+        @await Html.PartialAsync("Components/_CustomSelectPartial", authorModel)
+
+        <div class="action-bar">
+            <a asp-controller="Manage" asp-action="Books" class="cancel">Cancel</a>
+            <button class="confirm">Submit</button>
+        </div>
+    </form>
+</section>

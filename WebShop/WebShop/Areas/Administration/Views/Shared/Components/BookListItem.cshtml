@@ -21,7 +21,7 @@
                 <p>@item.StockQuantity</p>
             </td>
             <td class="action">
-                <a>
+                <a asp-area="Administration" asp-controller="Manage" asp-action="EditBook" asp-route-id="@item.Id">
                     <i class="fas fa-edit"></i>
                     <span class="foldable">Edit</span>
                 </a>
