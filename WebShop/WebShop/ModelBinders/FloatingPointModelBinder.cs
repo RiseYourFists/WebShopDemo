@@ -1,8 +1,9 @@
-﻿using System.Globalization;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-
-namespace WebShop.App.ModelBinders
+﻿namespace WebShop.App.ModelBinders
 {
+    using System.Globalization;
+    using System.Text.RegularExpressions;
+    using Microsoft.AspNetCore.Mvc.ModelBinding;
+
     public class FloatingPointModelBinder<T> : IModelBinder
         where T : struct, IComparable, IFormattable, IConvertible
     {
@@ -23,11 +24,9 @@ namespace WebShop.App.ModelBinders
 
             var value = valueProviderResult.FirstValue;
 
-            if (value != null && TryParseFloatingPoint(value, out var parsedValue))
+            if (value != null && TryParseFloatingPoint(value, out T parsedValue))
             {
-                var formattedValue = parsedValue.ToString("0.00", CultureInfo.InvariantCulture);
-
-                bindingContext.Result = ModelBindingResult.Success(formattedValue);
+                bindingContext.Result = ModelBindingResult.Success(parsedValue);
             }
             else
             {
@@ -37,15 +36,18 @@ namespace WebShop.App.ModelBinders
             return Task.CompletedTask;
         }
 
-        private bool TryParseFloatingPoint(string value, out T parsedValue)
+        private bool TryParseFloatingPoint<T>(string value, out T parsedValue)
         {
             parsedValue = default(T);
 
+            value = NormalizeValue(value);
+
             var formats = new[]
             {
-                NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands,
-                NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands | NumberStyles.AllowLeadingSign,
                 NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands | NumberStyles.AllowParentheses,
+                NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands | NumberStyles.AllowLeadingSign,
+                NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands,
+                NumberStyles.AllowCurrencySymbol,
                 NumberStyles.Any
             };
 
@@ -66,9 +68,43 @@ namespace WebShop.App.ModelBinders
                     parsedValue = (T)(object)decimalValue;
                     return true;
                 }
+                else if (typeof(T) == typeof(int) && int.TryParse(value, format, CultureInfo.InvariantCulture, out var intValue))
+                {
+                    parsedValue = (T)(object)intValue;
+                    return true;
+                }
             }
 
             return false;
+        }
+
+        private static string NormalizeValue(string value)
+        {
+            string dotSeparatorPattern = @"^(|-)\d+\.\d+$";
+            string commaSeparatorPattern = @"^(|-)\d+\,\d+$";
+            string dotInThousandsPattern = @"\.\d{0,3}\,\d+$";
+            string commaInThousandsPattern = @"\,\d{0,3}\.\d+$";
+
+            if (Regex.IsMatch(value, dotSeparatorPattern))
+            {
+                value = value.Replace(".", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+            }
+            else if (Regex.IsMatch(value, commaSeparatorPattern))
+            {
+                value = value.Replace(",", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+            }
+            else if (Regex.IsMatch(value, dotInThousandsPattern))
+            {
+                value = value.Replace(".", "");
+                value = value.Replace(",", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+            }
+            else if (Regex.IsMatch(value, commaInThousandsPattern))
+            {
+                value = value.Replace(",", "");
+                value = value.Replace(".", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+            }
+
+            return value;
         }
     }
 }

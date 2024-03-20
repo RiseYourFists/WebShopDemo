@@ -112,6 +112,56 @@
             return book;
         }
 
+        public async Task<bool> AnyGenre(int id)
+        {
+            return await _adminRepository
+                .AllReadonly<Genre>()
+                .AnyAsync(g => g.Id == id);
+        }
+
+        public async Task<bool> AnyAuthor(int id)
+        {
+            return await _adminRepository
+                .AllReadonly<Author>()
+                .AnyAsync(a => a.Id == id);
+        }
+
+        public async Task<Book?> GetBook(int id)
+        {
+            return await _adminRepository
+                .All<Book>()
+                .FirstOrDefaultAsync(b => b.Id == id);
+        }
+
+        public async Task<bool> EditBookInfo(BookInfoModel model)
+        {
+            var book = await GetBook(model.Id);
+
+            if (book == null)
+            {
+                throw new InvalidOperationException("Invalid book id.");
+            }
+
+            var doesGenreExist = await AnyGenre(model.GenreId);
+            var doesAuthorExist = await AnyAuthor(model.AuthorId);
+
+            if (!doesAuthorExist || !doesGenreExist)
+            {
+                throw new InvalidOperationException("Invalid genre/author id provided.");
+            }
+
+            book.Title = model.Title;
+            book.Description = model.Description;
+            book.BookCover = model.BookCover;
+            book.BasePrice = model.BasePrice;
+            book.GenreId = model.GenreId;
+            book.AuthorId = model.AuthorId;
+            book.StockQuantity = model.StockQuantity;
+
+            var result = await _adminRepository.SaveChangesAsync() > 0;
+            return result;
+        }
+
         private async Task<decimal> GetPromotion(IRepository repository, int genreId, int authorId)
         {
             var promotion = await repository

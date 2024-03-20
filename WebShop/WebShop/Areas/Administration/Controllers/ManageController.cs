@@ -97,13 +97,33 @@ namespace WebShop.App.Areas.Administration.Controllers
 
         public async Task<IActionResult> EditBook(BookInfoModel model)
         {
-            if (!ModelState.IsValid)
+            var isValid = ModelState.IsValid;
+
+            if (isValid)
+            {
+                try
+                {
+                    isValid = await _service.EditBookInfo(model);
+                    if (!isValid)
+                    {
+                        ModelState.AddModelError("Error", "Something went wrong.");
+                    }
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("Error", e.Message);
+                    isValid = false;
+                }
+            }
+
+            if (!isValid)
             {
                 model.Authors = await _service.GetAuthorsSelectionItem();
                 model.Genres = await _service.GetGenresSelectionItem();
                 return View(model);
             }
-            return Ok();
+            
+            return RedirectToAction("Books");
         }
 
         public IActionResult EditGenre(int id)

@@ -31,7 +31,12 @@
             <span asp-validation-for="BasePrice" class="text-danger"></span>
         </div>
         <div class="form-field">
-            <input type="text" asp-for="BookCover" tabindex="4" placeholder="">
+            <input type="text" asp-for="StockQuantity" tabindex="4" placeholder="">
+            <label asp-for="StockQuantity"></label>
+            <span asp-validation-for="StockQuantity" class="text-danger"></span>
+        </div>
+        <div class="form-field">
+            <input type="text" asp-for="BookCover" tabindex="5" placeholder="">
             <label asp-for="BookCover"></label>
             <span asp-validation-for="BookCover" class="text-danger"></span>
         </div>
@@ -45,7 +50,7 @@
                 "EditGenre",
                 "GenreId",
                 Model.GenreId,
-                5);
+                6);
 
             var authorModel = new CustomSelectModel(
                 "Administration",
@@ -56,7 +61,7 @@
                 "EditAuthor",
                 "AuthorId",
                 Model.AuthorId,
-                6);
+                7);
 
             genreModel.Items = Model.Genres;
             authorModel.Items = Model.Authors;

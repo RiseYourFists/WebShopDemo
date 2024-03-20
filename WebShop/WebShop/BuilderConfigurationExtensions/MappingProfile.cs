@@ -12,7 +12,6 @@ namespace WebShop.App.BuilderConfigurationExtensions
             this.CreateMap<Genre, GenreCategoryIcon>();
             this.CreateMap<Genre, GenreListItem>();
             this.CreateMap<Author, AuthorListItem>();
-            this.CreateMap<Book, BookInfoModel>();
 
             this.CreateMap<Book, BookDetail>()
                 .ForMember(p => p.Genre, 
@@ -21,6 +20,11 @@ namespace WebShop.App.BuilderConfigurationExtensions
                 .ForMember(p => p.Author,
                     dest => dest.MapFrom(
                         opt => opt.Author.Name));
+
+            this.CreateMap<Book, BookInfoModel>()
+                .ForMember(p => p.BasePrice,
+                    dest => dest.MapFrom(
+                        opt => opt.BasePrice));
         }
     }
 }
