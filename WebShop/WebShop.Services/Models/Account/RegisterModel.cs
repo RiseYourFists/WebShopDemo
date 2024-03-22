@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using WebShop.Services.CustomAttibutes;
+using WebShop.Services.CustomAttributes;
 using static WebShop.Services.ErrorMessages.AccountErrorMsgs.RegisterErrors;
 using static WebShop.Services.ValidationConstants.AccountConstants.RegisterConstants;
 

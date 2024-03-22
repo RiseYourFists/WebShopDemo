@@ -209,8 +209,8 @@ form .action-bar > *:hover{
   color: white;
 }
 
-input[data-val-required] + label::before,
-input[data-val-required] ~ label::before{
+input[data-val-required] + label::after,
+input[data-val-required] ~ label::after{
   content: "*";
   position: absolute;
   top: 0;
@@ -2293,6 +2293,11 @@ table tbody td:not(:last-child) {
   pointer-events: none;
   color: black;
   transform: inset .3s;
+}
+
+td .discount::after{
+  content: "%";
+  margin-left: 2px;
 }
 
 /*End Custom Select*/

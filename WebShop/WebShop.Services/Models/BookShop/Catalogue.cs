@@ -12,7 +12,7 @@ namespace WebShop.Services.Models.BookShop
 
         public int GenreId { get; set; }
 
-        public string SearchTerm { get; set; }
+        public string SearchTerm { get; set; } = string.Empty;
 
         public ItemSortClause SortClause { get; set; }
 

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model PromotionManageModel;
+@{
     ViewData["Title"] = "Promotions";
 }
 
@@ -11,25 +12,48 @@
             new("Manage Users", "Users")
         })
         @await Html.PartialAsync("Components/_SearchBarPartial", new SearchBar("Promotions", ""))
-        @*<div class="filter-sections">
-            @await Html.PartialAsync("Components/_DropdownPartial", new DropdownModel()
-            {
-                Heading = "Authors",
-                UnfoldButtonContent = "Authors",
-                UnfoldButtonClasses = "fas fa-angle-down",
-                ElementList = Model.GetAuthors()
-            })
-
-            @await Html.PartialAsync("Components/_DropdownPartial", new DropdownModel()
-            {
-                Heading = "Genres",
-                UnfoldButtonContent = "Genres",
-                UnfoldButtonClasses = "fas fa-angle-down",
-                ElementList = Model.GetGenres()
-            })
-        </div>*@
     </div>
     <div class="item-list">
-
+        <table>
+            <thead>
+                <tr>
+                    <th>Promotion Name</th>
+                    <th>Discount %</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th><span class="foldable">Action</span></th>
+                </tr>
+            </thead>
+            <tbody>
+            @{
+                foreach (var promotion in Model.Promotions)
+                {
+                    <tr>
+                        <td>
+                            <p>@promotion.Name</p>
+                        </td>
+                        <td>
+                            <p class="discount">@promotion.DiscountPercent</p>
+                        </td>
+                        <td>
+                            <p>@promotion.StartDate.ToString("dd-MMM-yyyy")</p>
+                        </td>
+                        <td>
+                            <p>@promotion.EndDate.ToString("dd-MMM-yyyy")</p>
+                        </td>
+                        <td class="action">
+                            <a href="#">
+                                <i class="fas fa-edit"></i>
+                                <span class="foldable">Edit</span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            </tbody>
+        </table>
+        <div class="action-bar">
+            <a class="fas fa-plus" href="#">New Promotion</a>
+        </div>
     </div>
 </section>

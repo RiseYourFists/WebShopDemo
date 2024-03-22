@@ -71,10 +71,14 @@ namespace WebShop.App.Areas.Administration.Controllers
             return View(model);
         }
 
-        public IActionResult Promotions()
+        public async Task<IActionResult> Promotions(string searchTerm)
         {
-
-            return View();
+            var model = new PromotionManageModel()
+            {
+                SearchTerm = searchTerm,
+                Promotions = await _service.GetPromotions()
+            };
+            return View(model);
         }
 
         public IActionResult Users()

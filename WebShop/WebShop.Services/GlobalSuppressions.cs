@@ -6,3 +6,5 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Naming", "VSSpell001:Spell Check", Justification = "<Pending>", Scope = "member", Target = "~M:WebShop.Services.ServiceControllers.AdministrationService.#ctor(WebShop.Core.Contracts.IAdminRepository,AutoMapper.IMapper)")]
+[assembly: SuppressMessage("Style", "IDE0270:Use coalesce expression", Justification = "<Pending>", Scope = "member", Target = "~M:WebShop.Services.ServiceControllers.AdministrationService.EditBookInfo(WebShop.Services.Models.Administration.BookInfoModel)~System.Threading.Tasks.Task{System.Boolean}")]
+[assembly: SuppressMessage("Naming", "VSSpell001:Spell Check", Justification = "<Pending>", Scope = "type", Target = "~T:WebShop.Services.Models.BookShop.Catalogue")]

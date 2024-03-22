@@ -266,6 +266,14 @@
             return result;
         }
 
+        public async Task<List<PromotionListItem>> GetPromotions()
+        {
+            return await _adminRepository
+                .AllReadonly<Promotion>()
+                .ProjectTo<PromotionListItem>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+        }
+
         private static async Task<decimal> GetPromotion(IRepository repository, int genreId, int authorId)
         {
             var promotion = await repository
