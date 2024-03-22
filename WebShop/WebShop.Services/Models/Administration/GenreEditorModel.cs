@@ -18,6 +18,6 @@
         [StringLength(UrlMaxLen, MinimumLength = UrlMinLen, ErrorMessage = "The URL must be between {2} and {1} characters long.")]
         public string IconLink { get; set; } = string.Empty;
 
-        public GenreEditorAction Action { get; set; }
+        public EditAction Action { get; set; }
     }
 }

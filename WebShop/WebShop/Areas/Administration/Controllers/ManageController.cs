@@ -92,12 +92,15 @@ namespace WebShop.App.Areas.Administration.Controllers
 
             model.Authors = await _service.GetAuthorsSelectionItem();
             model.Genres = await _service.GetGenresSelectionItem();
+            model.Action = EditAction.Edit;
 
             return View(model);
         }
 
+        [HttpPost]
         public async Task<IActionResult> EditBook(BookInfoModel model)
         {
+            ModelState.Remove(nameof(model.Action));
             var isValid = ModelState.IsValid;
 
             if (isValid)
@@ -123,7 +126,7 @@ namespace WebShop.App.Areas.Administration.Controllers
                 model.Genres = await _service.GetGenresSelectionItem();
                 return View(model);
             }
-            
+
             return RedirectToAction("Books");
         }
 
@@ -136,7 +139,7 @@ namespace WebShop.App.Areas.Administration.Controllers
                 return NotFound();
             }
 
-            model.Action = GenreEditorAction.Edit;
+            model.Action = EditAction.Edit;
             return View("GenreEditor", model);
         }
 
@@ -144,24 +147,23 @@ namespace WebShop.App.Areas.Administration.Controllers
         public async Task<IActionResult> EditGenre(GenreEditorModel model)
         {
             ModelState.Remove(nameof(model.Action));
-            if (!ModelState.IsValid)
-            {
-                return View("GenreEditor", model);
-            }
+            bool isValid = ModelState.IsValid;
 
-            var isValid = true;
-            try
+            if (isValid)
             {
-                isValid = await _service.EditGenre(model);
-                if (!isValid)
+                try
                 {
-                    ModelState.AddModelError("Error", "No changes have been made!");
+                    isValid = await _service.EditGenre(model);
+                    if (!isValid)
+                    {
+                        ModelState.AddModelError("Error", "No changes have been made!");
+                    }
                 }
-            }
-            catch (Exception e)
-            {
-                ModelState.AddModelError("Error", e.Message);
-                isValid = false;
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("Error", e.Message);
+                    isValid = false;
+                }
             }
 
             if (!isValid)
@@ -172,21 +174,97 @@ namespace WebShop.App.Areas.Administration.Controllers
             return RedirectToAction("Books");
         }
 
-        public IActionResult EditAuthor(int id)
+        [HttpGet]
+        public async Task<IActionResult> EditAuthor(int id)
         {
-            return Ok();
+            var model = await _service.GetAuthorInfo(id);
+            if (model == null)
+            {
+                return NotFound();
+            }
+
+            model.Action = EditAction.Edit;
+            return View("AuthorEditor", model);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> EditAuthor(AuthorEditorModel model)
+        {
+            ModelState.Remove(nameof(model.Action));
+            var isValid = ModelState.IsValid;
+
+            if (isValid)
+            {
+                try
+                {
+                    isValid = await _service.EditAuthor(model);
+                    if (!isValid)
+                    {
+                        ModelState.AddModelError("Error", "No changes have been made!");
+                    }
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("Error", e.Message);
+                    isValid = false;
+                }
+            }
+
+            if (!isValid)
+            {
+                return View("AuthorEditor", model);
+            }
+
+            return RedirectToAction("Books");
+        }
+
+        [HttpGet]
         public IActionResult AddAuthor()
         {
-            return Ok();
+            var model = new AuthorEditorModel()
+            {
+                Action = EditAction.Add
+            };
+            return View("AuthorEditor", model);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> AddAuthor(AuthorEditorModel model)
+        {
+            ModelState.Remove(nameof(model.Action));
+            var isValid = ModelState.IsValid;
+
+            if (isValid)
+            {
+                try
+                {
+                    isValid = await _service.AddNewAuthor(model);
+                    if (!isValid)
+                    {
+                        ModelState.AddModelError("Error", "Something went wrong.");
+                    }
+                }
+                catch (Exception e)
+                {
+                    isValid = false;
+                    ModelState.AddModelError("Error", e.Message);
+                }
+            }
+
+            if (!isValid)
+            {
+                return View("AuthorEditor", model);
+            }
+
+            return RedirectToAction("Books");
+        }
+
+        [HttpGet]
         public IActionResult AddGenre()
         {
             var model = new GenreEditorModel()
             {
-                Action = GenreEditorAction.Add
+                Action = EditAction.Add
             };
 
             return View("GenreEditor", model);
@@ -196,24 +274,23 @@ namespace WebShop.App.Areas.Administration.Controllers
         public async Task<IActionResult> AddGenre(GenreEditorModel model)
         {
             ModelState.Remove(nameof(model.Action));
-            if (!ModelState.IsValid)
-            {
-                return View("GenreEditor", model);
-            }
+            var isValid = ModelState.IsValid;
 
-            var isValid = true;
-            try
+            if (isValid)
             {
-                isValid = await _service.AddNewGenre(model);
-                if (!isValid)
+                try
                 {
-                    ModelState.AddModelError("Error", "Something went wrong.");
+                    isValid = await _service.AddNewGenre(model);
+                    if (!isValid)
+                    {
+                        ModelState.AddModelError("Error", "Something went wrong.");
+                    }
                 }
-            }
-            catch (Exception e)
-            {
-                isValid = false;
-                ModelState.AddModelError("Error", e.Message);
+                catch (Exception e)
+                {
+                    isValid = false;
+                    ModelState.AddModelError("Error", e.Message);
+                }
             }
 
             if (!isValid)
@@ -224,9 +301,52 @@ namespace WebShop.App.Areas.Administration.Controllers
             return RedirectToAction("Books");
         }
 
-        public IActionResult AddBook()
+        [HttpGet]
+        public async Task<IActionResult> AddBook()
         {
-            return Ok();
+            var model = new BookInfoModel()
+            {
+                Authors = await _service.GetAuthorsSelectionItem(),
+                Genres = await _service.GetGenresSelectionItem(),
+                Action = EditAction.Add
+            };
+
+            return View("EditBook", model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddBook(BookInfoModel model)
+        {
+            ModelState.Remove(nameof(model.Action));
+            var isValid = ModelState.IsValid;
+
+            if (isValid)
+            {
+                try
+                {
+                    isValid = await _service.AddNewBook(model);
+                    if (!isValid)
+                    {
+                        ModelState.AddModelError("Error", "Something went wrong.");
+                    }
+                }
+                catch (Exception e)
+                {
+                    isValid = false;
+                    ModelState.AddModelError("Error", e.Message);
+                }
+            }
+
+            if (!isValid)
+            {
+                model.Authors = await _service.GetAuthorsSelectionItem();
+                model.Genres = await _service.GetGenresSelectionItem();
+                model.Action = EditAction.Add;
+
+                return View("EditBook", model);
+            }
+
+            return RedirectToAction("Books");
         }
     }
 }

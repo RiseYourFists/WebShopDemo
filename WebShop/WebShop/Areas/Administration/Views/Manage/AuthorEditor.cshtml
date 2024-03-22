@@ -1,0 +1,28 @@
+﻿@model AuthorEditorModel;
+@{
+    var title = Model.Action.ToString();
+    var action = title + "Author";
+    ViewData["Title"] = $"{title} Author";
+
+    <section id="edit">
+        <form action="@action" class="form-list" method="post">
+            <div class="title">
+                <h1>@ViewData["Title"]</h1>
+            </div>
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="form-field">
+                <input type="text" asp-for="Name" placeholder="">
+                <label asp-for="Name">Name</label>
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+            <div class="action-bar">
+                <a asp-area="Administration" asp-controller="Manage" asp-action="Books" class="cancel far fa-times-circle action-cancel">Cancel</a>
+                <button class="fas fa-check-circle confirm">Confirm</button>
+            </div>
+            @if (Model.Action != EditAction.Add)
+            {
+                <input type="hidden" asp-for="Id"/>
+            }
+        </form>
+    </section>
+}

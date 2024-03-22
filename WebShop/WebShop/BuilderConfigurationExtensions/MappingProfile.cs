@@ -13,7 +13,15 @@ namespace WebShop.App.BuilderConfigurationExtensions
             this.CreateMap<Genre, GenreListItem>();
             this.CreateMap<Author, AuthorListItem>();
             this.CreateMap<Genre, GenreEditorModel>();
+            this.CreateMap<Author, AuthorEditorModel>();
 
+            this.CreateMap<BookInfoModel, Book>()
+                .ForMember(p => p.Id,
+                    dest => dest.Ignore());
+
+            this.CreateMap<AuthorEditorModel, Author>()
+                .ForMember(p => p.Id,
+                    dest => dest.Ignore());
 
             this.CreateMap<GenreEditorModel, Genre>()
                 .ForMember(p => p.Id,

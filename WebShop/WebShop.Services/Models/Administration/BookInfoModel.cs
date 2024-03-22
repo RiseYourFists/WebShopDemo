@@ -1,4 +1,6 @@
-﻿namespace WebShop.Services.Models.Administration
+﻿using WebShop.Services.Models.Administration.Enumerations;
+
+namespace WebShop.Services.Models.Administration
 {
     using System.ComponentModel.DataAnnotations;
     using static ValidationConstants.AdministrationValidationConstants.BookValidation;
@@ -31,9 +33,13 @@
         [StringLength(UrlMaxLen, MinimumLength = UrlMinLen, ErrorMessage = "The URL must be {2} and {1} characters long.")]
         public string BookCover { get; set; } = string.Empty;
 
+        [Required]
         public int GenreId { get; set; }
 
+        [Required]
         public int AuthorId { get; set; }
+
+        public EditAction Action { get; set; }
 
         public List<SelectionItemModel> Genres { get; set; } = new();
 

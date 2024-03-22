@@ -6,7 +6,7 @@
         {
             public const int TitleMaxLen = 35;
 
-            public const int DescriptionMaxLen = 500;
+            public const int DescriptionMaxLen = 1000;
 
         }
 

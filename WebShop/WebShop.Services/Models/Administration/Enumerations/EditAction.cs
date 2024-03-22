@@ -1,6 +1,6 @@
 ﻿namespace WebShop.Services.Models.Administration.Enumerations
 {
-    public enum GenreEditorAction
+    public enum EditAction
     {
         Add,
         Edit

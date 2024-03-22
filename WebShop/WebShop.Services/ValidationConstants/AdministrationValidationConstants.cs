@@ -24,6 +24,12 @@
             public const int NameMinLen = 3;
         }
 
+        public static class AuthorValidation
+        {
+            public const int NameMaxLen = AuthorConstants.NameMaxLen;
+            public const int NameMinLen = 2;
+        }
+
         public static class SharedValidation    
         {
             public const int UrlMaxLen = 2048;

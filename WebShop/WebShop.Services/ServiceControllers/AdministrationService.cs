@@ -214,7 +214,59 @@
             return result;
         }
 
-        private async Task<decimal> GetPromotion(IRepository repository, int genreId, int authorId)
+        public async Task<AuthorEditorModel?> GetAuthorInfo(int id)
+        {
+            return await _adminRepository
+                .AllReadonly<Author>()
+                .ProjectTo<AuthorEditorModel>(_mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync(a => a.Id == id);
+        }
+
+        public async Task<bool> AddNewAuthor(AuthorEditorModel model)
+        {
+            var author = _mapper.Map<Author>(model);
+
+            await _adminRepository.AddAsync(author);
+            var result = await _adminRepository.SaveChangesAsync() > 0;
+            return result;
+        }
+
+        public async Task<bool> EditAuthor(AuthorEditorModel model)
+        {
+            var doesAuthorExist = await AnyAuthor(model.Id);
+            if (!doesAuthorExist)
+            {
+                throw new InvalidOperationException("Invalid author id provided");
+            }
+
+            var author = await _adminRepository
+                .All<Author>()
+                .FirstAsync(a => a.Id == model.Id);
+
+            author.Name = model.Name;
+
+            var result = await _adminRepository.SaveChangesAsync() > 0;
+            return result;
+        }
+
+        public async Task<bool> AddNewBook(BookInfoModel model)
+        {
+            var doesGenreExist = await AnyGenre(model.GenreId);
+            var doesAuthorExist = await AnyAuthor(model.AuthorId);
+
+            if (!doesAuthorExist || !doesGenreExist)
+            {
+                throw new InvalidOperationException("Invalid genre/author id provided.");
+            }
+
+            var book = _mapper.Map<Book>(model);
+
+            await _adminRepository.AddAsync(book);
+            var result = await _adminRepository.SaveChangesAsync() > 0;
+            return result;
+        }
+
+        private static async Task<decimal> GetPromotion(IRepository repository, int genreId, int authorId)
         {
             var promotion = await repository
                 .AllReadonly<Promotion>()
