@@ -39,7 +39,7 @@ namespace WebShop.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Authors");
+                    b.ToTable("Authors", (string)null);
 
                     b.HasComment("Author table");
 
@@ -85,7 +85,7 @@ namespace WebShop.Core.Migrations
 
                     b.HasIndex("PromotionId");
 
-                    b.ToTable("AuthorPromotions");
+                    b.ToTable("AuthorPromotions", (string)null);
 
                     b.HasComment("Author targeted promotion");
                 });
@@ -139,7 +139,7 @@ namespace WebShop.Core.Migrations
 
                     b.HasIndex("GenreId");
 
-                    b.ToTable("Books");
+                    b.ToTable("Books", (string)null);
 
                     b.HasComment("Book table");
 
@@ -609,7 +609,7 @@ namespace WebShop.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genres");
+                    b.ToTable("Genres", (string)null);
 
                     b.HasComment("Genre table");
 
@@ -660,7 +660,7 @@ namespace WebShop.Core.Migrations
 
                     b.HasIndex("PromotionId");
 
-                    b.ToTable("GenrePromotions");
+                    b.ToTable("GenrePromotions", (string)null);
 
                     b.HasComment("Promotion targeting genres");
                 });
@@ -710,7 +710,7 @@ namespace WebShop.Core.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("PlacedOrders");
+                    b.ToTable("PlacedOrders", (string)null);
 
                     b.HasComment("Placed order");
                 });
@@ -737,7 +737,7 @@ namespace WebShop.Core.Migrations
 
                     b.HasIndex("PlacedOrderId");
 
-                    b.ToTable("PlacedOrderBooks");
+                    b.ToTable("PlacedOrderBooks", (string)null);
 
                     b.HasComment("Collection of all books that are ordered");
                 });
@@ -771,7 +771,7 @@ namespace WebShop.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Promotions");
+                    b.ToTable("Promotions", (string)null);
 
                     b.HasComment("Promotion table");
                 });

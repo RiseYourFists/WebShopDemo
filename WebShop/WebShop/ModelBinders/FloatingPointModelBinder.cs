@@ -36,9 +36,9 @@
             return Task.CompletedTask;
         }
 
-        private bool TryParseFloatingPoint<T>(string value, out T parsedValue)
+        private static bool TryParseFloatingPoint(string value, out T parsedValue)
         {
-            parsedValue = default(T);
+            parsedValue = default;
 
             value = NormalizeValue(value);
 

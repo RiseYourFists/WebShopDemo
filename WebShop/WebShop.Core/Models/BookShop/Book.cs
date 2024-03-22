@@ -35,9 +35,6 @@ namespace WebShop.Core.Models.BookShop
         [JsonProperty]
         public decimal BasePrice { get; set; }
 
-        [NotMapped]
-        public decimal CurrentPrice { get; set; }
-
         [Required]
         [Comment("Total quantity available")]
         [JsonProperty]
