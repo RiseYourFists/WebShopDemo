@@ -22,18 +22,34 @@
 
         public async Task<List<GenreListItem>> GetGenres()
         {
-            return await _adminRepository
+            var result = await _adminRepository
                 .AllReadonly<Genre>()
                 .ProjectTo<GenreListItem>(_mapper.ConfigurationProvider)
                 .ToListAsync();
+
+            result.Insert(0, new GenreListItem()
+            {
+                Id = 0,
+                Name = "All"
+            });
+
+            return result;
         }
 
         public async Task<List<AuthorListItem>> GetAuthors()
         {
-            return await _adminRepository
+            var result = await _adminRepository
                 .AllReadonly<Author>()
                 .ProjectTo<AuthorListItem>(_mapper.ConfigurationProvider)
                 .ToListAsync();
+
+            result.Insert(0, new AuthorListItem()
+            {
+                Id = 0,
+                Name = "All"
+            });
+
+            return result;
         }
 
         public async Task<List<BookListItem>> GetBooks(string searchTerm, int? authorId, int? genreId)
@@ -48,11 +64,11 @@
                     .Where(b => EF.Functions.Like(b.Title, $"%{searchTerm}%"));
             }
 
-            if (authorId.HasValue)
+            if (authorId.HasValue && authorId.Value != 0)
             {
                 query = query.Where(b => b.AuthorId == authorId.Value);
             }
-            else if(genreId.HasValue)
+            else if(genreId.HasValue && genreId.Value != 0)
             {
                 query = query.Where(b => b.GenreId == genreId.Value);
             }
@@ -157,6 +173,42 @@
             book.GenreId = model.GenreId;
             book.AuthorId = model.AuthorId;
             book.StockQuantity = model.StockQuantity;
+
+            var result = await _adminRepository.SaveChangesAsync() > 0;
+            return result;
+        }
+
+        public async Task<GenreEditorModel?> GetGenreInfo(int id)
+        {
+            return await _adminRepository
+                .AllReadonly<Genre>()
+                .ProjectTo<GenreEditorModel>(_mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync(g => g.Id == id);
+        }
+
+        public async Task<bool> AddNewGenre(GenreEditorModel model)
+        {
+            var genre = _mapper.Map<Genre>(model);
+
+            await _adminRepository.AddAsync(genre);
+            var result = await _adminRepository.SaveChangesAsync() > 0;
+            return result;
+        }
+
+        public async Task<bool> EditGenre(GenreEditorModel model)
+        {
+            var doesGenreExist = await AnyGenre(model.Id);
+            if (!doesGenreExist)
+            {
+                throw new InvalidOperationException("Invalid genre id provided.");
+            }
+
+            var genre = await _adminRepository
+                .All<Genre>()
+                .FirstAsync(g => g.Id == model.Id);
+
+            genre.Name = model.Name;
+            genre.IconLink = model.IconLink;
 
             var result = await _adminRepository.SaveChangesAsync() > 0;
             return result;

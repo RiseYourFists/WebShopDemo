@@ -2,6 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
     using static ValidationConstants.AdministrationValidationConstants.BookValidation;
+    using static ValidationConstants.AdministrationValidationConstants.SharedValidation;
     public class BookInfoModel
     {
         [Required]

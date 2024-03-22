@@ -7,13 +7,16 @@
     <div class="img-wrapper">
         @{
             var cover = string.IsNullOrWhiteSpace(Model.BookCover)
-                ? "/images/book-template-v2.png"
+                ? "/images/icon-canvas.svg"
                 : Model.BookCover;
         }
         <img src="@cover"
              alt="book-cover">
     </div>
     <form method="post" asp-action="EditBook" asp-route-id="@Model.Id" class="form-list">
+        <div class="title">
+            <h1>@ViewData["Title"]</h1>
+        </div>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-field">
             <input type="text" asp-for="Title" tabindex="1" placeholder="">
@@ -36,7 +39,7 @@
             <span asp-validation-for="StockQuantity" class="text-danger"></span>
         </div>
         <div class="form-field">
-            <input type="text" asp-for="BookCover" tabindex="5" placeholder="">
+            <input type="text" asp-for="BookCover" data-info="icon-input" tabindex="5" placeholder="">
             <label asp-for="BookCover"></label>
             <span asp-validation-for="BookCover" class="text-danger"></span>
         </div>

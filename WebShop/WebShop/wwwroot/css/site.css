@@ -400,6 +400,9 @@ a:hover {
 
 .title {
   font-family: "Rubik Doodle Shadow";
+  color: var(--primary-color);
+  display: flex;
+  justify-content: center;
 }
 
 .logo {
@@ -2068,11 +2071,24 @@ table tbody td:not(:last-child) {
   gap: 10px;
   justify-content: end;
   margin-block: 20px;
+  position: sticky;
+  bottom: 0;
 }
 
 #administration .action-bar * {
   color: white;
   text-shadow: 1px 1px 1px black;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 1px solid transparent;
+}
+
+.action-bar *::before{
+  margin-right: 5px;
+}
+
+#administration .action-bar *:hover {
+  border-color: white;
 }
 
 /*End Administration*/
@@ -2122,12 +2138,14 @@ table tbody td:not(:last-child) {
 
 .select-wrapper .list-items {
   max-height: 0;
+  overflow-y:visible;
   transition: all .3s ease-in-out;
   background-color: var(--main-bg-color);
 }
 
 .select-wrapper .unfold-btn:focus+.list-items {
   max-height: 300px;
+  overflow-y: scroll;
 }
 
 .select-wrapper .list-items li :is(label, a) {
@@ -2212,12 +2230,14 @@ table tbody td:not(:last-child) {
   width: 650px;
   border-radius: 16px;
   overflow: hidden;
+  border: 1px solid gray;
 }
 
 #edit .form-list {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
 #edit .form-list .form-field {
@@ -2278,6 +2298,7 @@ form .action-bar > *{
   color: white;
   font-weight: 500;
   flex: 1;
+  padding: 5px;
 }
 
 /*End Edit*/

@@ -269,95 +269,24 @@
             </div>
             <section id="edit">
                 <div class="img-wrapper">
-                    <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1598823299l/42844155._SY475_.jpg"
-                        alt="book-cover">
+                    <img src="../../wwwroot/images/icon-canvas.svg" alt="">
                 </div>
                 <form action="" class="form-list">
-                    <div class="form-field">
-                        <input tabindex="1" type="text" name="" id="title" placeholder="">
-                        <label for="title">Title</label>
+                    <div class="title">
+                        <h1>Edit Genre info</h1>
                     </div>
                     <div class="form-field">
-                        <textarea tabindex="2" type="text" name="" id="description" placeholder=""></textarea>
-                        <label for="description">Description</label>
+                        <input type="text" name="name" id="name" placeholder="">
+                        <label for="name">Name</label>
+                        <span class="text-danger"></span>
                     </div>
                     <div class="form-field">
-                        <input tabindex="3" type="text" name="" id="base-price" placeholder="">
-                        <label for="base-price">Base Price</label>
-                    </div>
-                    <div class="form-field">
-                        <input tabindex="4" type="text" name="" id="cover" placeholder="">
-                        <label for="cover">Cover Photo</label>
-                    </div>
-                    <div class="select-wrapper">
-                        <button tabindex="5" type="button" class="fas fa-angle-down unfold-btn"></button>
-                        <ul class="list-items">
-                            <li>
-                                <a href="#1" class="fas fa-edit"></a>
-                                <input type="radio" name="author" id="Author1" value="author1">
-                                <label for="Author1">Author1</label>
-                            </li>
-                            <li>
-                                <a href="#2" class="fas fa-edit"></a>
-                                <input checked type="radio" name="author" id="Author2" value="author2">
-                                <label for="Author2">Author2</label>
-                            </li>
-                            <li>
-                                <a href="#3" class="fas fa-edit"></a>
-                                <input type="radio" name="author" id="Author3" value="author3">
-                                <label for="Author3">Author3</label>
-                            </li>
-                            <li>
-                                <a href="#4" class="fas fa-edit"></a>
-                                <input type="radio" name="author" id="Author4" value="author4">
-                                <label for="Author4">Author4</label>
-                            </li>
-                            <li>
-                                <a href="#5" class="fas fa-edit"></a>
-                                <input type="radio" name="author" id="Author5" value="author5">
-                                <label for="Author5">Author5</label>
-                            </li>
-                            <li class="additional">
-                                <a href="#add" class="fas fa-plus">New</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="select-wrapper">
-                        <button tabindex="6" type="button" class="fas fa-angle-down unfold-btn"></button>
-                        <ul class="list-items">
-                            <li>
-                                <a href="#" class="fas fa-edit"></a>
-                                <input type="radio" name="genre" checked id="Action" value="action">
-                                <label for="Action">Action</label>
-                            </li>
-                            <li>
-                                <a href="#" class="fas fa-edit"></a>
-                                <input type="radio" name="genre" id="Fiction" value="fiction">
-                                <label for="Fiction">Fiction</label>
-                            </li>
-                            <li>
-                                <a href="#" class="fas fa-edit"></a>
-                                <input type="radio" name="genre" id="Mystery" value="mystery">
-                                <label for="Mystery">Mystery</label>
-                            </li>
-                            <li>
-                                <a href="#" class="fas fa-edit"></a>
-                                <input type="radio" name="genre" id="History" value="history">
-                                <label for="History">History</label>
-                            </li>
-                            <li>
-                                <a href="#" class="fas fa-edit"></a>
-                                <input type="radio" name="genre" id="Science-Fiction" value="science-fiction">
-                                <label for="Science-Fiction">Science-Fiction</label>
-                            </li>
-                            <li class="additional">
-                                <a href="#" class="fas fa-plus">New</a>
-                            </li>
-                        </ul>
+                        <input type="text" data-info="icon-input" name="icon" id="icon" placeholder="">
+                        <label for="icon">Icon URL</label>
                     </div>
                     <div class="action-bar">
-                        <a href="#" class="cancel">Cancel</a>
-                        <button class="confirm">Submit</button>
+                        <a href="#" class="cancel far fa-times-circle action-cancel">Cancel</a>
+                        <button class="fas fa-check-circle confirm">Confirm</button>
                     </div>
                 </form>
             </section>

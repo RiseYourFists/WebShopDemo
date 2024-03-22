@@ -16,7 +16,16 @@
 
             public const int StockQuantityMaxRange = int.MaxValue;
             public const int StockQuantityMinRange = 0;
+        }
 
+        public static class GenreValidation
+        {
+            public const int NameMaxLen = GenreConstants.NameMaxLen;
+            public const int NameMinLen = 3;
+        }
+
+        public static class SharedValidation    
+        {
             public const int UrlMaxLen = 2048;
             public const int UrlMinLen = 2;
         }
