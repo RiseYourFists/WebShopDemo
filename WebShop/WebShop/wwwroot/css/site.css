@@ -137,6 +137,90 @@ a {
   color: var(--secondary-color);
 }
 
+/*Forms*/
+
+.form-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.form-list .form-field {
+  position: relative;
+}
+
+.form-list .form-field *:not(label) {
+  width: 100%;
+  font-size: 20px;
+  padding-inline: 5px;
+}
+
+.form-field {
+  margin-bottom: 1rem;
+}
+
+.form-list .form-field textarea {
+  padding-top: 5px;
+  border: 2px solid black;
+  border-radius: 4px;
+  min-height: 195px;
+}
+
+.form-list .form-field label {
+  position: absolute;
+  top: 0.5rem;
+  left: 10px;
+  font-size: 20px;
+  background-color: white;
+  color: black;
+  border-radius: 4px;
+  padding-inline: 10px;
+  white-space: nowrap;
+  width: fit-content;
+  transition: all .3s ease-in-out;
+}
+
+.form-field *:focus+label,
+.form-field *:not(:placeholder-shown)+label {
+  border: 1px solid black;
+  top: -1rem;
+  left: 0;
+  transform: scale(0.75);
+}
+
+form .action-bar{
+  display: flex;
+  gap: 5px;
+  align-self: flex-end;
+}
+
+form .action-bar > *{
+  border: none;
+  text-align: center;
+  color: white;
+  font-weight: 500;
+  flex: 1;
+  padding: 5px;
+}
+
+form .action-bar > *:hover{
+  color: white;
+}
+
+input[data-val-required] + label::before,
+input[data-val-required] ~ label::before{
+  content: "*";
+  position: absolute;
+  top: 0;
+  right: 1px;
+  color: red;
+  transition: all 0s ease-in-out;
+  transition-duration: 0.3s;
+}
+
+/*End forms*/
 /*Custom scrollbar*/
 
 *::-webkit-scrollbar {
@@ -2226,6 +2310,7 @@ table tbody td:not(:last-child) {
   box-shadow: 0 0 15px black;
   background-color: var(--secondary-bg-color);
 }
+
 #edit .img-wrapper {
   width: 650px;
   border-radius: 16px;
@@ -2233,72 +2318,8 @@ table tbody td:not(:last-child) {
   border: 1px solid gray;
 }
 
-#edit .form-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-}
-
-#edit .form-list .form-field {
-  position: relative;
-}
-
-#edit .form-list .form-field *:not(label) {
-  width: 100%;
-  font-size: 20px;
-  padding-inline: 5px;
-}
-
-#edit .form-field {
-  margin-bottom: 1rem;
-}
-
-#edit .form-list .form-field textarea {
-  padding-top: 5px;
-  border: 2px solid black;
-  border-radius: 4px;
-  min-height: 195px;
-}
-
-#edit .form-list .form-field label {
-  position: absolute;
-  top: 0.5rem;
-  left: 10px;
-  font-size: 20px;
-  background-color: white;
-  border-radius: 4px;
-  padding-inline: 5px;
-  white-space: nowrap;
-  width: fit-content;
-  transition: all .3s ease-in-out;
-}
-
-#edit .form-field *:focus+label,
-#edit .form-field *:not(:placeholder-shown)+label {
-  border: 1px solid black;
-  top: -1rem;
-  left: 0;
-  transform: scale(0.75);
-}
-
 #edit form{
   width: 100%;
-}
-
-form .action-bar{
-  display: flex;
-  gap: 5px;
-  align-self: flex-end;
-}
-
-form .action-bar > *{
-  border: none;
-  text-align: center;
-  color: white;
-  font-weight: 500;
-  flex: 1;
-  padding: 5px;
 }
 
 /*End Edit*/
@@ -2429,7 +2450,7 @@ form .action-bar > *{
     flex-direction: column;
   }
 
-  main>*:not(.bg-image-wrapper),
+  main>*:not(.bg-image-wrapper, .small-window-field),
   #administration>*:not(.tool-bar) {
     padding-inline: 0;
   }

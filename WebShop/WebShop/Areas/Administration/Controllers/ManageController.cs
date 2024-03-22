@@ -73,12 +73,13 @@ namespace WebShop.App.Areas.Administration.Controllers
 
         public IActionResult Promotions()
         {
-            return Ok();
+
+            return View();
         }
 
         public IActionResult Users()
         {
-            return Ok();
+            return View();
         }
 
         [HttpGet]

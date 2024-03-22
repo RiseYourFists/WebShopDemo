@@ -12,12 +12,12 @@
         <div class="text-danger" asp-validation-summary="All"></div>
         <input type="hidden" asp-for="ReturnUrl"/>
         <div class="form-field">
+            <input asp-for="Email" placeholder="">
             <label asp-for="Email"></label>
-            <input asp-for="Email">
         </div>
         <div class="form-field">
+            <input type="password" asp-for="Password" placeholder="">
             <label asp-for="Password"></label>
-            <input type="password" asp-for="Password">
         </div>
         <div class="form-field centered">
             <button class="btn-confirm" type="submit">Log in</button>

@@ -267,22 +267,58 @@
             <div class="bg-image-wrapper">
                 <img src="../../wwwroot/images/Books.jpeg" alt="">
             </div>
-            <section id="edit">
-                <form action="" class="form-list">
-                    <div class="title">
-                        <h1>Edit Genre info</h1>
+            <div class="small-window-field">
+                <div class="title-holder">
+                    <h1 class="title">Register</h1>
+                </div>
+            
+                <form class="form-list" method="post" novalidate="novalidate">
+                    
+                    <div class="form-field">
+                        <input placeholder="" type="text" data-val="true" data-val-length="First name must be between 2 and 30 characters long." data-val-length-max="30" data-val-length-min="2" data-val-required="The first name field is required." id="FirstName" maxlength="30" name="FirstName" value="">
+                        <label for="FirstName">First name</label>
+                        <span class="text-danger field-validation-valid" data-valmsg-for="FirstName" data-valmsg-replace="true"></span>
                     </div>
                     <div class="form-field">
-                        <input type="text" name="name" id="name" placeholder="">
-                        <label for="name">Name</label>
-                        <span class="text-danger"></span>
+                        <input placeholder="" type="text" data-val="true" data-val-length="Last name must be between 2 and 50 characters long." data-val-length-max="50" data-val-length-min="2" data-val-required="The last name field is required." id="LastName" maxlength="50" name="LastName" value="">
+                        <label for="LastName">Last name</label>
+                        <span class="text-danger field-validation-valid" data-valmsg-for="LastName" data-valmsg-replace="true"></span>
                     </div>
-                    <div class="action-bar">
-                        <a href="#" class="cancel far fa-times-circle action-cancel">Cancel</a>
-                        <button class="fas fa-check-circle confirm">Confirm</button>
+                    <div class="form-field">
+                        <input placeholder="" placeholder="" type="text" data-val="true" data-val-length="Username must be between 5 and 256 characters long." data-val-length-max="256" data-val-length-min="5" data-val-regex="Username can only have letter and digits." data-val-regex-pattern="^[\w\d]+$" data-val-required="The Username field is required." id="Username" maxlength="256" name="Username" value="">
+                        <label for="Username">Username</label>
+                        <span class="text-danger field-validation-valid" data-valmsg-for="Username" data-valmsg-replace="true"></span>
                     </div>
-                </form>
-            </section>
+                    <div class="form-field">
+                        <input placeholder="" type="email" data-val="true" data-val-email="The Email field is not a valid e-mail address." data-val-required="The email field is required." id="Email" name="Email" value="">
+                        <label for="Email">Email</label>
+                        <span class="text-danger field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="form-field">
+                        <input placeholder="" type="password" data-val="true" data-val-required="The password field is required." id="Password" name="Password">
+                        <label placeholder="" for="Password">Password</label>
+                        <span class="text-danger field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="form-field">
+                        <input placeholder="" type="password" data-val="true" data-val-equalto="'ConfirmPassword' and 'Password' do not match." data-val-equalto-other="*.Password" data-val-required="The confirm password field is required." id="ConfirmPassword" name="ConfirmPassword">
+                        <label for="ConfirmPassword">Confirm password</label>
+                        <span class="text-danger field-validation-valid" data-valmsg-for="ConfirmPassword" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="form-field">
+                        <input placeholder="" type="tel" data-val="true" data-val-phone="The PhoneNumber field is not a valid phone number." data-val-required="The phone number field is required." id="PhoneNumber" name="PhoneNumber" value="">
+                        <label for="PhoneNumber">Phone number</label>
+                        <span class="text-danger field-validation-valid" data-valmsg-for="PhoneNumber" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="form-field">
+                        <input placeholder="" type="tel" data-val="true" data-val-phone="The PhoneNumber field is not a valid phone number." id="PhoneNumber" name="PhoneNumber" value="">
+                        <label for="PhoneNumber">Phone number</label>
+                        <span class="text-danger field-validation-valid" data-valmsg-for="PhoneNumber" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="form-field centered">
+                        <button class="btn-confirm" type="submit">Create</button>
+                    </div>
+                <input name="__RequestVerificationToken" type="hidden" value="CfDJ8MuA-EsxF5dJlFo_Zc8N2Cn7x45lGdPCUHfNPjnqcAwvOMfuzI7aiGrHD0v32Pt6t0mxWl6QZQ_69ICT65USwc1NfsU3UYWCZF6qrrRnkHeYpQKIHdlkE6ysHXnEgKKjKpvzSF69vg9hD96ZBTSfdA4"></form>
+            </div>
         </main>
 
         <footer class="main-footer">

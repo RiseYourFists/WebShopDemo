@@ -1,10 +1,10 @@
-﻿using AutoMapper;
-using WebShop.Core.Models.BookShop;
-using WebShop.Services.Models.Administration;
-using WebShop.Services.Models.BookShop;
-
-namespace WebShop.App.BuilderConfigurationExtensions
+﻿namespace WebShop.App.BuilderConfigurationExtensions
 {
+    using AutoMapper;
+    using WebShop.Core.Models.BookShop;
+    using WebShop.Services.Models.BookShop;
+    using WebShop.Services.Models.Administration;
+
     public class MappingProfile : Profile
     {
         public MappingProfile()
@@ -28,7 +28,7 @@ namespace WebShop.App.BuilderConfigurationExtensions
                     dest => dest.Ignore());
 
             this.CreateMap<Book, BookDetail>()
-                .ForMember(p => p.Genre, 
+                .ForMember(p => p.Genre,
                     dest => dest.MapFrom(
                         opt => opt.Genre.Name))
                 .ForMember(p => p.Author,
