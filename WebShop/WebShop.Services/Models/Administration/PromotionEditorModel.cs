@@ -30,6 +30,9 @@
 
         public int? GenreId { get; set; }
 
+        [Required] 
+        public string PromotionType { get; set; } = string.Empty;
+
         public EditAction Action { get; set; }
 
         public List<SelectionItemModel> Genres { get; set; } = new();

@@ -86,6 +86,8 @@ namespace WebShop.App.Areas.Administration.Controllers
         {
             var model = new PromotionEditorModel()
             {
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now,
                 Action = EditAction.Add,
                 Authors = await _service.GetPromotionAuthors(),
                 Genres = await _service.GetPromotionGenres()
@@ -108,6 +110,72 @@ namespace WebShop.App.Areas.Administration.Controllers
             model.Genres = await _service.GetPromotionGenres();
 
             return View("PromotionEditor" ,model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddPromotion(PromotionEditorModel model)
+        {
+            ModelState.Remove(nameof(model.Action));
+            var isValid = ModelState.IsValid;
+            if (isValid)
+            {
+                try
+                {
+                    isValid = await _service.AddPromotion(model);
+                    if (!isValid)
+                    {
+                        ModelState.AddModelError("Error", "Something went wrong.");
+                    }
+                }
+                catch (Exception e)
+                {
+                    isValid = false;
+                    ModelState.AddModelError("Error", e.Message);
+                }
+            }
+
+            if (!isValid)
+            {
+                model.Authors = await _service.GetPromotionAuthors();
+                model.Genres = await _service.GetPromotionGenres();
+                model.Action = EditAction.Add;
+
+                return View("PromotionEditor", model);
+            }
+            return RedirectToAction("Promotions");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditPromotion(PromotionEditorModel model)
+        {
+            ModelState.Remove(nameof(model.Action));
+            var isValid = ModelState.IsValid;
+            if (isValid)
+            {
+                try
+                {
+                    isValid = await _service.EditPromotion(model);
+                    if (!isValid)
+                    {
+                        ModelState.AddModelError("Error", "Something went wrong.");
+                    }
+                }
+                catch (Exception e)
+                {
+                    isValid = false;
+                    ModelState.AddModelError("Error", e.Message);
+                }
+            }
+
+            if (!isValid)
+            {
+                model.Authors = await _service.GetPromotionAuthors();
+                model.Genres = await _service.GetPromotionGenres();
+                model.Action = EditAction.Edit;
+
+                return View("PromotionEditor", model);
+            }
+            return RedirectToAction("Promotions");
         }
 
         public IActionResult Users()

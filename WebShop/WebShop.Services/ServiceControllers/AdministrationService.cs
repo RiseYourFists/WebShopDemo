@@ -1,4 +1,6 @@
-﻿namespace WebShop.Services.ServiceControllers
+﻿using System.Globalization;
+
+namespace WebShop.Services.ServiceControllers
 {
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
@@ -56,7 +58,7 @@
         {
             var query = _adminRepository
                 .AllReadonly<Book>();
-                
+
 
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {
@@ -68,7 +70,7 @@
             {
                 query = query.Where(b => b.AuthorId == authorId.Value);
             }
-            else if(genreId.HasValue && genreId.Value != 0)
+            else if (genreId.HasValue && genreId.Value != 0)
             {
                 query = query.Where(b => b.GenreId == genreId.Value);
             }
@@ -276,16 +278,20 @@
             {
                 result = result.Where(p => EF.Functions.Like(p.Name, $"%{searchTerm}%"));
             }
-               
+
             return await result.ToListAsync();
         }
 
         public async Task<PromotionEditorModel?> GetPromotion(int id)
         {
-            return await _adminRepository
+            var result = await _adminRepository
                 .AllReadonly<Promotion>()
+                .Include(p => p.AuthorPromotions)
+                .Include(p => p.GenrePromotions)
                 .ProjectTo<PromotionEditorModel>(_mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync(p => p.Id == id);
+
+            return result;
         }
 
         public async Task<List<SelectionItemModel>> GetPromotionAuthors()
@@ -315,6 +321,240 @@
 
             return genres;
         }
+
+        public async Task<bool> RemovePromotions(int promotionId)
+        {
+            var genrePromotions = await _adminRepository
+                .All<GenrePromotion>()
+                .Where(gp => gp.PromotionId == promotionId)
+                .ToListAsync();
+
+            var authorPromotions = await _adminRepository
+                .All<AuthorPromotion>()
+                .Where(gp => gp.PromotionId == promotionId)
+                .ToListAsync();
+
+            bool result = false;
+            if (genrePromotions.Count > 0 || authorPromotions.Count > 0)
+            {
+                _adminRepository.DeleteRange(genrePromotions);
+                _adminRepository.DeleteRange(authorPromotions);
+                result = await _adminRepository.SaveChangesAsync() > 0;
+            }
+
+            return result;
+        }
+
+        public async Task<bool> EditPromotion(PromotionEditorModel model)
+        {
+            var promotiontokens = model.PromotionType.Split("-");
+            var promoType = promotiontokens.First();
+            var isPromoIdValid = int.TryParse(promotiontokens.Last(), NumberStyles.None, CultureInfo.InvariantCulture, out var promoId);
+
+            if (isPromoIdValid == false)
+            {
+                throw new ArgumentException("Invalid promotion id.");
+            }
+
+            var promotion = await _adminRepository
+                .All<Promotion>()
+                .FirstOrDefaultAsync(p => p.Id == model.Id);
+
+            if (promotion == null)
+            {
+                throw new InvalidOperationException("Invalid promotion id was provided.");
+            }
+
+            Author? author = null;
+            Genre? genre = null;
+
+            if (promoType == "author")
+            {
+                author = await _adminRepository
+                    .AllReadonly<Author>()
+                    .FirstOrDefaultAsync(a => a.Id == promoId);
+            }
+            else if (promoType == "genre")
+            {
+                genre = await _adminRepository
+                    .AllReadonly<Genre>()
+                    .FirstOrDefaultAsync(g => g.Id == promoId);
+            }
+            else
+            {
+                throw new ArgumentException("Invalid promotion id.");
+            }
+
+            if (genre == null && author == null)
+            {
+                throw new InvalidOperationException("Genre/Author doesn't exist in this context.");
+            }
+
+            await RemovePromotions(promotion.Id);
+
+            promotion.Name = model.Name;
+            promotion.DiscountPercent = model.DiscountPercent;
+            promotion.StartDate = model.StartDate;
+            promotion.EndDate = model.EndDate;
+
+            if (genre != null)
+            {
+                promotion.GenrePromotions.Add(new GenrePromotion()
+                {
+                    Genre = genre
+                });
+            }
+            else
+            {
+                promotion.AuthorPromotions.Add(new AuthorPromotion()
+                {
+                    Author = author
+                });
+            }
+
+            if (await IsExistingPromotionInvalid(promotion) == true)
+            {
+                throw new ArgumentException("There are other promotions during the specified time");
+            }
+
+            var result = await _adminRepository.SaveChangesAsync() > 0;
+            return result;
+        }
+
+        public async Task<bool> AddPromotion(PromotionEditorModel model)
+        {
+            var promotiontokens = model.PromotionType.Split("-");
+            var promoType = promotiontokens.First();
+            var isPromoIdValid = int.TryParse(promotiontokens.Last(), NumberStyles.None, CultureInfo.InvariantCulture, out var promoId);
+
+            if (isPromoIdValid == false)
+            {
+                throw new ArgumentException("Invalid promotion id.");
+            }
+
+            Author? author = null;
+            Genre? genre = null;
+
+            if (promoType == "author")
+            {
+                author = await _adminRepository
+                    .AllReadonly<Author>()
+                    .FirstOrDefaultAsync(a => a.Id == promoId);
+            }
+            else if (promoType == "genre")
+            {
+                genre = await _adminRepository
+                    .AllReadonly<Genre>()
+                    .FirstOrDefaultAsync(g => g.Id == promoId);
+            }
+            else
+            {
+                throw new ArgumentException("Invalid promotion id.");
+            }
+
+            if (genre == null && author == null)
+            {
+                throw new InvalidOperationException("Genre/Author doesn't exist in this context.");
+            }
+
+            var promotion = new Promotion()
+            {
+                Name = model.Name,
+                DiscountPercent = model.DiscountPercent,
+                StartDate = model.StartDate,
+                EndDate = model.EndDate,
+            };
+
+            if (genre != null)
+            {
+                promotion.GenrePromotions.Add(new GenrePromotion()
+                {
+                    Genre = genre
+                });
+            }
+            else
+            {
+                promotion.AuthorPromotions.Add(new AuthorPromotion()
+                {
+                    Author = author
+                });
+            }
+
+            if (await IsPreExistingPromotionInvalid(promotion) == true)
+            {
+                throw new ArgumentException("There are other promotions during the specified time");
+            }
+
+            await _adminRepository.AddAsync(promotion);
+            var result = await _adminRepository.SaveChangesAsync() > 0;
+            return result;
+        }
+
+        private async Task<bool> IsPreExistingPromotionInvalid(Promotion promotion)
+        {
+            bool result = true;
+
+            if (promotion.StartDate > promotion.EndDate)
+            {
+                return result;
+            }
+
+            var authorId = promotion.AuthorPromotions
+                .Select(ap => ap.Author.Id)
+                .FirstOrDefault();
+
+            var genreId = promotion.GenrePromotions
+                .Select(gp => gp.Genre.Id)
+                .FirstOrDefault();
+
+            var start = promotion.StartDate;
+            var end = promotion.EndDate;
+
+            result = await _adminRepository
+                .AllReadonly<Book>()
+                .Where(b => b.AuthorId == authorId || b.GenreId == genreId)
+                .AnyAsync(b =>
+                    b.Genre.GenrePromotions.Any(gp =>
+                        (gp.Promotion.StartDate <= start && start <= gp.Promotion.EndDate) ||
+                        (gp.Promotion.StartDate <= end && end <= gp.Promotion.EndDate))||
+                    b.Author.AuthorPromotions.Any(ap =>
+                        (ap.Promotion.StartDate <= start && start <= ap.Promotion.EndDate) ||
+                        (ap.Promotion.StartDate <= end && end <= ap.Promotion.EndDate)));
+                
+
+            return result;
+        }
+
+        private async Task<bool> IsExistingPromotionInvalid(Promotion promotion)
+        {
+            if (promotion.StartDate > promotion.EndDate)
+            {
+                return true;
+            }
+
+            var authorId = promotion.AuthorPromotions.Select(ap => ap.Author.Id).FirstOrDefault();
+            var genreId = promotion.GenrePromotions.Select(gp => gp.Genre.Id).FirstOrDefault();
+
+            var promotionId = promotion.Id;
+            var start = promotion.StartDate;
+            var end = promotion.EndDate;
+
+            bool result = await _adminRepository
+                .AllReadonly<Book>()
+                .Where(b => b.AuthorId == authorId || b.GenreId == genreId)
+                .AnyAsync(b =>
+                    b.Genre.GenrePromotions.Any(gp =>
+                        gp.PromotionId != promotionId &&
+                        ((gp.Promotion.StartDate <= start && start <= gp.Promotion.EndDate) ||
+                         (gp.Promotion.StartDate <= end && end <= gp.Promotion.EndDate))) ||
+                    b.Author.AuthorPromotions.Any(ap =>
+                        ap.PromotionId != promotionId &&
+                        ((ap.Promotion.StartDate <= start && start <= ap.Promotion.EndDate) ||
+                         (ap.Promotion.StartDate <= end && end <= ap.Promotion.EndDate))));
+
+            return result;
+        }
+
 
         private static async Task<decimal> GetPromotion(IRepository repository, int genreId, int authorId)
         {

@@ -139,6 +139,16 @@ a {
 
 /*Forms*/
 
+span.text-danger,
+div.text-danger{
+  margin-bottom: 10px;
+}
+
+span.text-danger *,
+div.text-danger *{
+  list-style: none;
+}
+
 .form-list {
   display: flex;
   flex-direction: column;
