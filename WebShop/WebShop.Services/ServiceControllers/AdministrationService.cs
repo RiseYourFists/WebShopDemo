@@ -266,12 +266,54 @@
             return result;
         }
 
-        public async Task<List<PromotionListItem>> GetPromotions()
+        public async Task<List<PromotionListItem>> GetPromotions(string? searchTerm)
+        {
+            var result = _adminRepository
+                .AllReadonly<Promotion>()
+                .ProjectTo<PromotionListItem>(_mapper.ConfigurationProvider);
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                result = result.Where(p => EF.Functions.Like(p.Name, $"%{searchTerm}%"));
+            }
+               
+            return await result.ToListAsync();
+        }
+
+        public async Task<PromotionEditorModel?> GetPromotion(int id)
         {
             return await _adminRepository
                 .AllReadonly<Promotion>()
-                .ProjectTo<PromotionListItem>(_mapper.ConfigurationProvider)
+                .ProjectTo<PromotionEditorModel>(_mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync(p => p.Id == id);
+        }
+
+        public async Task<List<SelectionItemModel>> GetPromotionAuthors()
+        {
+            var authors = await _adminRepository
+                .AllReadonly<Author>()
+                .Select(a => new SelectionItemModel()
+                {
+                    PropertyName = a.Name,
+                    PropertyValue = "author-" + a.Id
+                })
                 .ToListAsync();
+
+            return authors;
+        }
+
+        public async Task<List<SelectionItemModel>> GetPromotionGenres()
+        {
+            var genres = await _adminRepository
+                .AllReadonly<Genre>()
+                .Select(a => new SelectionItemModel()
+                {
+                    PropertyName = a.Name,
+                    PropertyValue = "genre-" + a.Id
+                })
+                .ToListAsync();
+
+            return genres;
         }
 
         private static async Task<decimal> GetPromotion(IRepository repository, int genreId, int authorId)

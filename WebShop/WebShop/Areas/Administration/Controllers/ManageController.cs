@@ -76,9 +76,38 @@ namespace WebShop.App.Areas.Administration.Controllers
             var model = new PromotionManageModel()
             {
                 SearchTerm = searchTerm,
-                Promotions = await _service.GetPromotions()
+                Promotions = await _service.GetPromotions(searchTerm)
             };
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddPromotion()
+        {
+            var model = new PromotionEditorModel()
+            {
+                Action = EditAction.Add,
+                Authors = await _service.GetPromotionAuthors(),
+                Genres = await _service.GetPromotionGenres()
+            };
+            return View("PromotionEditor", model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditPromotion(int id)
+        {
+            var model = await _service.GetPromotion(id);
+
+            if (model == null)
+            {
+                return NotFound();
+            }
+
+            model.Action = EditAction.Edit;
+            model.Authors = await _service.GetPromotionAuthors();
+            model.Genres = await _service.GetPromotionGenres();
+
+            return View("PromotionEditor" ,model);
         }
 
         public IActionResult Users()

@@ -1,0 +1,55 @@
+﻿@model PromotionEditorModel;
+@{
+    var title = Model.Action.ToString();
+    var action = title + "Promotion";
+    ViewData["Title"] = $"{title} Promotion";
+
+    <section id="edit">
+        <form action="@action" method="post" class="form-list">
+            <div class="title">
+                <h1>@ViewData["Title"]</h1>
+            </div>
+            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+            <div class="form-field">
+                <input asp-for="Name" tabindex="1" placeholder="" type="text">
+                <label asp-for="Name"></label>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-field">
+                <input asp-for="DiscountPercent" tabindex="2" placeholder="" type="text">
+                <label asp-for="DiscountPercent"></label>
+                <span asp-validation-for="DiscountPercent" class="text-danger"></span>
+            </div>
+            <div class="form-field">
+                <input asp-for="StartDate" tabindex="3" placeholder="" type="date">
+                <label asp-for="StartDate"></label>
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-field">
+                <input asp-for="EndDate" tabindex="4" placeholder="" type="date">
+                <label asp-for="EndDate">End Date</label>
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            @{
+                int? authorId = Model.AuthorId.HasValue? Model.AuthorId.Value : 0;
+                int? genreId = Model.GenreId.HasValue? Model.GenreId.Value : 0;
+                var authorSelection = new CustomSelectModel("PromotionType", "author-" + authorId, 5, false, false);
+                var genreSelection = new CustomSelectModel("PromotionType", "genre-" + genreId, 6, false, false);
+                authorSelection.Items = Model.Authors;
+                genreSelection.Items = Model.Genres;
+
+                if (Model.Action != EditAction.Add)
+                {
+                    <input type="hidden" asp-for="Id"/>
+                }
+            }
+            @await Html.PartialAsync("Components/_CustomSelectPartial", authorSelection)
+            @await Html.PartialAsync("Components/_CustomSelectPartial", genreSelection)
+
+            <div class="action-bar">
+                <a asp-action="Promotions" class="cancel">Cancel</a>
+                <button class="confirm">Submit</button>
+            </div>
+        </form>
+    </section>
+}

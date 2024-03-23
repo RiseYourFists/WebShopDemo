@@ -30,6 +30,15 @@
             public const int NameMinLen = 2;
         }
 
+        public static class PromotionValidation
+        {
+            public const int NameMaxLen = PromotionConstants.NameMaxLen;
+            public const int NameMinLen = 5;
+
+            public const double DiscountMaxRange = 90;
+            public const double DiscountMinRange = 1;
+        }
+
         public static class SharedValidation    
         {
             public const int UrlMaxLen = 2048;

@@ -2292,7 +2292,7 @@ table tbody td:not(:last-child) {
   inset: 0 40px 0;
   pointer-events: none;
   color: black;
-  transform: inset .3s;
+  width: 80%;
 }
 
 td .discount::after{

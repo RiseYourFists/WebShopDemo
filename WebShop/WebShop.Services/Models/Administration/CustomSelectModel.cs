@@ -1,4 +1,6 @@
-﻿namespace WebShop.Services.Models.Administration
+﻿using WebShop.Services.Models.Administration.Enumerations;
+
+namespace WebShop.Services.Models.Administration
 {
     public class CustomSelectModel
     {
@@ -10,7 +12,7 @@
             string editController,
             string editAction,
             string valueName,
-            int checkedByValue,
+            dynamic checkedByValue,
             int tabIndex)
         {
             AdditionalArea = additionalArea;
@@ -22,11 +24,13 @@
             ValueName = valueName;
             CheckedByValue = checkedByValue;
             TabIndex = tabIndex;
+            AdditionalOption = true;
+            EditOption = true;
         }
 
         public CustomSelectModel(
             string valueName,
-            int checkedByValue,
+            dynamic checkedByValue,
             int tabIndex,
             bool editOption = true,
             bool additionalOption = true,
@@ -51,7 +55,7 @@
             EditAction = editAction;
         }
 
-        public List<SelectionItemModel> Items { get; set; } = new();
+        public List<SelectionItemModel> Items { get; set; }
 
         public string AdditionalArea { get; set; } = string.Empty;
 
@@ -67,7 +71,7 @@
 
         public string ValueName { get; set; } = string.Empty;
 
-        public int CheckedByValue { get; set; }
+        public dynamic CheckedByValue { get; set; }
 
         public int TabIndex { get; set; }
 

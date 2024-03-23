@@ -42,7 +42,7 @@
                             <p>@promotion.EndDate.ToString("dd-MMM-yyyy")</p>
                         </td>
                         <td class="action">
-                            <a href="#">
+                            <a href="@Url.Action("EditPromotion", new{ id = promotion.Id})">
                                 <i class="fas fa-edit"></i>
                                 <span class="foldable">Edit</span>
                             </a>
@@ -53,7 +53,7 @@
             </tbody>
         </table>
         <div class="action-bar">
-            <a class="fas fa-plus" href="#">New Promotion</a>
+            <a class="fas fa-plus" asp-action="AddPromotion">New Promotion</a>
         </div>
     </div>
 </section>

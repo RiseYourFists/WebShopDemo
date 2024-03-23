@@ -4,6 +4,6 @@
     {
         public string PropertyName { get; set; } = string.Empty;
 
-        public int PropertyValue { get; set; }
+        public dynamic PropertyValue { get; set; }
     }
 }

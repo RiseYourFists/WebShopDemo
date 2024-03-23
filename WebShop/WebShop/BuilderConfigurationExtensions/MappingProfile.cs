@@ -15,6 +15,7 @@
             this.CreateMap<Genre, GenreEditorModel>();
             this.CreateMap<Author, AuthorEditorModel>();
             this.CreateMap<Promotion, PromotionListItem>();
+            this.CreateMap<Promotion, PromotionEditorModel>();
 
             this.CreateMap<BookInfoModel, Book>()
                 .ForMember(p => p.Id,
