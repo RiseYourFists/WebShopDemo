@@ -2185,6 +2185,53 @@ table tbody td:not(:last-child) {
   border-color: white;
 }
 
+table.users .action{
+  padding: 0;
+}
+
+td.action > .wrapper{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+table.users td.action > .wrapper > *{
+  height: 85px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-inline: 5px;
+}
+
+table.users .fas{
+  color: white;
+}
+
+td.action > .wrapper > * > *{
+  color: white;
+  font-weight: 600;
+}
+
+tr .action-btn{
+  border: none;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+tr .action-btn > *,
+td.action > .wrapper > * > *{
+  padding-inline: 5px;
+}
+
+tr.disabled .action-wrapper{
+  background-color: var(--secondary-bg-color);
+  pointer-events: none;
+}
+
 /*End Administration*/
 
 /*Custom Select*/
@@ -2361,7 +2408,18 @@ td .discount::after{
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
+  table.users td.action > .wrapper > *{
+    justify-content: center;
+  }
+
+  .foldable {
+    display: none;
+    opacity: 0;
+  }
+}
+
+@media (max-width: 975px) {
   #genres * .title {
     font-size: 18px;
   }
@@ -2378,13 +2436,6 @@ td .discount::after{
   #checkout {
     width: 85%;
   }
-}
-
-@media (max-width: 768px) {
-
-  .small-window-field {
-    width: 85%;
-  }
 
   .aside-toggle {
     outline: 1px solid gray;
@@ -2396,11 +2447,6 @@ td .discount::after{
 
   .side-menu {
     width: 4.1em;
-  }
-
-  .foldable {
-    display: none;
-    opacity: 0;
   }
 
   .site-name {
@@ -2419,6 +2465,15 @@ td .discount::after{
   .aside-toggle:checked~.side-menu .site-name {
     transform: translateY(0em);
   }
+}
+
+@media (max-width: 768px) {
+
+  .small-window-field {
+    width: 85%;
+  }
+
+  
 
   .carousel {
     width: 100%;
@@ -2471,7 +2526,7 @@ td .discount::after{
   }
 }
 
-@media (max-width: 550px) {
+@media (max-width: 600px) {
 
   .search-bar {
     width: 75%;

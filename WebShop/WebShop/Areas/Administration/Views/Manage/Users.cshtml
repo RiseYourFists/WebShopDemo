@@ -1,4 +1,5 @@
-﻿@{
+﻿@model UserPage;
+@{
     ViewData["Title"] = "Users";
 }
 
@@ -6,29 +7,105 @@
     <div class="tool-bar">
         @await Html.PartialAsync("Components/_HeaderNavigationPartial", new List<HeaderNavigation>()
         {
-            new("Manage Books"),
-            new("Manage Promotions", "Promotions"),
-            new("Manage Users", "Users")
+        new("Manage Books"),
+        new("Manage Promotions", "Promotions"),
+        new("Manage Users", "Users")
         })
-        @await Html.PartialAsync("Components/_SearchBarPartial", new SearchBar("Users", ""))
-        @*<div class="filter-sections">
-            @await Html.PartialAsync("Components/_DropdownPartial", new DropdownModel()
-            {
-                Heading = "Authors",
-                UnfoldButtonContent = "Authors",
-                UnfoldButtonClasses = "fas fa-angle-down",
-                ElementList = Model.GetAuthors()
-            })
-
-            @await Html.PartialAsync("Components/_DropdownPartial", new DropdownModel()
-            {
-                Heading = "Genres",
-                UnfoldButtonContent = "Genres",
-                UnfoldButtonClasses = "fas fa-angle-down",
-                ElementList = Model.GetGenres()
-            })
-        </div>*@
+        @await Html.PartialAsync("Components/_SearchBarPartial", new SearchBar("Users", Model.SearchTerm))
     </div>
     <div class="item-list">
+        <table class="users">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Account Status</th>
+                    <th>Role</th>
+                    <th><span class="foldable">Action</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var user in Model.Users)
+                    {
+                        var isActionDisabled = user.Id == Model.CurrentUserId
+                        ? "disabled"
+                        : string.Empty;
+
+                        var accountStatus = user.IsActive
+                        ? "Active"
+                        : "Disabled";
+
+                        var userRole = string.IsNullOrWhiteSpace(user.Role)
+                        ? "User"
+                        : user.Role;
+
+                        <tr class="@isActionDisabled">
+                            <td>@user.FirstName</td>
+                            <td>@user.LastName</td>
+                            <td>@user.Email</td>
+                            <td class="status"><span>@accountStatus</span></td>
+                            <td>@userRole</td>
+                            <td class="action">
+
+                                @if (string.IsNullOrWhiteSpace(isActionDisabled))
+                                {
+                                    <div class="wrapper">
+                                        @if (userRole == "User")
+                                        {
+                                            <form action="Promote" method="post" class="action-wrapper confirm">
+                                                <button class="action-btn">
+                                                    <i class="fas fa-user-plus"></i>
+                                                    <span class="foldable">Promote to Employee</span>
+                                                    <input type="hidden" name="UserId" value="@user.Id"/>
+                                                </button>
+                                            </form>
+                                        }
+                                        else if (userRole == "Employee")
+                                        {
+                                            <form action="Promote" method="post" class="action-wrapper confirm">
+                                                <button class="action-btn">
+                                                    <i class="fas fa-user-plus"></i>
+                                                    <span class="foldable">Promote to Admin</span>
+                                                    <input type="hidden" name="UserId" value="@user.Id" />
+                                                </button>
+                                            </form>
+
+                                            <form action="Demote" method="post" class="action-wrapper cancel">
+                                                <button class="action-btn">
+                                                    <i class="fas fa-user-plus"></i>
+                                                    <span class="foldable">Demote to User</span>
+                                                    <input type="hidden" name="UserId" value="@user.Id" />
+                                                </button>
+                                            </form>
+                                        }
+                                        else
+                                        {
+                                            <form action="Demote" method="post" class="action-wrapper cancel">
+                                                <button class="action-btn">
+                                                    <i class="fas fa-user-plus"></i>
+                                                    <span class="foldable">Demote to Employee</span>
+                                                    <input type="hidden" name="UserId" value="@user.Id" />
+                                                </button>
+                                            </form>
+                                        }
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="wrapper">
+                                        <div class="action-wrapper">
+                                            <i class="fas fa-ban"></i>
+                                            <span class="foldable">No action can be performed</span>
+                                        </div>
+                                    </div>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
     </div>
 </section>

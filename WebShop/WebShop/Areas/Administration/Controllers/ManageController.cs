@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.AspNetCore.Identity;
+using WebShop.Core.Models.Identity;
 using WebShop.Services.Models.Administration;
 using WebShop.Services.Models.Administration.Enumerations;
 
@@ -17,10 +19,12 @@ namespace WebShop.App.Areas.Administration.Controllers
     public class ManageController : Controller
     {
         private readonly AdministrationService _service;
+        private readonly UserHelper<ApplicationUser, Guid> _userHelper;
 
-        public ManageController(AdministrationService service)
+        public ManageController(AdministrationService service, UserHelper<ApplicationUser, Guid> userHelper)
         {
             _service = service;
+            _userHelper = userHelper;
         }
 
         public async Task<IActionResult> Books(string searchTerm, string parameters)
@@ -178,9 +182,45 @@ namespace WebShop.App.Areas.Administration.Controllers
             return RedirectToAction("Promotions");
         }
 
-        public IActionResult Users()
+        public async Task<IActionResult> Users(string searchTerm)
         {
-            return View();
+            var model = new UserPage()
+            {
+                SearchTerm = searchTerm,
+                Users = await _service.GetUsers(searchTerm),
+                CurrentUserId = await _userHelper.GetUserId(User)
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Promote(string userId)
+        {
+            try
+            {
+                var currentUserId = await _userHelper.GetUserId(User);
+                await _service.PromoteUser(userId, currentUserId);
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("DetailedError", "Error", new { message = e.Message });
+            }
+            return RedirectToAction("Users");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Demote(string userId)
+        {
+            try
+            {
+                var currentUserId = await _userHelper.GetUserId(User);
+                await _service.DemoteUser(userId, currentUserId);
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("DetailedError", "Error", new { message = e.Message });
+            }
+            return RedirectToAction("Users");
         }
 
         [HttpGet]

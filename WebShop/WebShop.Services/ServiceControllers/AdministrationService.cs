@@ -1,4 +1,7 @@
 ﻿using System.Globalization;
+using System.Text;
+using Microsoft.AspNetCore.Identity;
+using WebShop.Core.Models.Identity;
 
 namespace WebShop.Services.ServiceControllers
 {
@@ -13,13 +16,21 @@ namespace WebShop.Services.ServiceControllers
 
     public class AdministrationService
     {
-        private readonly IAdminRepository _adminRepository;
         private readonly IMapper _mapper;
+        private readonly IAdminRepository _adminRepository;
+        private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public AdministrationService(IAdminRepository adminRepository, IMapper mapper)
+        public AdministrationService(
+            IMapper mapper,
+            IAdminRepository adminRepository,
+            RoleManager<ApplicationRole> roleManager,
+            UserManager<ApplicationUser> userManager)
         {
-            _adminRepository = adminRepository;
             _mapper = mapper;
+            _roleManager = roleManager;
+            _userManager = userManager;
+            _adminRepository = adminRepository;
         }
 
         public async Task<List<GenreListItem>> GetGenres()
@@ -490,6 +501,137 @@ namespace WebShop.Services.ServiceControllers
             return result;
         }
 
+        public async Task<List<UserListItem>> GetUsers(string searchTerm)
+        {
+
+            var result = _adminRepository
+                .AllReadonly<ApplicationUser>()
+                .Include(u => u.UserRoles)
+                .ThenInclude(ur => ur.Role)
+                .Select(u => new UserListItem()
+                {
+                    Id = u.Id,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    Email = u.Email,
+                    IsActive = u.IsActive,
+                    Role = u.UserRoles
+                        .Select(ur => ur.Role.Name)
+                        .FirstOrDefault()
+                });
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                result = result.Where(u =>
+                    EF.Functions.Like(u.Email, $"%{searchTerm}%") ||
+                    EF.Functions.Like(u.FirstName, $"%{searchTerm}%") ||
+                    EF.Functions.Like(u.LastName, $"%{searchTerm}%") ||
+                    u.Role != null && EF.Functions.Like(u.Role, $"%{searchTerm}%"));
+            }
+
+            return await result.ToListAsync();
+        }
+
+        public async Task<bool> PromoteUser(string userId, Guid currentUserId)
+        {
+            var isUserIdValid = Guid.TryParse(userId, out var userGuid);
+            if (!isUserIdValid)
+            {
+                throw new ArgumentException("Invalid User id.");
+            }
+
+            if (userGuid == currentUserId)
+            {
+                throw new InvalidOperationException("Cannot change your own role");
+            }
+
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userGuid);
+            if (user == null)
+            {
+                throw new InvalidOperationException("User not found");
+            }
+
+            var currentUserRoles = await _userManager.GetRolesAsync(user);
+            var role = currentUserRoles.FirstOrDefault();
+
+            var result = role switch
+            {
+                "Employee" => await _userManager.AddToRoleAsync(user, "Admin"),
+                null => await _userManager.AddToRoleAsync(user, "Employee"),
+                _ => IdentityResult.Failed(new[]
+                {
+                    new IdentityError(){Description = "Cannot promote higher than Admin!"}
+                })
+            };
+
+            if (!result.Succeeded)
+            {
+                var sb = new StringBuilder();
+                foreach (var identityError in result.Errors)
+                {
+                    sb.AppendLine(identityError.Description);
+                }
+
+                throw new InvalidOperationException(sb.ToString());
+            }
+
+            if (role != null)
+            {
+                await _userManager.RemoveFromRoleAsync(user, role);
+            }
+            return result.Succeeded;
+        }
+
+        public async Task<bool> DemoteUser(string userId, Guid currentUserId)
+        {
+            var isUserIdValid = Guid.TryParse(userId, out var userGuid);
+            if (!isUserIdValid)
+            {
+                throw new ArgumentException("Invalid User id.");
+            }
+
+            if (userGuid == currentUserId)
+            {
+                throw new InvalidOperationException("Cannot change your own role");
+            }
+
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userGuid);
+            if (user == null)
+            {
+                throw new InvalidOperationException("User not found");
+            }
+
+            var currentUserRoles = await _userManager.GetRolesAsync(user);
+            var role = currentUserRoles.FirstOrDefault();
+
+            var result = role switch
+            {
+                "Admin" => await _userManager.AddToRoleAsync(user, "Employee"),
+                "Employee" => await _userManager.RemoveFromRoleAsync(user, "Employee"),
+                _ => IdentityResult.Failed(new[]
+                {
+                    new IdentityError(){Description = "Cannot demote lower than user!"}
+                })
+            };
+
+            if (!result.Succeeded)
+            {
+                var sb = new StringBuilder();
+                foreach (var identityError in result.Errors)
+                {
+                    sb.AppendLine(identityError.Description);
+                }
+
+                throw new InvalidOperationException(sb.ToString());
+            }
+
+            if (role != "Employee")
+            {
+                await _userManager.RemoveFromRoleAsync(user, role);
+            }
+            return result.Succeeded;
+        }
+
         private async Task<bool> IsPreExistingPromotionInvalid(Promotion promotion)
         {
             bool result = true;
@@ -516,11 +658,11 @@ namespace WebShop.Services.ServiceControllers
                 .AnyAsync(b =>
                     b.Genre.GenrePromotions.Any(gp =>
                         (gp.Promotion.StartDate <= start && start <= gp.Promotion.EndDate) ||
-                        (gp.Promotion.StartDate <= end && end <= gp.Promotion.EndDate))||
+                        (gp.Promotion.StartDate <= end && end <= gp.Promotion.EndDate)) ||
                     b.Author.AuthorPromotions.Any(ap =>
                         (ap.Promotion.StartDate <= start && start <= ap.Promotion.EndDate) ||
                         (ap.Promotion.StartDate <= end && end <= ap.Promotion.EndDate)));
-                
+
 
             return result;
         }

@@ -267,106 +267,64 @@
             <div class="bg-image-wrapper">
                 <img src="../../wwwroot/images/Books.jpeg" alt="">
             </div>
-            <section id="edit">
-                <form action="" method="post" class="form-list">
-                    <div class="title">
-                        <h1>Add Promotion</h1>
+            <section id="administration">
+                <div class="tool-bar">
+
+                    <header id="adm-header">
+                        <nav>
+                            <ul>
+                                <li><a title="Manage Books" class="" href="/Administration/Manage/Books">Books</a></li>
+                                <li><a title="Manage Promotions" class="selected"
+                                        href="/Administration/Manage/Promotions">Promotions</a></li>
+                                <li><a title="Manage Users" class="" href="/Administration/Manage/Users">Users</a></li>
+                            </ul>
+                        </nav>
+                    </header>
+
+                    <div class="search-bar">
+                        <form method="get" action="/Administration/Manage/Promotions">
+                            <input type="search" name="searchTerm" id="search" placeholder="search" value="">
+                            <label for="search">Search</label>
+                            <button type="submit" class="fas fa-search"></button>
+                        </form>
                     </div>
-                    <div class="form-field">
-                        <input placeholder="" type="text">
-                        <label for="">Name</label>
-                        <span></span>
-                    </div>
-                    <div class="form-field">
-                        <input placeholder="" type="text">
-                        <label for="">Discount</label>
-                        <span></span>
-                    </div>
-                    <div class="form-field">
-                        <input placeholder="" type="date">
-                        <label for="">Start Date</label>
-                        <span></span>
-                    </div>
-                    <div class="form-field">
-                        <input placeholder="" type="date">
-                        <label for="">End Date</label>
-                        <span></span>
-                    </div>
-                    <div class="select-wrapper">
-                        <button type="button" tabindex="6" class="fas fa-angle-down unfold-btn"></button>
-                        <ul class="list-items">
-                            <li>
-                                <input type="radio" checked="" name="GenreId" id="Fiction" value="1">
-                                <label for="Fiction">Fiction</label>
-                            </li>
-                            <li>
-                                <input type="radio" name="GenreId" id="Mystery" value="2">
-                                <label for="Mystery">Mystery</label>
-                            </li>
-                            <li>
-                                <input type="radio" name="GenreId" id="Romance" value="3">
-                                <label for="Romance">Romance</label>
-                            </li>
-                            <li>
-                                <input type="radio" name="GenreId" id="Science Fiction" value="4">
-                                <label for="Science Fiction">Science Fiction</label>
-                            </li>
-                            <li>
-                                <input type="radio" name="GenreId" id="History" value="5">
-                                <label for="History">History</label>
-                            </li>
-                            <li>
-                                <input type="radio" name="GenreId" id="Biography" value="6">
-                                <label for="Biography">Biography</label>
-                            </li>
-                            <li class="additional">
-                                <a href="/Administration/Manage/AddGenre" class="fas fa-plus">New</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="select-wrapper">
-                        <button type="button" tabindex="6" class="fas fa-angle-down unfold-btn"></button>
-                        <ul class="list-items">
-                            <li>
-                                <a href="/Administration/Manage/EditGenre/1" class="fas fa-edit"></a>
-                                <input type="radio" checked="" name="AuthorId" id="1" value="1">
-                                <label for="1">Fiction</label>
-                            </li>
-                            <li>
-                                <a href="/Administration/Manage/EditGenre/2" class="fas fa-edit"></a>
-                                <input type="radio" name="AuthorId" id="2" value="2">
-                                <label for="2">Mystery</label>
-                            </li>
-                            <li>
-                                <a href="/Administration/Manage/EditGenre/3" class="fas fa-edit"></a>
-                                <input type="radio" name="AuthorId" id="3" value="3">
-                                <label for="3">Romance</label>
-                            </li>
-                            <li>
-                                <a href="/Administration/Manage/EditGenre/4" class="fas fa-edit"></a>
-                                <input type="radio" name="AuthorId" id="4" value="4">
-                                <label for="4">Science Fiction</label>
-                            </li>
-                            <li>
-                                <a href="/Administration/Manage/EditGenre/5" class="fas fa-edit"></a>
-                                <input type="radio" name="AuthorId" id="5" value="5">
-                                <label for="5">History</label>
-                            </li>
-                            <li>
-                                <a href="/Administration/Manage/EditGenre/6" class="fas fa-edit"></a>
-                                <input type="radio" name="AuthorId" id="6" value="6">
-                                <label for="6">Biography</label>
-                            </li>
-                            <li class="additional">
-                                <a href="/Administration/Manage/AddGenre" class="fas fa-plus">New</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="action-bar">
-                        <a href="" class="cancel">Cancel</a>
-                        <button class="confirm">Submit</button>
-                    </div>
-                </form>
+                </div>
+                <div class="item-list">
+                    <table class="users">
+                        <thead>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Account Status</th>
+                                <th>Role</th>
+                                <th><span class="foldable">Action</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="">
+                                <td>Pesho</td>
+                                <td>Petrov</td>
+                                <td>petrov_pesh@mail.com</td>
+                                <td class="status"><span>Active</span></td>
+                                <td>Admin</td>
+                                <td class="action">
+                                    <div class="wrapper">
+                                        <form action="" class="action-wrapper confirm">
+                                            <i class="fas fa-user-plus"></i>
+                                            <span class="foldable">Promote to Admin</span>
+                                            
+                                        </form>
+                                        <form action="" class="action-wrapper cancel">
+                                            <i class="fas fa-user-minus"></i>
+                                            <span class="foldable">Demote to user</span>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </section>
         </main>
 
