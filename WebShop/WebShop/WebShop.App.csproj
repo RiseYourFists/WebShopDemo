@@ -34,4 +34,8 @@
     <ProjectReference Include="..\WebShop.Services\WebShop.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Employee\Models\" />
+  </ItemGroup>
+
 </Project>
