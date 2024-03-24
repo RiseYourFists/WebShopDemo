@@ -382,7 +382,6 @@ input[data-val-required] ~ label::after{
 .site-name {
   position: absolute;
   top: 1em;
-  ;
   left: 4.4em;
   width: fit-content;
 }
@@ -2417,9 +2416,7 @@ td .discount::after{
     display: none;
     opacity: 0;
   }
-}
 
-@media (max-width: 975px) {
   #genres * .title {
     font-size: 18px;
   }
@@ -2473,8 +2470,6 @@ td .discount::after{
     width: 85%;
   }
 
-  
-
   .carousel {
     width: 100%;
   }
@@ -2524,9 +2519,6 @@ td .discount::after{
   #administration>*:not(.tool-bar) {
     padding-inline: 0;
   }
-}
-
-@media (max-width: 600px) {
 
   .search-bar {
     width: 75%;
@@ -2538,7 +2530,6 @@ td .discount::after{
 
   .side-menu {
     height: 73px;
-    border: none;
     padding-top: 72px;
     border-bottom: 1px solid gray;
     box-shadow: 0px 5px 10px var(--main-bg-color);
@@ -2607,7 +2598,7 @@ td .discount::after{
   }
 
   table * {
-    font-size: small;
+    font-size: 11px;
   }
 
   table tbody td p {
