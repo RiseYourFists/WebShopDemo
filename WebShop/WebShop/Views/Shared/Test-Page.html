@@ -267,63 +267,372 @@
             <div class="bg-image-wrapper">
                 <img src="../../wwwroot/images/Books.jpeg" alt="">
             </div>
-            <section id="administration">
-                <div class="tool-bar">
-
-                    <header id="adm-header">
-                        <nav>
-                            <ul>
-                                <li><a title="Manage Books" class="" href="/Administration/Manage/Books">Books</a></li>
-                                <li><a title="Manage Promotions" class="selected"
-                                        href="/Administration/Manage/Promotions">Promotions</a></li>
-                                <li><a title="Manage Users" class="" href="/Administration/Manage/Users">Users</a></li>
-                            </ul>
-                        </nav>
-                    </header>
-
-                    <div class="search-bar">
-                        <form method="get" action="/Administration/Manage/Promotions">
-                            <input type="search" name="searchTerm" id="search" placeholder="search" value="">
-                            <label for="search">Search</label>
-                            <button type="submit" class="fas fa-search"></button>
-                        </form>
+            <section id="my-orders">
+                <form class="filter-bar">
+                    <div class="display-status">
+                        <a class="" href="/MyOrders?Status=Pending&amp;OrderedBy=OrderDateDesc">Pending</a>
+                        <a class="" href="/MyOrders?Status=Shipped&amp;OrderedBy=OrderDateDesc">Shipped</a>
+                        <a class="" href="/MyOrders?Status=Delivered&amp;OrderedBy=OrderDateDesc">Delivered</a>
+                        <a class="selected" href="/MyOrders?Status=All&amp;OrderedBy=OrderDateDesc">All</a>
                     </div>
-                </div>
-                <div class="item-list">
-                    <table class="users">
-                        <thead>
-                            <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
-                                <th>Account Status</th>
-                                <th>Role</th>
-                                <th><span class="foldable">Action</span></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="">
-                                <td>Pesho</td>
-                                <td>Petrov</td>
-                                <td>petrov_pesh@mail.com</td>
-                                <td class="status"><span>Active</span></td>
-                                <td>Admin</td>
-                                <td class="action">
-                                    <div class="wrapper">
-                                        <form action="" class="action-wrapper confirm">
-                                            <i class="fas fa-user-plus"></i>
-                                            <span class="foldable">Promote to Admin</span>
-                                            
-                                        </form>
-                                        <form action="" class="action-wrapper cancel">
-                                            <i class="fas fa-user-minus"></i>
-                                            <span class="foldable">Demote to user</span>
-                                        </form>
+                    <div class="date-filter">
+                        <label for="From">From</label>
+                        <input type="date" class="input-validation-error" id="From" name="From" value="">
+                        <label for="To">To</label>
+                        <input type="date" class="input-validation-error" id="To" name="To" value="">
+                    </div>
+                    <div class="sort">
+                        <select class="input-validation-error" data-val="true"
+                            data-val-required="The OrderClause field is required." id="OrderClause" name="OrderClause">
+                            <option value="OrderDateAsc">Order date ascending</option>
+                            <option value="OrderDateDesc" selected="selected">Order date descending</option>
+                            <option value="TotalPriceAsc">Total price ascending</option>
+                            <option value="TotalPriceDesc">Total price descending</option>
+                        </select>
+                        <input type="hidden" name="status" value="All">
+                        <button type="submit" class="fas fa-check"></button>
+                    </div>
+                    <section class="page-bar">
+                        <ul>
+                            <li><a disabled="true" aria-disabled="True" href="#" class="fas fa-angle-double-left"></a>
+                            </li>
+                            <li><a disabled="true" aria-disabled="True" href="#" class="fas fa-angle-left"></a></li>
+
+
+                            <li><a disabled="true" aria-disabled="True" class="selected" href="#">1</a></li>
+
+                            <li><a
+                                    href="/Home/All?GenreId=0&amp;ItemsOnPage=6&amp;SortClause=NameAsc&amp;CurrentPage=2">2</a>
+                            </li>
+                            <li><a
+                                    href="/Home/All?GenreId=0&amp;ItemsOnPage=6&amp;SortClause=NameAsc&amp;CurrentPage=3">3</a>
+                            </li>
+
+                            <li><a href="/Home/All?GenreId=0&amp;ItemsOnPage=6&amp;SortClause=NameAsc&amp;CurrentPage=2"
+                                    class="fas fa-angle-right"></a></li>
+                            <li><a href="/Home/All?GenreId=0&amp;ItemsOnPage=6&amp;SortClause=NameAsc&amp;CurrentPage=7"
+                                    class="fas fa-angle-double-right"></a></li>
+                        </ul>
+                    </section>
+                </form>
+                <div class="order-list">
+
+                    <article class="order">
+                        <h2>София daru12378@gmail.com</h2>
+                        <span class="label status ">Pending</span>
+                        <p>
+                            <span class="label">Ordered on:</span>
+                            <span>Friday, March 22, 2024 7:38 PM</span>
+                        </p>
+                        <div class="info">
+                            <input type="checkbox" class="toggle" name="" id="ec513b1c-2571-4f33-55b5-08dc4a96ebc4">
+                            <label for="ec513b1c-2571-4f33-55b5-08dc4a96ebc4"
+                                class="toggle-btn fas fa-angle-right"></label>
+                            <div class="mini">
+                                <p>
+                                    Harry Potter: 1x 10.50$
+                                </p>
+                            </div>
+                            <div class="full">
+
+                                <a class="item-card" href="/Home/Details?ItemId=10&amp;ReturnRoute=/MyOrders/">
+                                    <div class="img-wrapper">
+                                        <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1598823299l/42844155._SY475_.jpg"
+                                            alt="cover-image">
                                     </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                    <div class="content-wrapper">
+                                        <p class="title" title="Harry Potter">Harry Potter</p>
+                                        <div class="pricing">
+                                            <span class="quantity">1 x</span>
+                                            <span>10.50</span>
+                                        </div>
+                                    </div>
+                                </a>
+
+                            </div>
+                        </div>
+                        <form action="" class="action-bar">
+                            <button class="generic-action">Mark as Shipped</button>
+                        </form>
+                        <p class="price-tag">
+                            <span>Total price:</span>
+                            <span class="price-value">10.50$</span>
+                        </p>
+                    </article>
+                    <article class="order">
+                        <h2>София Sofia, Lylin-7, 701</h2>
+                        <span class="label status ">Pending</span>
+                        <p>
+                            <span class="label">Ordered on:</span>
+                            <span>Tuesday, March 12, 2024 2:34 PM</span>
+                        </p>
+                        <div class="info">
+                            <input type="checkbox" class="toggle" name="" id="9089a7de-534f-4cca-b589-08dc4290d227">
+                            <label for="9089a7de-534f-4cca-b589-08dc4290d227"
+                                class="toggle-btn fas fa-angle-right"></label>
+                            <div class="mini">
+                                <p>
+                                    The History of Ancient Rome: 1x 22.99$, War and Peace: 1x 26.99$, The Girl with the
+                                    Dragon Tattoo: 3x 23.75$, The Great Expectations: 1x 11.20$, The Adventures of
+                                    Huckleberry Finn: 1x 9.68$, The Road: 1x 23.50$
+                                </p>
+                            </div>
+                            <div class="full">
+
+                                <a class="item-card" href="/Home/Details?ItemId=5&amp;ReturnRoute=/MyOrders/">
+                                    <div class="img-wrapper">
+                                        <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1478144278i/2203._SX50_.jpg"
+                                            alt="cover-image">
+                                    </div>
+                                    <div class="content-wrapper">
+                                        <p class="title" title="The History of Ancient Rome">The History of Ancient Rome
+                                        </p>
+                                        <div class="pricing">
+                                            <span class="quantity">1 x</span>
+                                            <span>22.99</span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="item-card" href="/Home/Details?ItemId=9&amp;ReturnRoute=/MyOrders/">
+                                    <div class="img-wrapper">
+                                        <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1657555929i/27323.jpg"
+                                            alt="cover-image">
+                                    </div>
+                                    <div class="content-wrapper">
+                                        <p class="title" title="War and Peace">War and Peace</p>
+                                        <div class="pricing">
+                                            <span class="quantity">1 x</span>
+                                            <span>26.99</span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="item-card" href="/Home/Details?ItemId=12&amp;ReturnRoute=/MyOrders/">
+                                    <div class="img-wrapper">
+                                        <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1672016255l/65213197.jpg"
+                                            alt="cover-image">
+                                    </div>
+                                    <div class="content-wrapper">
+                                        <p class="title" title="The Girl with the Dragon Tattoo">The Girl with the
+                                            Dragon Tattoo</p>
+                                        <div class="pricing">
+                                            <span class="quantity">3 x</span>
+                                            <span>23.75</span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="item-card" href="/Home/Details?ItemId=25&amp;ReturnRoute=/MyOrders/">
+                                    <div class="img-wrapper">
+                                        <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1691467586l/157560224._SY475_.jpg"
+                                            alt="cover-image">
+                                    </div>
+                                    <div class="content-wrapper">
+                                        <p class="title" title="The Great Expectations">The Great Expectations</p>
+                                        <div class="pricing">
+                                            <span class="quantity">1 x</span>
+                                            <span>11.20</span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="item-card" href="/Home/Details?ItemId=30&amp;ReturnRoute=/MyOrders/">
+                                    <div class="img-wrapper">
+                                        <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1680590876l/124944200.jpg"
+                                            alt="cover-image">
+                                    </div>
+                                    <div class="content-wrapper">
+                                        <p class="title" title="The Adventures of Huckleberry Finn">The Adventures of
+                                            Huckleberry Finn</p>
+                                        <div class="pricing">
+                                            <span class="quantity">1 x</span>
+                                            <span>9.68</span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="item-card" href="/Home/Details?ItemId=36&amp;ReturnRoute=/MyOrders/">
+                                    <div class="img-wrapper">
+                                        <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1642696843l/60168787._SY475_.jpg"
+                                            alt="cover-image">
+                                    </div>
+                                    <div class="content-wrapper">
+                                        <p class="title" title="The Road">The Road</p>
+                                        <div class="pricing">
+                                            <span class="quantity">1 x</span>
+                                            <span>23.50</span>
+                                        </div>
+                                    </div>
+                                </a>
+
+                            </div>
+                        </div>
+                        <p class="price-tag">
+                            <span>Total price:</span>
+                            <span class="price-value">165.61$</span>
+                        </p>
+                    </article>
+                    <article class="order">
+                        <h2>София Sofia, Lylin-7, 701</h2>
+                        <span class="label status completed">Delivered</span>
+                        <p>
+                            <span class="label">Ordered on:</span>
+                            <span>Sunday, March 10, 2024 10:56 PM</span>
+                        </p>
+                        <p>
+                            <span class="label">Delivered on:</span>
+                            <span>Sunday, March 3, 2024 12:00 AM</span>
+                        </p>
+                        <div class="info">
+                            <input type="checkbox" class="toggle" name="" id="17f24325-8a9a-4485-0845-08dc4143bb7a">
+                            <label for="17f24325-8a9a-4485-0845-08dc4143bb7a"
+                                class="toggle-btn fas fa-angle-right"></label>
+                            <div class="mini">
+                                <p>
+                                    The Picture of Dorian Gray: 10x 11.45$
+                                </p>
+                            </div>
+                            <div class="full">
+
+                                <a class="item-card" href="/Home/Details?ItemId=40&amp;ReturnRoute=/MyOrders/">
+                                    <div class="img-wrapper">
+                                        <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1685351764l/123505439.jpg"
+                                            alt="cover-image">
+                                    </div>
+                                    <div class="content-wrapper">
+                                        <p class="title" title="The Picture of Dorian Gray">The Picture of Dorian Gray
+                                        </p>
+                                        <div class="pricing">
+                                            <span class="quantity">10 x</span>
+                                            <span>11.45</span>
+                                        </div>
+                                    </div>
+                                </a>
+
+                            </div>
+                        </div>
+                        <p class="price-tag">
+                            <span>Total price:</span>
+                            <span class="price-value">114.50$</span>
+                        </p>
+                    </article>
+                    <article class="order">
+                        <h2>София Sofia, Lylin-7, 701</h2>
+                        <span class="label status processing">Shipped</span>
+                        <p>
+                            <span class="label">Ordered on:</span>
+                            <span>Sunday, March 10, 2024 10:50 PM</span>
+                        </p>
+                        <div class="info">
+                            <input type="checkbox" class="toggle" name="" id="0bfe1ed6-5827-42fc-0844-08dc4143bb7a">
+                            <label for="0bfe1ed6-5827-42fc-0844-08dc4143bb7a"
+                                class="toggle-btn fas fa-angle-right"></label>
+                            <div class="mini">
+                                <p>
+                                    Murder on the Orient Express: 1x 19.99$, The Great Expectations: 1x 11.20$
+                                </p>
+                            </div>
+                            <div class="full">
+
+                                <a class="item-card" href="/Home/Details?ItemId=2&amp;ReturnRoute=/MyOrders/">
+                                    <div class="img-wrapper">
+                                        <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1686001523l/123416690.jpg"
+                                            alt="cover-image">
+                                    </div>
+                                    <div class="content-wrapper">
+                                        <p class="title" title="Murder on the Orient Express">Murder on the Orient
+                                            Express</p>
+                                        <div class="pricing">
+                                            <span class="quantity">1 x</span>
+                                            <span>19.99</span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="item-card" href="/Home/Details?ItemId=25&amp;ReturnRoute=/MyOrders/">
+                                    <div class="img-wrapper">
+                                        <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1691467586l/157560224._SY475_.jpg"
+                                            alt="cover-image">
+                                    </div>
+                                    <div class="content-wrapper">
+                                        <p class="title" title="The Great Expectations">The Great Expectations</p>
+                                        <div class="pricing">
+                                            <span class="quantity">1 x</span>
+                                            <span>11.20</span>
+                                        </div>
+                                    </div>
+                                </a>
+
+                            </div>
+                        </div>
+                        <p class="price-tag">
+                            <span>Total price:</span>
+                            <span class="price-value">31.19$</span>
+                        </p>
+                    </article>
+                    <article class="order">
+                        <h2>София Sofia, Lylin-7, 701</h2>
+                        <span class="label status ">Pending</span>
+                        <p>
+                            <span class="label">Ordered on:</span>
+                            <span>Sunday, March 10, 2024 10:47 PM</span>
+                        </p>
+                        <div class="info">
+                            <input type="checkbox" class="toggle" name="" id="3ab7fa3e-adbd-48ba-438f-08dc414349df">
+                            <label for="3ab7fa3e-adbd-48ba-438f-08dc414349df"
+                                class="toggle-btn fas fa-angle-right"></label>
+                            <div class="mini">
+                                <p>
+                                    Harry Potter: 1x 10.50$
+                                </p>
+                            </div>
+                            <div class="full">
+
+                                <a class="item-card" href="/Home/Details?ItemId=10&amp;ReturnRoute=/MyOrders/">
+                                    <div class="img-wrapper">
+                                        <img src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1598823299l/42844155._SY475_.jpg"
+                                            alt="cover-image">
+                                    </div>
+                                    <div class="content-wrapper">
+                                        <p class="title" title="Harry Potter">Harry Potter</p>
+                                        <div class="pricing">
+                                            <span class="quantity">1 x</span>
+                                            <span>10.50</span>
+                                        </div>
+                                    </div>
+                                </a>
+
+                            </div>
+                        </div>
+                        <p class="price-tag">
+                            <span>Total price:</span>
+                            <span class="price-value">10.50$</span>
+                        </p>
+                    </article>
+
+                </div>
+                <div class="footer">
+
+                    <section class="page-bar">
+                        <ul>
+                            <li>
+                                <a disabled="true" aria-disabled="True" href="#" class="fas fa-angle-double-left"></a>
+                            </li>
+                            <li>
+                                <a disabled="true" aria-disabled="True" href="#" class="fas fa-angle-left"></a>
+                            </li>
+                            <li>
+                                <a disabled="true" aria-disabled="True" class="selected" href="#">1</a>
+                            </li>
+                            <li>
+                                <a href="#">2</a>
+                            </li>
+                            <li>
+                                <a href="#">3</a>
+                            </li>
+                            <li>
+                                <a href="#" class="fas fa-angle-right"></a>
+                            </li>
+                            <li>
+                                <a href="#" class="fas fa-angle-double-right"></a>
+                            </li>
+                        </ul>
+                    </section>
                 </div>
             </section>
         </main>

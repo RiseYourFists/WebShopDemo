@@ -16,12 +16,14 @@
             services.AddScoped<CartService>();
             services.AddScoped<MyOrderService>();
             services.AddScoped<AdministrationService>();
+            services.AddScoped<EmployeeService>();
 
             services.AddScoped<UserHelper<ApplicationUser, Guid>>();
             services.AddScoped<IBookShopRepository, BookShopRepository>();
             services.AddScoped<IHtmlSanitizer, HtmlSanitizer>();
             services.AddScoped<IOrdersRepository, OrdersRepository>();
             services.AddScoped<IAdminRepository, AdminRepository>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             return services;
         }
     }

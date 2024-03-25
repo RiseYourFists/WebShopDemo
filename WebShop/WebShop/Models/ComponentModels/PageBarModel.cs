@@ -5,7 +5,7 @@
         public PageBarModel(
             int currentPage,
             int lastPage,
-            Dictionary<string, object> parameters,
+            Dictionary<string, object?> parameters,
             string action,
             string controller = "",
             string area = "")
@@ -27,6 +27,6 @@
 
         public string Action { get; set; }
 
-        public Dictionary<string, object> Parameters { get; set; }
+        public Dictionary<string, object?> Parameters { get; set; }
     }
 }

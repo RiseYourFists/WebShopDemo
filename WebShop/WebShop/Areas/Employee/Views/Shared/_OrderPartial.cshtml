@@ -1,4 +1,4 @@
-﻿ @model List<Order>
+﻿@model List<Order>
 
 @{
     foreach (var invoice in Model)
@@ -16,6 +16,14 @@
             <p>
                 <span class="label">Ordered on:</span>
                 <span>@invoice.OrderedOn.ToString("f")</span>
+            </p>
+            <p>
+                <span class="label">Client:</span>
+                <span>@invoice.ClientName</span>
+            </p>
+            <p>
+                <span class="label">Phone number:</span>
+                <span>@invoice.PhoneNumber</span>
             </p>
             @if(invoice.DeliveredOn.HasValue)
             {
@@ -36,6 +44,22 @@
                     @await Html.PartialAsync("Components/_OrderItemPartial", invoice.Items)
                 </div>
             </div>
+            @{
+                if (invoice.OrderStatus == OrderStatus.Pending)
+                {
+                    <form asp-action="MarkAsShipped" method="post" class="action-bar">
+                        <input type="hidden" name="Id" value="@invoice.Id"/>
+                        <button class="generic-action">Mark as Shipped</button>
+                    </form>
+                }
+                else if (invoice.OrderStatus == OrderStatus.Shipped)
+                {
+                    <form asp-action="MarkAsDelivered" method="post" class="action-bar">
+                        <input type="hidden" name="Id" value="@invoice.Id" />
+                        <button class="confirm">Mark as Delivered</button>
+                    </form>
+                }
+            }
             <p class="price-tag">
                 <span>Total price:</span>
                 <span class="price-value">@invoice.TotalPrice.ToString("F")$</span>

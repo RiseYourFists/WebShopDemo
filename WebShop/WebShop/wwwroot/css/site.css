@@ -140,12 +140,12 @@ a {
 /*Forms*/
 
 span.text-danger,
-div.text-danger{
+div.text-danger {
   margin-bottom: 10px;
 }
 
 span.text-danger *,
-div.text-danger *{
+div.text-danger * {
   list-style: none;
 }
 
@@ -200,13 +200,13 @@ div.text-danger *{
   transform: scale(0.75);
 }
 
-form .action-bar{
+form .action-bar {
   display: flex;
   gap: 5px;
   align-self: flex-end;
 }
 
-form .action-bar > *{
+form .action-bar>* {
   border: none;
   text-align: center;
   color: white;
@@ -215,12 +215,12 @@ form .action-bar > *{
   padding: 5px;
 }
 
-form .action-bar > *:hover{
+form .action-bar>*:hover {
   color: white;
 }
 
-input[data-val-required] + label::after,
-input[data-val-required] ~ label::after{
+input[data-val-required]+label::after,
+input[data-val-required]~label::after {
   content: "*";
   position: absolute;
   top: 0;
@@ -1719,6 +1719,14 @@ html {
   max-width: 1200px;
 }
 
+#my-orders .footer {
+  display: flex;
+  justify-content: center;
+  background-color: var(--main-bg-color);
+  margin-top: 20px;
+  padding-block: 10px;
+}
+
 #my-orders .filter-bar {
   display: flex;
   gap: 10px;
@@ -1790,6 +1798,18 @@ html {
   padding: 1rem;
   color: white;
   position: relative;
+}
+
+.order form.action-bar {
+  margin-block: 10px;
+}
+
+.order form.action-bar button {
+  border: none;
+  padding: 5px;
+  border-radius: 4px;
+  color: white;
+  font-weight: 500;
 }
 
 .order h2 {
@@ -2176,7 +2196,7 @@ table tbody td:not(:last-child) {
   border: 1px solid transparent;
 }
 
-.action-bar *::before{
+.action-bar *::before {
   margin-right: 5px;
 }
 
@@ -2184,17 +2204,17 @@ table tbody td:not(:last-child) {
   border-color: white;
 }
 
-table.users .action{
+table.users .action {
   padding: 0;
 }
 
-td.action > .wrapper{
+td.action>.wrapper {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
-table.users td.action > .wrapper > *{
+table.users td.action>.wrapper>* {
   height: 85px;
   display: flex;
   justify-content: flex-start;
@@ -2202,16 +2222,16 @@ table.users td.action > .wrapper > *{
   padding-inline: 5px;
 }
 
-table.users .fas{
+table.users .fas {
   color: white;
 }
 
-td.action > .wrapper > * > *{
+td.action>.wrapper>*>* {
   color: white;
   font-weight: 600;
 }
 
-tr .action-btn{
+tr .action-btn {
   border: none;
   width: 100%;
   height: 100%;
@@ -2221,12 +2241,12 @@ tr .action-btn{
   align-items: center;
 }
 
-tr .action-btn > *,
-td.action > .wrapper > * > *{
+tr .action-btn>*,
+td.action>.wrapper>*>* {
   padding-inline: 5px;
 }
 
-tr.disabled .action-wrapper{
+tr.disabled .action-wrapper {
   background-color: var(--secondary-bg-color);
   pointer-events: none;
 }
@@ -2250,7 +2270,7 @@ tr.disabled .action-wrapper{
   align-items: center;
 }
 
-.select-wrapper .unfold-btn::after{
+.select-wrapper .unfold-btn::after {
   content: "";
   width: 30px;
   height: 30px;
@@ -2261,7 +2281,7 @@ tr.disabled .action-wrapper{
   border-right: 1px solid black;
 }
 
-.select-wrapper .unfold-btn:before{
+.select-wrapper .unfold-btn:before {
   z-index: 1;
   left: 10px;
   position: absolute;
@@ -2278,7 +2298,7 @@ tr.disabled .action-wrapper{
 
 .select-wrapper .list-items {
   max-height: 0;
-  overflow-y:visible;
+  overflow-y: visible;
   transition: all .3s ease-in-out;
   background-color: var(--main-bg-color);
 }
@@ -2298,7 +2318,7 @@ tr.disabled .action-wrapper{
   background-color: var(--primary-color);
 }
 
-.list-items li:not(.additional) a.fas{
+.list-items li:not(.additional) a.fas {
   background-color: yellow;
   color: black;
   width: 30px;
@@ -2351,7 +2371,7 @@ tr.disabled .action-wrapper{
   width: 80%;
 }
 
-td .discount::after{
+td .discount::after {
   content: "%";
   margin-left: 2px;
 }
@@ -2379,7 +2399,7 @@ td .discount::after{
   border: 1px solid gray;
 }
 
-#edit form{
+#edit form {
   width: 100%;
 }
 
@@ -2408,7 +2428,7 @@ td .discount::after{
 }
 
 @media (max-width: 1100px) {
-  table.users td.action > .wrapper > *{
+  table.users td.action>.wrapper>* {
     justify-content: center;
   }
 
@@ -2492,11 +2512,11 @@ td .discount::after{
     width: 95%;
   }
 
-  #edit{
+  #edit {
     flex-direction: column;
   }
 
-  #edit .img-wrapper{
+  #edit .img-wrapper {
     width: 350px;
   }
 }
@@ -2609,6 +2629,9 @@ td .discount::after{
     display: none;
   }
 
+  .order h2{
+    font-size: 2rem;
+  }
 }
 
 @media(max-width: 425px) {

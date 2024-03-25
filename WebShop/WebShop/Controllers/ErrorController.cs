@@ -12,8 +12,9 @@
         {
             var errorMsg = statusCode switch
             {
-                404 => "Error not found!",
+                400 => "Bad request",
                 401 => "Unauthorized access!",
+                404 => "Error not found!",
                 405 => "Method Not Allowed",
                 500 => "Internal Server error!",
                 _ => "Unexpected error occured!"

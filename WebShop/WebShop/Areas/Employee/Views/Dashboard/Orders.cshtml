@@ -1,13 +1,64 @@
-﻿@using WebShop.App.Models.ComponentModels
+﻿@model OrderPageModel;
 @{
     ViewData["Title"] = "Orders";
+    var data = new Dictionary<string, object?>()
+    {
+        { nameof(Model.To), Model.To },
+        { nameof(Model.From), Model.From },
+        { nameof(Model.Order), Model.Order },
+        { nameof(Model.Status), Model.Status }
+    };
+    var routeDictionary = new RouteValueDictionary(data);
+    routeDictionary[nameof(Model.CurrentPage)] = Model.CurrentPage;
 }
 
-@{
-    var data = new Dictionary<string, object>()
-    {
-        {"GenreId", 1},
-        { "SearchTerm", "That thing"}
-    };
-}
-@await Html.PartialAsync("Components/_PageBarPartial", new PageBarModel(1, 24, data, "Orders", "Dashboard"))
+<section id="my-orders">
+    <form class="filter-bar">
+        <div class="display-status">
+            @{
+                var statusList = (OrderStatus[])Enum.GetValues(typeof(OrderStatus));
+                foreach (var status in statusList)
+                {
+                    if(status == OrderStatus.All) continue;
+                    var selection = Model.Status == status ? "selected" : string.Empty;
+                    routeDictionary[nameof(Model.Status)] = status;
+                    <a class="@selection" href="@Url.Action("Orders", routeDictionary)">@status.ToString()</a>
+                }
+            }
+        </div>
+        <div class="date-filter">
+            <label asp-for="From"></label>
+            <input type="date" asp-for="From">
+            <label asp-for="To"></label>
+            <input type="date" asp-for="To">
+        </div>
+        <div class="sort">
+            <select asp-for="Order">
+                @{
+                    var orderList = (OrderClause[])Enum.GetValues(typeof(OrderClause));
+                    var naming = new Dictionary<OrderClause, string>()
+                    {
+                        { OrderClause.OrderDateAsc, "Order date ascending"},
+                        { OrderClause.OrderDateDesc, "Order date descending"},
+                        { OrderClause.TotalPriceAsc, "Total price ascending"},
+                        { OrderClause.TotalPriceDesc, "Total price descending"}
+                    };
+
+                    foreach (var clause in orderList)
+                    {
+                        <option value="@clause">@naming[clause]</option>
+                    }
+                }
+            </select>
+            <input type="hidden" name="status" value="@Model.Status"/>
+            <button type="submit" class="fas fa-check"></button>
+        </div>
+        @await Html.PartialAsync("Components/_PageBarPartial", new PageBarModel(Model.CurrentPage, Model.LastPage, data, "Orders", "Dashboard"))
+    </form>
+    <div class="order-list">
+        @await Html.PartialAsync("_OrderPartial", Model.Orders)
+    </div>
+    <div class="footer">
+        @await Html.PartialAsync("Components/_PageBarPartial", new PageBarModel(Model.CurrentPage, Model.LastPage, data, "Orders", "Dashboard"))
+    </div>
+</section>

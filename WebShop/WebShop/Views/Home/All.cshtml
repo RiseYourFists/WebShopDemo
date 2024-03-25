@@ -7,6 +7,7 @@
 
 <section id="search-result">
     <form class="search-header" method="get">
+        <input type="hidden" asp-for="GenreId"/>
         @{
             var data = new Dictionary<string, object>()
             {

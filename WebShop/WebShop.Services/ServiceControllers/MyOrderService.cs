@@ -39,7 +39,7 @@ namespace WebShop.Services.ServiceControllers
                 .AnyAsync(o => o.UserId == userId);
         }
 
-        public async Task<List<MyOrder>> GetUserOrders(ClaimsPrincipal user, OrderStatus status, OrderClause orderedBy, DateTime? from, DateTime? to)
+        public async Task<List<Order>> GetUserOrders(ClaimsPrincipal user, OrderStatus status, OrderClause orderedBy, DateTime? from, DateTime? to)
         {
             var userId = await _userHelper.GetUserId(user);
 
@@ -49,7 +49,7 @@ namespace WebShop.Services.ServiceControllers
                 .ThenInclude(ob => ob.Book)
                 .Where(o => o.UserId.ToString() == userId.ToString())
                 .OrderByDescending(o => o.DatePlaced)
-                .Select(o => new MyOrder()
+                .Select(o => new Order()
                 {
                     Id = o.Id,
                     City = o.City,

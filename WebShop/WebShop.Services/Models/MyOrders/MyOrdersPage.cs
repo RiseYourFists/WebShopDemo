@@ -14,6 +14,6 @@ namespace WebShop.Services.Models.MyOrders
 
         public DateTime? To { get; set; }
 
-        public List<MyOrder> Orders { get; set; } = new();
+        public List<Order> Orders { get; set; } = new();
     }
 }

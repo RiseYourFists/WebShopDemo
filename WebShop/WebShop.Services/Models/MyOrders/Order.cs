@@ -2,7 +2,7 @@
 {
     using Enumerations;
 
-    public class MyOrder
+    public class Order
     {
         public Guid Id { get; set; }
 
@@ -19,5 +19,9 @@
         public decimal TotalPrice { get; set; }
 
         public OrderStatus OrderStatus { get; set; }
+
+        public string ClientName { get; set; } = string.Empty;
+
+        public string PhoneNumber { get; set; } = string.Empty;
     }
 }
