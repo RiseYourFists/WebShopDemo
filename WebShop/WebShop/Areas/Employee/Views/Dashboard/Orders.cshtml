@@ -1,3 +1,13 @@
-﻿@{
+﻿@using WebShop.App.Models.ComponentModels
+@{
     ViewData["Title"] = "Orders";
 }
+
+@{
+    var data = new Dictionary<string, object>()
+    {
+        {"GenreId", 1},
+        { "SearchTerm", "That thing"}
+    };
+}
+@await Html.PartialAsync("Components/_PageBarPartial", new PageBarModel(1, 24, data, "Orders", "Dashboard"))

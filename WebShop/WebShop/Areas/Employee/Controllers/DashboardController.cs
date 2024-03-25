@@ -1,4 +1,6 @@
-﻿namespace WebShop.App.Areas.Employee.Controllers
+﻿using WebShop.App.Models.ComponentModels;
+
+namespace WebShop.App.Areas.Employee.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;

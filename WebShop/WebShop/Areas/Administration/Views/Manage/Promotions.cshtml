@@ -11,7 +11,7 @@
             new("Manage Promotions", "Promotions"),
             new("Manage Users", "Users")
         })
-        @await Html.PartialAsync("Components/_SearchBarPartial", new SearchBar("Promotions", ""))
+        @await Html.PartialAsync("Components/_SearchBarPartial", new SearchBar("Promotions", Model.SearchTerm))
     </div>
     <div class="item-list">
         <table>
