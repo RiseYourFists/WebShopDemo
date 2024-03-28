@@ -64,4 +64,9 @@ app.UseEndpoints(endpoints =>
 app.MapRazorPages();
 await app.AddRolesAsync(builder.Configuration);
 
+if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Testing"))
+{
+     await app.SeedUsersAsync();
+}
+
 await app.RunAsync();

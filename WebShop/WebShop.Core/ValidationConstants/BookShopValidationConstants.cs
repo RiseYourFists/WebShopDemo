@@ -4,9 +4,9 @@
     {
         public static class BookConstants
         {
-            public const int TitleMaxLen = 35;
+            public const int TitleMaxLen = 150;
 
-            public const int DescriptionMaxLen = 1000;
+            public const int DescriptionMaxLen = 2500;
 
         }
 

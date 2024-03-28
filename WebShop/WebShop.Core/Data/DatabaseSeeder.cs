@@ -15,6 +15,8 @@ namespace WebShop.Core.Data
             modelBuilder.Entity<Author>(entity => entity.HasData(GetData<Author>()));
             modelBuilder.Entity<Genre>(entity => entity.HasData(GetData<Genre>()));
             modelBuilder.Entity<Book>(entity => entity.HasData(GetData<Book>()));
+            modelBuilder.Entity<Promotion>(entity => entity.HasData(GetData<Promotion>()));
+            modelBuilder.Entity<GenrePromotion>(entity => entity.HasData(GetData<GenrePromotion>()));
             return modelBuilder;
         }
 

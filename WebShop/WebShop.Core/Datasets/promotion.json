@@ -1,0 +1,9 @@
+﻿[
+  {
+    "id": 1,
+    "name": "Year of fiction",
+    "discountPercent": 50,
+    "startDate": "01/01/2024",
+    "endDate": "01/01/2025"
+  }
+]

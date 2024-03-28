@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebShop.Core.Data;
 
@@ -11,9 +12,10 @@ using WebShop.Core.Data;
 namespace WebShop.Core.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240328164905_Initial-Setup")]
+    partial class InitialSetup
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -425,7 +427,7 @@ namespace WebShop.Core.Migrations
                             BasePrice = 14.99m,
                             BookCover = "https://images-us.bookshop.org/ingram/9780451417855.jpg?height=500&v=v2",
                             Description = "With wry humor and penetrating satire, Flatland takes us on a mind-expanding journey into a different world to give us a new vision of our own. A. Square, the slightly befuddled narrator, is born into a place limited to two dimensions--irrevocably flat--and peopled by a hierarchy of geometrical forms. In a Gulliver-like tour of his bizarre homeland, A. Square spins a fascinating tale of domestic drama and political turmoil, from sex among consenting triangles to the intentional subjugation of Flatland's females. He tells of visits to Lineland, the world of one dimension, and Pointland, the world of no dimension. But when A. Square dares to speak openly of a third, or even a fourth, dimension, his tragic fate climaxes a brilliant parody of Victorian society. An underground favorite since its publication in England in1884, Flatland is as prophetic a science fiction classic as the works of H. G. Wells, introducing aspects of relativity and hyperspace years before Einstein's famous theories. And it does so with wonderful, enduring enchantment.\r\nWith an Introduction by Valerie Smith and a New Afterword by John Allen Paulos",
-                            GenreId = 5,
+                            GenreId = 6,
                             StockQuantity = 300,
                             Title = "Flatland: A Romance of Many Dimensions"
                         },
@@ -436,7 +438,7 @@ namespace WebShop.Core.Migrations
                             BasePrice = 13.49m,
                             BookCover = "https://images-us.bookshop.org/ingram/9780062732767.jpg?height=500&v=v2",
                             Description = "A century-old classic of British letters that charmed and fascinated generations of readers with its witty satire of Victorian society and its unique insights, by analogy, into the fourth dimension.",
-                            GenreId = 5,
+                            GenreId = 6,
                             StockQuantity = 300,
                             Title = "Sphere Land: A Fantasy of Numerous Dimensions"
                         },
@@ -447,7 +449,7 @@ namespace WebShop.Core.Migrations
                             BasePrice = 12.99m,
                             BookCover = "https://images-us.bookshop.org/ingram/9781539346920.jpg?height=500&v=v2",
                             Description = "Edwin Abbott Abbott (1838-1926) has been ranked as one of the leading scholars and theologians of the Victorian era. He received highest honors in mathematics, classics, and theology at St. John's College, Cambridge, and in 1862 began a brilliant career, during which he served as schoolmaster of some of England's outstanding schools. At the same time he distinguished himself as a scholar, and in 1889 he retired to his studies. Although Flatland, a literary jeu d'esprit, has given pleasure to thousands of readers over many generations, Abbott is best known for his scholarly works, especially his Shakespearian Grammar and his life of Francis Bacon, and for a number of theological discussions.",
-                            GenreId = 5,
+                            GenreId = 6,
                             StockQuantity = 300,
                             Title = "Planilandia"
                         },
