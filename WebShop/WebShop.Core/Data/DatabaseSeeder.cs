@@ -30,6 +30,11 @@ namespace WebShop.Core.Data
         {
             var type = typeof(T);
             var filePath = Path.Combine(DataSetPath, type.Name.ToLower() + FileExtension);
+            if (!Directory.Exists(filePath))
+            {
+                return new();
+            }
+
             var jsonString =  File.ReadAllText(filePath);
             var objectData = JsonConvert.DeserializeObject<T[]>(jsonString);
             return objectData.ToList();
