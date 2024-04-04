@@ -11,7 +11,7 @@ using WebShop.Testing.Datasets;
 
 namespace WebShop.Testing
 {
-    public class BoolShopServiceTests
+    public class BookShopServiceTests
     {
         private IServiceProvider serviceProvider;
 
