@@ -1,4 +1,6 @@
-﻿namespace WebShop.App.BuilderConfigurationExtensions
+﻿using WebShop.Services.Contracts;
+
+namespace WebShop.App.BuilderConfigurationExtensions
 {
     using Ganss.Xss;
     using Core.Data;
@@ -18,7 +20,7 @@
             services.AddScoped<AdministrationService>();
             services.AddScoped<EmployeeService>();
 
-            services.AddScoped<UserHelper<ApplicationUser, Guid>>();
+            services.AddScoped<IUserHelper<ApplicationUser, Guid>,UserHelper<ApplicationUser, Guid>>();
             services.AddScoped<IBookShopRepository, BookShopRepository>();
             services.AddScoped<IHtmlSanitizer, HtmlSanitizer>();
             services.AddScoped<IOrdersRepository, OrdersRepository>();

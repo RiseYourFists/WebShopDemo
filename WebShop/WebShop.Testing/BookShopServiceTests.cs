@@ -1,37 +1,22 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using WebShop.App.BuilderConfigurationExtensions;
-using WebShop.Core.Contracts;
-using WebShop.Core.Data;
-using WebShop.Core.Repository;
-using WebShop.Services.Contracts;
-using WebShop.Services.ServiceControllers;
-using WebShop.Testing.Datasets;
-
-namespace WebShop.Testing
+﻿namespace WebShop.Testing
 {
-    public class BookShopServiceTests
+    using Microsoft.EntityFrameworkCore;
+    using Core.Contracts;
+    using Core.Data;
+    using Core.Repository;
+    using Services.Contracts;
+    using Services.ServiceControllers;
+    using Datasets;
+    public class BookShopServiceTests : BaseTestSetup
     {
-        private IServiceProvider serviceProvider;
-
         private BookShopService service;
-
         private IBookShopRepository bookShopRepository;
-
-        private ApplicationDbContext context;
 
         [SetUp]
         public void Setup()
         {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile<MappingProfile>();
-            });
-            this.serviceProvider = ConfigureServices<ApplicationDbContext>(Guid.NewGuid().ToString());
-            context = serviceProvider.GetService<ApplicationDbContext>();
-            var mapper = new Mapper(config);
-            bookShopRepository = new BookShopRepository(context);
+            base.Setup<ApplicationDbContext>();
+            bookShopRepository = new BookShopRepository((ApplicationDbContext)context);
             service = new BookShopService(bookShopRepository, mapper);
         }
 
@@ -121,7 +106,8 @@ namespace WebShop.Testing
             await BookShopServiceDatasetSeeder.SeedFor_GetBookInfo_Test(context);
 
             var result = await service.GetBookInfo(id);
-            var expectedBook = await context.Books.FirstOrDefaultAsync(b => b.Id == id);
+            ApplicationDbContext dbContext = (ApplicationDbContext)base.context;
+            var expectedBook = await dbContext.Books.FirstOrDefaultAsync(b => b.Id == id);
 
             if (expectedBook == null)
             {
@@ -144,41 +130,6 @@ namespace WebShop.Testing
             var result = await service.AnyBook(id);
 
             Assert.That(result == expectedValue);
-        }
-
-        private static IServiceProvider ConfigureServices<TContext>(string databaseName)
-            where TContext : DbContext
-        {
-            var services = ConfigureDbContext<TContext>(databaseName);
-
-            var context = services.GetService<TContext>();
-
-            try
-            {
-                context.Model.GetEntityTypes();
-            }
-            catch (InvalidOperationException ex) when (ex.Source == "Microsoft.EntityFrameworkCore.Proxies")
-            {
-                services = ConfigureDbContext<TContext>(databaseName, useLazyLoading: true);
-            }
-
-            return services;
-        }
-
-        private static IServiceProvider ConfigureDbContext<TContext>(string databaseName, bool useLazyLoading = false)
-            where TContext : DbContext
-        {
-            var services = new ServiceCollection();
-
-            services
-                .AddDbContext<TContext>(
-                    options => options
-                        .UseInMemoryDatabase(databaseName)
-                        .UseLazyLoadingProxies(useLazyLoading)
-                );
-
-            var serviceProvider = services.BuildServiceProvider();
-            return serviceProvider;
         }
     }
 }

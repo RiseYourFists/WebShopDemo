@@ -1,4 +1,6 @@
 ﻿
+using WebShop.Services.Contracts;
+
 namespace WebShop.Services.ServiceControllers
 {
     using System.Security.Claims;
@@ -10,7 +12,7 @@ namespace WebShop.Services.ServiceControllers
     /// </summary>
     /// <typeparam name="TUser">IdentityUser primary key. The type is set to string by default.</typeparam>
     /// <typeparam name="TKey">Primary key type</typeparam>
-    public class UserHelper<TUser, TKey>
+    public class UserHelper<TUser, TKey> : IUserHelper<TUser,TKey>
         where TUser : class, IUserIdentity<TKey>
     {
         public UserHelper(
