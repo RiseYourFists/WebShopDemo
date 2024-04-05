@@ -100,7 +100,7 @@ namespace WebShop.Services.ServiceControllers
             return await query.CountAsync() / itemsOnPage;
         }
 
-        public static IQueryable<PlacedOrder> GetFilter(IQueryable<PlacedOrder> query, OrderStatus status, DateTime? from, DateTime? to)
+        private static IQueryable<PlacedOrder> GetFilter(IQueryable<PlacedOrder> query, OrderStatus status, DateTime? from, DateTime? to)
         {
             if (from.HasValue && to.HasValue && from < to)
             {
