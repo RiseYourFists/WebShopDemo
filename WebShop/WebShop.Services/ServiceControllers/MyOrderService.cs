@@ -54,7 +54,9 @@ namespace WebShop.Services.ServiceControllers
                     City = o.City,
                     Address = o.Address,
                     OrderedOn = o.DatePlaced,
-                    DeliveredOn = o.DateFulfilled!.Value,
+                    DeliveredOn = o.DateFulfilled.HasValue 
+                        ? o.DateFulfilled.Value
+                        : null,
                     Items = o.PlacedOrderBooks
                         .Select(ob => new OrderItem()
                         {
