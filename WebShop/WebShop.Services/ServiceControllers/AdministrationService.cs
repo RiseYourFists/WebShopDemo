@@ -1,34 +1,31 @@
-﻿using System.Globalization;
-using System.Text;
-using Microsoft.AspNetCore.Identity;
-using WebShop.Core.Models.Identity;
-
-namespace WebShop.Services.ServiceControllers
+﻿namespace WebShop.Services.ServiceControllers
 {
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
 
+    using System.Text;
+    using System.Globalization;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.AspNetCore.Identity;
 
     using Models.Administration;
     using WebShop.Core.Contracts;
     using WebShop.Core.Models.BookShop;
+    using WebShop.Core.Models.Identity;
+    using static ErrorMessages.AdministrationErrors;
 
     public class AdministrationService
     {
         private readonly IMapper _mapper;
         private readonly IAdminRepository _adminRepository;
-        private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly UserManager<ApplicationUser> _userManager;
 
         public AdministrationService(
             IMapper mapper,
             IAdminRepository adminRepository,
-            RoleManager<ApplicationRole> roleManager,
             UserManager<ApplicationUser> userManager)
         {
             _mapper = mapper;
-            _roleManager = roleManager;
             _userManager = userManager;
             _adminRepository = adminRepository;
         }
@@ -168,7 +165,7 @@ namespace WebShop.Services.ServiceControllers
 
             if (book == null)
             {
-                throw new InvalidOperationException("Invalid book id.");
+                throw new InvalidOperationException(InvalidBookId);
             }
 
             var doesGenreExist = await AnyGenre(model.GenreId);
@@ -176,7 +173,7 @@ namespace WebShop.Services.ServiceControllers
 
             if (!doesAuthorExist || !doesGenreExist)
             {
-                throw new InvalidOperationException("Invalid genre/author id provided.");
+                throw new InvalidOperationException(InvalidGenreAuthorId);
             }
 
             book.Title = model.Title;
@@ -213,7 +210,7 @@ namespace WebShop.Services.ServiceControllers
             var doesGenreExist = await AnyGenre(model.Id);
             if (!doesGenreExist)
             {
-                throw new InvalidOperationException("Invalid genre id provided.");
+                throw new InvalidOperationException(InvalidGenreId);
             }
 
             var genre = await _adminRepository
@@ -249,7 +246,7 @@ namespace WebShop.Services.ServiceControllers
             var doesAuthorExist = await AnyAuthor(model.Id);
             if (!doesAuthorExist)
             {
-                throw new InvalidOperationException("Invalid author id provided");
+                throw new InvalidOperationException(InvalidAuthorId);
             }
 
             var author = await _adminRepository
@@ -269,7 +266,7 @@ namespace WebShop.Services.ServiceControllers
 
             if (!doesAuthorExist || !doesGenreExist)
             {
-                throw new InvalidOperationException("Invalid genre/author id provided.");
+                throw new InvalidOperationException(InvalidGenreAuthorId);
             }
 
             var book = _mapper.Map<Book>(model);
@@ -364,7 +361,7 @@ namespace WebShop.Services.ServiceControllers
 
             if (isPromoIdValid == false)
             {
-                throw new ArgumentException("Invalid promotion id.");
+                throw new ArgumentException(InvalidPromotionIdFormat);
             }
 
             var promotion = await _adminRepository
@@ -373,7 +370,7 @@ namespace WebShop.Services.ServiceControllers
 
             if (promotion == null)
             {
-                throw new InvalidOperationException("Invalid promotion id was provided.");
+                throw new InvalidOperationException(InvalidPromotionId);
             }
 
             Author? author = null;
@@ -393,12 +390,12 @@ namespace WebShop.Services.ServiceControllers
             }
             else
             {
-                throw new ArgumentException("Invalid promotion id.");
+                throw new ArgumentException(InvalidPromotionIdFormat);
             }
 
             if (genre == null && author == null)
             {
-                throw new InvalidOperationException("Genre/Author doesn't exist in this context.");
+                throw new InvalidOperationException(GenreAuthorNotFound);
             }
 
             await RemovePromotions(promotion.Id);
@@ -425,7 +422,7 @@ namespace WebShop.Services.ServiceControllers
 
             if (await IsExistingPromotionInvalid(promotion) == true)
             {
-                throw new ArgumentException("There are other promotions during the specified time");
+                throw new ArgumentException(ExistingPromotions);
             }
 
             var result = await _adminRepository.SaveChangesAsync() > 0;
@@ -440,7 +437,7 @@ namespace WebShop.Services.ServiceControllers
 
             if (isPromoIdValid == false)
             {
-                throw new ArgumentException("Invalid promotion id.");
+                throw new ArgumentException(InvalidPromotionIdFormat);
             }
 
             Author? author = null;
@@ -460,12 +457,12 @@ namespace WebShop.Services.ServiceControllers
             }
             else
             {
-                throw new ArgumentException("Invalid promotion id.");
+                throw new ArgumentException(InvalidPromotionIdFormat);
             }
 
             if (genre == null && author == null)
             {
-                throw new InvalidOperationException("Genre/Author doesn't exist in this context.");
+                throw new InvalidOperationException(GenreAuthorNotFound);
             }
 
             var promotion = new Promotion()
@@ -493,7 +490,7 @@ namespace WebShop.Services.ServiceControllers
 
             if (await IsPreExistingPromotionInvalid(promotion) == true)
             {
-                throw new ArgumentException("There are other promotions during the specified time");
+                throw new ArgumentException(ExistingPromotions);
             }
 
             await _adminRepository.AddAsync(promotion);
@@ -537,18 +534,18 @@ namespace WebShop.Services.ServiceControllers
             var isUserIdValid = Guid.TryParse(userId, out var userGuid);
             if (!isUserIdValid)
             {
-                throw new ArgumentException("Invalid User id.");
+                throw new ArgumentException(InvalidUserIdFormat);
             }
 
             if (userGuid == currentUserId)
             {
-                throw new InvalidOperationException("Cannot change your own role");
+                throw new InvalidOperationException(SelfPromotionError);
             }
 
             var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userGuid);
             if (user == null)
             {
-                throw new InvalidOperationException("User not found");
+                throw new InvalidOperationException(UserNotFound);
             }
 
             var currentUserRoles = await _userManager.GetRolesAsync(user);
@@ -560,7 +557,7 @@ namespace WebShop.Services.ServiceControllers
                 null => await _userManager.AddToRoleAsync(user, "Employee"),
                 _ => IdentityResult.Failed(new[]
                 {
-                    new IdentityError(){Description = "Cannot promote higher than Admin!"}
+                    new IdentityError(){Description = RoleOverflow}
                 })
             };
 
@@ -572,7 +569,7 @@ namespace WebShop.Services.ServiceControllers
                     sb.AppendLine(identityError.Description);
                 }
 
-                throw new InvalidOperationException(sb.ToString());
+                throw new InvalidOperationException(sb.ToString().Trim());
             }
 
             if (role != null)
@@ -587,18 +584,18 @@ namespace WebShop.Services.ServiceControllers
             var isUserIdValid = Guid.TryParse(userId, out var userGuid);
             if (!isUserIdValid)
             {
-                throw new ArgumentException("Invalid User id.");
+                throw new ArgumentException(InvalidUserIdFormat);
             }
 
             if (userGuid == currentUserId)
             {
-                throw new InvalidOperationException("Cannot change your own role");
+                throw new InvalidOperationException(SelfPromotionError);
             }
 
             var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userGuid);
             if (user == null)
             {
-                throw new InvalidOperationException("User not found");
+                throw new InvalidOperationException(UserNotFound);
             }
 
             var currentUserRoles = await _userManager.GetRolesAsync(user);
@@ -610,7 +607,7 @@ namespace WebShop.Services.ServiceControllers
                 "Employee" => await _userManager.RemoveFromRoleAsync(user, "Employee"),
                 _ => IdentityResult.Failed(new[]
                 {
-                    new IdentityError(){Description = "Cannot demote lower than user!"}
+                    new IdentityError(){Description = RoleUnderflow}
                 })
             };
 
