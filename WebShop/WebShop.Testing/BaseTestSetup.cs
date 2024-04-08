@@ -61,5 +61,10 @@
             var serviceProvider = services.BuildServiceProvider();
             return serviceProvider;
         }
+
+        protected static string GetErrorMsg<T>(T expected, T actual)
+        {
+            return $"Expected: {expected}\r\nBut got: {actual}";
+        }
     }
 }
