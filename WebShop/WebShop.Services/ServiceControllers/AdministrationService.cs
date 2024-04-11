@@ -619,7 +619,7 @@
                     sb.AppendLine(identityError.Description);
                 }
 
-                throw new InvalidOperationException(sb.ToString());
+                throw new InvalidOperationException(sb.ToString().Trim());
             }
 
             if (role != "Employee")

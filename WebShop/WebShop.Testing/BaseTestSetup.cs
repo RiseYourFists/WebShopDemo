@@ -15,6 +15,9 @@
 
         protected IMapper mapper;
 
+        protected const string NullIsExpected = "Object value is expected to be null!";
+
+        protected const string ObjectNotNull = "Object value is not supposed to be null!";
 
         public void Setup<TContext>() where TContext : DbContext
         {
@@ -64,7 +67,7 @@
 
         protected static string GetErrorMsg<T>(T expected, T actual)
         {
-            return $"Expected: {expected}\r\nBut got: {actual}";
+            return $"Expected: {expected}\nBut got: {actual}";
         }
     }
 }
