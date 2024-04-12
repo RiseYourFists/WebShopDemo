@@ -17,27 +17,12 @@
                     foreach (var element in Model.ElementList)
                     {
                         var area = !string.IsNullOrWhiteSpace(element.Area) ? element.Area : string.Empty;
+                        element.Parameters["Area"] = area;
 
-                        if (!string.IsNullOrWhiteSpace(element.Parameters))
-                        {
-                            var data = new
-                            {
-                                element.Parameters,
-                                Area = area
-                            };
-
-                            <a href="@Url.Action(element.Action, element.Controller, data)">
-                                <i class="@element.ButtonClasses"></i>
-                                @element.ButtonContent
-                            </a>
-                        }
-                        else
-                        {
-                            <a asp-area="@area" asp-controller="@element.Controller" asp-action="@element.Action">
-                                <i class="@element.ButtonClasses"></i>
-                                @element.ButtonContent
-                            </a>
-                        }
+                        <a href="@Url.Action(element.Action, element.Controller, new RouteValueDictionary(element.Parameters))">
+                            <i class="@element.ButtonClasses"></i>
+                            @element.ButtonContent
+                        </a>
                     }
                 }
             </div>

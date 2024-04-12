@@ -45,14 +45,36 @@
             var hasParse = Enum.TryParse(typeof(ItemSortClause), sortClause, out var sort);
             var sortBy = sort != null ? (ItemSortClause)sort : ItemSortClause.NameAsc;
 
-            model.CurrentPage = currentPage;
+            if (itemsOnPage > 24)
+            {
+                itemsOnPage = 24;
+            }
+
+            if (itemsOnPage < 6)
+            {
+                itemsOnPage = 6;
+            }
+
             model.GenreId = genreId;
             model.SearchTerm = searchTerm;
             model.ItemsOnPage = itemsOnPage;
             model.SortClause = sortBy;
+            model.Genres = await _bookShopService.GetCategoryList();
 
             model.MaxPages = await _bookShopService
                 .MaxPages(model.SearchTerm, model.ItemsOnPage, model.GenreId);
+
+            if (currentPage < 1)
+            {
+                currentPage = 1;
+            }
+
+            if (currentPage > model.MaxPages)
+            {
+                currentPage = model.MaxPages;
+            }
+
+            model.CurrentPage = currentPage;
 
             model.Items = await _bookShopService
                 .GetCatalogue(model.SearchTerm, model.ItemsOnPage, model.GenreId, sortBy, currentPage);

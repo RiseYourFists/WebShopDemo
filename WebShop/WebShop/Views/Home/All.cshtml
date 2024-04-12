@@ -1,23 +1,38 @@
-﻿@model Catalogue;
+﻿@using NuGet.Packaging
+@model Catalogue;
 
 @{
     ViewBag.Title = $"Catalogue - Page {Model.CurrentPage}";
     ViewBag.SearchTerm = Model.SearchTerm;
 }
+@{
+    var data = new Dictionary<string, object?>()
+    {
+        { nameof(Model.ItemsOnPage), Model.ItemsOnPage },
+        { nameof(Model.SortClause), Model.SortClause },
+        { nameof(Model.SearchTerm), Model.SearchTerm }
+    };
+}
 
 <section id="search-result">
     <form class="search-header" method="get">
-        <input type="hidden" asp-for="GenreId"/>
         @{
-            var data = new Dictionary<string, object>()
+            foreach (var genre in Model.Genres)
             {
-                { nameof(Model.GenreId), Model.GenreId },
-                { nameof(Model.ItemsOnPage), Model.ItemsOnPage },
-                { nameof(Model.SortClause), Model.SortClause },
-                { nameof(Model.SearchTerm), Model.SearchTerm }
-            };
+                genre.Parameters.AddRange(data);
+                genre.Action = "All";
+                genre.Controller = "Home";
+            }
         }
-        @await Html.PartialAsync("Components/_PageBarPartial", new PageBarModel(Model.CurrentPage, Model.MaxPages, data, "All", "Home"))
+
+        @await Html.PartialAsync("Components/_DropdownPartial", new DropdownModel()
+        {
+            ElementList = Model.Genres,
+            Heading = "Genres",
+            UnfoldButtonClasses = "fas fa-angle-down",
+            UnfoldButtonContent = "Genres"
+        })
+        <input type="hidden" asp-for="GenreId"/>
         <section class="filter-bar">
             <div class="select-input">
                 <label asp-for="SortClause">Sort by:</label>
@@ -47,11 +62,17 @@
     <div class="content">
         @if (Model.Items.Count > 0)
         {
-            @await Html.PartialAsync("Components/_ItemCardPartial", Model.Items);
+            @await Html.PartialAsync("Components/_ItemCardPartial", Model.Items)
         }
         else
         {
             <p class="search-error">Nothing found</p>
         }
+    </div>
+    <div class="search-header">
+        @{
+            data[nameof(Model.GenreId)] = Model.GenreId;
+        }
+        @await Html.PartialAsync("Components/_PageBarPartial", new PageBarModel(Model.CurrentPage, Model.MaxPages, data, "All", "Home"))
     </div>
 </section>

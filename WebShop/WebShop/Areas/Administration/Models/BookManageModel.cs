@@ -1,6 +1,6 @@
 ﻿namespace WebShop.App.Areas.Administration.Models
 {
-    using WebShop.App.Models.ComponentModels;
+    using WebShop.Services.Models.Shared;
     using WebShop.Services.Models.Administration;
 
     public class BookManageModel
@@ -26,13 +26,16 @@
                     Controller = "Manage",
                     ButtonClasses = "fas fa-user",
                     ButtonContent = a.Name,
-                    Parameters = $"AuthorId={a.Id}"
+                    Parameters  = new Dictionary<string, object?>()
+                    {
+                        { "AuthorId", a.Id }
+                    }
                 });
             });
 
             return elements;
         }
-        
+
         public List<DropdownListElement> GetGenres()
         {
             var elements = new List<DropdownListElement>();
@@ -46,7 +49,10 @@
                     Controller = "Manage",
                     ButtonClasses = "fas fa-book",
                     ButtonContent = a.Name,
-                    Parameters = $"GenreId={a.Id}"
+                    Parameters = new Dictionary<string, object?>()
+                    {
+                        { "GenreId", a.Id }
+                    }
                 });
             });
 

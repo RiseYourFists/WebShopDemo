@@ -1,7 +1,7 @@
-﻿using WebShop.Services.Contracts;
-
-namespace WebShop.Services.Models.BookShop
+﻿namespace WebShop.Services.Models.BookShop
 {
+    using Shared;
+    using Contracts;
     public class Catalogue
     {
         public int CurrentPage { get; set; }
@@ -17,5 +17,7 @@ namespace WebShop.Services.Models.BookShop
         public ItemSortClause SortClause { get; set; }
 
         public List<ItemCard> Items { get; set; } = new();
+
+        public List<DropdownListElement> Genres { get; set; } = new();
     }
 }

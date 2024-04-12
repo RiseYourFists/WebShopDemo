@@ -1,4 +1,4 @@
-﻿namespace WebShop.App.Models.ComponentModels
+﻿namespace WebShop.Services.Models.Shared
 {
     public class DropdownListElement
     {
@@ -16,7 +16,7 @@
             Parameters = null;
         }
 
-        public DropdownListElement(string area, string controller, string action, string buttonContent, string parameters)
+        public DropdownListElement(string area, string controller, string action, string buttonContent, Dictionary<string, object?> parameters)
         {
             Area = area;
             Controller = controller;
@@ -35,6 +35,6 @@
 
         public string? ButtonClasses { get; set; }
 
-        public string? Parameters { get; set; }
+        public Dictionary<string, object?> Parameters { get; set; }
     }
 }

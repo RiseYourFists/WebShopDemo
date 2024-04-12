@@ -1,10 +1,11 @@
 ﻿namespace WebShop.App.Models.ComponentModels
 {
+    using WebShop.Services.Models.Shared;
     public class DropdownModel
     {
         public DropdownModel()
         {
-            
+
         }
 
         public DropdownModel(
@@ -21,6 +22,6 @@
 
         public string? UnfoldButtonClasses { get; set; }
 
-        public  List<DropdownListElement> ElementList { get; set; } = new();
+        public List<DropdownListElement> ElementList { get; set; } = new();
     }
 }

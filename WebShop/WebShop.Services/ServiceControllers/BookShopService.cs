@@ -1,4 +1,6 @@
-﻿namespace WebShop.Services.ServiceControllers
+﻿using WebShop.Services.Models.Shared;
+
+namespace WebShop.Services.ServiceControllers
 {
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
@@ -52,6 +54,34 @@
                 .ToListAsync();
 
             return icons;
+        }
+
+        public async Task<List<DropdownListElement>> GetCategoryList()
+        {
+            var genres = await _repo
+                .AllReadonly<Genre>()
+                .OrderBy(g => g.Name)
+                .Select(g => new DropdownListElement()
+                {
+                    ButtonContent = g.Name,
+                    Parameters = new()
+                    {
+                        { "GenreId", g.Id }
+                    },
+                    ButtonClasses = "fas fa-book"
+                })
+                .ToListAsync();
+
+            genres.Insert(0, new DropdownListElement()
+            {
+                ButtonContent = "All",
+                Parameters = new()
+                {
+                    { "GenreId", 0 }
+                },
+                ButtonClasses = "fas fa-book"
+            });
+            return genres;
         }
 
         public async Task<List<ItemCard>> GetCatalogue(string searchTerm, int itemsOnPage, int genreId, ItemSortClause sortBy, int currentPage)

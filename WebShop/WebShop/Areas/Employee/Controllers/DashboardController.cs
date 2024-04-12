@@ -55,6 +55,7 @@ namespace WebShop.App.Areas.Employee.Controllers
             var itemsOnPage = 10;
             int lastPage = 1;
 
+
             List<Order> orders = new();
 
             if (isFromValid && isToValid && fromDate < toDate)
@@ -66,6 +67,16 @@ namespace WebShop.App.Areas.Employee.Controllers
             {
                 lastPage = await _employeeService.GetLastPage(orderStatus, null, null, itemsOnPage);
                 orders = await _employeeService.GetOrders(orderStatus, null, null, itemsOnPage, currentPage, orderClause);
+            }
+
+            if (currentPage > lastPage)
+            {
+                currentPage = lastPage;
+            }
+
+            if (currentPage < 1)
+            {
+                currentPage = 1;
             }
 
             var model = new OrderPageModel()
