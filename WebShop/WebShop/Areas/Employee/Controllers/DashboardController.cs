@@ -1,15 +1,15 @@
-﻿
-using System.Globalization;
-using System.Text;
-using WebShop.App.Areas.Employee.Models;
-using WebShop.Services.Models.MyOrders;
-using WebShop.Services.Models.MyOrders.Enumerations;
-using WebShop.Services.ServiceControllers;
-
-namespace WebShop.App.Areas.Employee.Controllers
+﻿namespace WebShop.App.Areas.Employee.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
+
+    using System.Globalization;
+    using System.Text;
+
+    using Models;
+    using Services.ServiceControllers;
+    using WebShop.Services.Models.MyOrders;
+    using WebShop.Services.Models.MyOrders.Enumerations;
 
     [Area(nameof(Employee))]
     [Authorize(Roles = "Admin, Employee")]
@@ -82,8 +82,8 @@ namespace WebShop.App.Areas.Employee.Controllers
             var model = new OrderPageModel()
             {
                 CurrentPage = currentPage,
-                From = string.IsNullOrWhiteSpace(from)? null : fromDate,
-                To = string.IsNullOrWhiteSpace(to)? null : toDate,
+                From = string.IsNullOrWhiteSpace(from) ? null : fromDate,
+                To = string.IsNullOrWhiteSpace(to) ? null : toDate,
                 LastPage = lastPage,
                 Orders = orders,
                 Order = orderClause,
@@ -119,10 +119,10 @@ namespace WebShop.App.Areas.Employee.Controllers
 
             if (!isValid)
             {
-                RedirectToAction("DetailedError", "Error", new { message = sb.ToString()});
+                RedirectToAction("DetailedError", "Error", new { message = sb.ToString() });
             }
 
-            return RedirectToAction("Orders", new {status = OrderStatus.Shipped.ToString()});
+            return RedirectToAction("Orders", new { status = OrderStatus.Shipped.ToString() });
         }
 
         [HttpPost]

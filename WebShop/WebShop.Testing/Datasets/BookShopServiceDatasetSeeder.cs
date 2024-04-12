@@ -144,6 +144,25 @@ namespace WebShop.Testing.Datasets
             await context.SaveChangesAsync();
         }
 
+        public static async Task<int> SeedFor_GetCategoryList_Tests(DbContext context)
+        {
+            var genres = new List<Genre>();
+
+            for (int i = 1; i <= 10; i++)
+            {
+                genres.Add(new()
+                {
+                    Id = i,
+                    Name = $"Genre{i}",
+                    IconLink = "Empty"
+                });
+            }
+
+            await context.AddRangeAsync(genres);
+            await context.SaveChangesAsync();
+            return genres.Count;
+        }
+
         public static async Task SeedFor_GetCatalogue_Test(DbContext context)
         {
             await context.AddRangeAsync(new List<Author>()

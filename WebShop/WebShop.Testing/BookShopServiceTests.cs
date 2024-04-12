@@ -62,6 +62,16 @@
         }
 
         [Test]
+        public async Task GetCategoryList_ReturnsCorrectData()
+        {
+            var expectedCount = await BookShopServiceDatasetSeeder.SeedFor_GetCategoryList_Tests(context) + 1;
+
+            var result = await service.GetCategoryList();
+
+            Assert.That(expectedCount == result.Count, GetErrorMsg(expectedCount, result.Count));
+        }
+
+        [Test]
         public async Task GetCatalogue_ReturnsCorrectData()
         {
             await BookShopServiceDatasetSeeder.SeedFor_GetCatalogue_Test(context);
