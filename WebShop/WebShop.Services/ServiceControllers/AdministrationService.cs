@@ -477,14 +477,14 @@
             {
                 promotion.GenrePromotions.Add(new GenrePromotion()
                 {
-                    Genre = genre
+                    GenreId = genre.Id
                 });
             }
             else
             {
                 promotion.AuthorPromotions.Add(new AuthorPromotion()
                 {
-                    Author = author
+                    AuthorId = author.Id
                 });
             }
 
@@ -639,11 +639,11 @@
             }
 
             var authorId = promotion.AuthorPromotions
-                .Select(ap => ap.Author.Id)
+                .Select(ap => ap.AuthorId)
                 .FirstOrDefault();
 
             var genreId = promotion.GenrePromotions
-                .Select(gp => gp.Genre.Id)
+                .Select(gp => gp.GenreId)
                 .FirstOrDefault();
 
             var canApplyPromotion = await _adminRepository
