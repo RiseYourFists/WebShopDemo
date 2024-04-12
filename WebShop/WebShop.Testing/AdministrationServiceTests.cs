@@ -537,7 +537,7 @@
                 StartDate = DateTime.MinValue,
                 EndDate = DateTime.MaxValue,
                 Name = "Promotion1-Edited",
-                PromotionType = "author-2"
+                PromotionType = "author-3"
             };
             await AdministrationServiceDatasetSeeder.SeedFor_AddAndEditPromotion_Tests(context);
 
@@ -550,7 +550,7 @@
                 .Include(p => p.AuthorPromotions)
                 .FirstAsync(p => p.Id == model.Id);
 
-            var isPromotionTypeChanged = result.AuthorPromotions.Any(ap => ap.AuthorId == 2) &&
+            var isPromotionTypeChanged = result.AuthorPromotions.Any(ap => ap.AuthorId == 3) &&
                                          result.GenrePromotions.Any() == false;
 
             Assert.IsTrue(isPromotionTypeChanged);
@@ -730,6 +730,62 @@
                 {
                     Assert.That(e.Message == ExistingPromotions, GetErrorMsg(ExistingPromotions, e.Message));
                 }
+            }
+        }
+
+        [Test]
+        public async Task AddPromotion_ThrowsWhenNoBooksAvaliable()
+        {
+            var model = new PromotionEditorModel()
+            {
+                Id = 1,
+                Action = EditAction.Edit,
+                DiscountPercent = 40,
+                StartDate = DateTime.MinValue,
+                EndDate = DateTime.MaxValue,
+                Name = "Promotion1-Edited",
+                PromotionType = "author-2"
+            };
+
+            await AdministrationServiceDatasetSeeder.SeedFor_AddAndEditPromotion_NegativeTests(context);
+
+            Assert.ThrowsAsync<InvalidOperationException>(async () => await _adminService.AddPromotion(model));
+
+            try
+            {
+                await _adminService.AddPromotion(model);
+            }
+            catch (Exception e)
+            {
+                Assert.That(e.Message == NoPromotionalAssortment, GetErrorMsg(NoPromotionalAssortment, e.Message));
+            }
+        }
+        
+        [Test]
+        public async Task EditPromotion_ThrowsWhenNoBooksAvaliable()
+        {
+            var model = new PromotionEditorModel()
+            {
+                Id = 1,
+                Action = EditAction.Edit,
+                DiscountPercent = 40,
+                StartDate = DateTime.MinValue,
+                EndDate = DateTime.MaxValue,
+                Name = "Promotion1-Edited",
+                PromotionType = "author-2"
+            };
+
+            await AdministrationServiceDatasetSeeder.SeedFor_AddAndEditPromotion_NegativeTests(context);
+
+            Assert.ThrowsAsync<InvalidOperationException>(async () => await _adminService.EditPromotion(model));
+
+            try
+            {
+                await _adminService.EditPromotion(model);
+            }
+            catch (Exception e)
+            {
+                Assert.That(e.Message == NoPromotionalAssortment, GetErrorMsg(NoPromotionalAssortment, e.Message));
             }
         }
 

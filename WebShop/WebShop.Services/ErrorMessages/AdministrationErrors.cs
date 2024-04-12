@@ -27,5 +27,7 @@
         public const string RoleOverflow = "Cannot promote higher than Admin!";
 
         public const string RoleUnderflow = "Cannot demote lower than user!";
+
+        public const string NoPromotionalAssortment = "There are no avaliable books on the selected genre/author.";
     }
 }

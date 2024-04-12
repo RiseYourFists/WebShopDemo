@@ -432,5 +432,99 @@
             await context.SaveChangesAsync();
             context.ChangeTracker.Clear();
         }
+
+        public static async Task SeedFor_AddAndEditPromotion_NegativeTests(DbContext context)
+        {
+            var promotions = new List<Promotion>()
+            {
+                new()
+                {
+                    Id = 1,
+                    Name = "Promotion1",
+                    DiscountPercent = 50,
+                    StartDate = DateTime.MinValue,
+                    EndDate = DateTime.MaxValue,
+                    AuthorPromotions = new List<AuthorPromotion>(),
+                    GenrePromotions = new List<GenrePromotion>()
+                },
+                new()
+                {
+                    Id = 2,
+                    Name = "Promotion2",
+                    DiscountPercent = 50,
+                    StartDate = DateTime.MinValue,
+                    EndDate = DateTime.MaxValue,
+                    GenrePromotions = new List<GenrePromotion>(),
+                    AuthorPromotions = new List<AuthorPromotion>()
+                }
+            };
+
+            var genrePromotions = new List<GenrePromotion>()
+            {
+                new()
+                {
+                    PromotionId = 1,
+                    GenreId = 1
+                }
+            };
+
+            var authorPromotions = new List<AuthorPromotion>()
+            {
+                new()
+                {
+                    PromotionId = 2,
+                    AuthorId = 1
+                }
+            };
+
+            var authors = new List<Author>()
+            {
+                new()
+                {
+                    Id = 1,
+                    Name = "Author1"
+                },
+                new()
+                {
+                    Id = 2,
+                    Name = "Author2"
+                },
+                new()
+                {
+                    Id = 3,
+                    Name = "Author3"
+                }
+            };
+
+            var genres = new List<Genre>()
+            {
+                new()
+                {
+                    Id = 1,
+                    Name = "Genre1",
+                    IconLink = "Empty",
+                },
+                new()
+                {
+                    Id = 2,
+                    Name = "Genre2",
+                    IconLink = "Empty"
+                },
+                new()
+                {
+                    Id = 3,
+                    Name = "Genre3",
+                    IconLink = "Empty"
+                }
+            };
+
+            await context.AddRangeAsync(genres);
+            await context.AddRangeAsync(authors);
+            await context.AddRangeAsync(promotions);
+            await context.AddRangeAsync(authorPromotions);
+            await context.AddRangeAsync(genrePromotions);
+            await context.SaveChangesAsync();
+            context.ChangeTracker.Clear();
+        }
     }
 }

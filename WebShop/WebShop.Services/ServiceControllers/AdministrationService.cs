@@ -646,6 +646,16 @@
                 .Select(gp => gp.Genre.Id)
                 .FirstOrDefault();
 
+            var canApplyPromotion = await _adminRepository
+                .AllReadonly<Book>()
+                .Where(b => b.AuthorId == authorId || b.GenreId == genreId)
+                .CountAsync() > 0;
+
+            if (!canApplyPromotion)
+            {
+                throw new InvalidOperationException(NoPromotionalAssortment);
+            }
+
             var start = promotion.StartDate;
             var end = promotion.EndDate;
 
@@ -673,6 +683,16 @@
 
             var authorId = promotion.AuthorPromotions.Select(ap => ap.Author.Id).FirstOrDefault();
             var genreId = promotion.GenrePromotions.Select(gp => gp.Genre.Id).FirstOrDefault();
+
+            var canApplyPromotion = await _adminRepository
+                .AllReadonly<Book>()
+                .Where(b => b.AuthorId == authorId || b.GenreId == genreId)
+                .CountAsync() > 0;
+
+            if (!canApplyPromotion)
+            {
+                throw new InvalidOperationException(NoPromotionalAssortment);
+            }
 
             var promotionId = promotion.Id;
             var start = promotion.StartDate;
