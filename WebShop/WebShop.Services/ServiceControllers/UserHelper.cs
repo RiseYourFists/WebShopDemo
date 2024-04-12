@@ -39,7 +39,7 @@
         public virtual async Task<TKey> GetUserId(ClaimsPrincipal user)
         {
             var userQuery = await UserManager.GetUserAsync(user);
-            return (TKey)Convert.ChangeType(userQuery.Id, typeof(TKey));
+            return (TKey)userQuery.Id;
         }
     }
 }

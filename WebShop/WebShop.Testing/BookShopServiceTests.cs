@@ -30,7 +30,7 @@
             var correctIds = new int[] { 1, 2, 3, 4, 6 };
             const int expectedCount = 5;
 
-            Assert.That(expectedCount == result.Count, $"Expected item count was {expectedCount} but got {result.Count}");
+            Assert.That(expectedCount == result.Count, GetErrorMsg(expectedCount, result.Count));
 
             bool hasCorrectIds = true;
             foreach (var id in correctIds)
@@ -58,7 +58,7 @@
 
             var result = await service.GetCategoryIcons();
             var expectedCount = 2;
-            Assert.That(result.Count == expectedCount, $"Expected {expectedCount} but got {result.Count}");
+            Assert.That(result.Count == expectedCount, GetErrorMsg(expectedCount, result.Count));
         }
 
         [Test]
@@ -95,7 +95,7 @@
             await BookShopServiceDatasetSeeder.SeedFor_MaxPages_Test(context);
 
             var result = await service.MaxPages(searchTerm, itemsOnPage, genreId);
-            Assert.That(expectedCount == result, $"Expected ${expectedCount} but got {result}");
+            Assert.That(expectedCount == result, GetErrorMsg(expectedCount, result));
         }
 
         [TestCase(5, 30.00)]
@@ -111,13 +111,13 @@
 
             if (expectedBook == null)
             {
-                Assert.IsNull(result, "Value expected to be null.");
+                Assert.IsNull(result, NullIsExpected);
             }
             else
             {
-                Assert.NotNull(result);
-                Assert.That(result.Id == expectedBook.Id, $"Expected item with id {id} but got {result.Id}");
-                Assert.That(result.CurrentPrice == expectedPrice, $"Invalid price expected {expectedPrice} but got {result.CurrentPrice}");
+                Assert.NotNull(result, ObjectNotNull);
+                Assert.That(result.Id == expectedBook.Id, GetErrorMsg(expectedBook.Id, result.Id));
+                Assert.That(result.CurrentPrice == expectedPrice, GetErrorMsg(expectedPrice, result.CurrentPrice));
             }
         }
 
@@ -129,7 +129,7 @@
 
             var result = await service.AnyBook(id);
 
-            Assert.That(result == expectedValue);
+            Assert.That(result == expectedValue, GetErrorMsg(expectedValue, result));
         }
     }
 }

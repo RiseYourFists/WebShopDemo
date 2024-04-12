@@ -1,11 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
-using WebShop.Core.Contracts;
-using WebShop.Core.Models.BookShop;
-using WebShop.Services.Models.MyOrders;
-using WebShop.Services.Models.MyOrders.Enumerations;
-
-namespace WebShop.Services.ServiceControllers
+﻿namespace WebShop.Services.ServiceControllers
 {
+    using Microsoft.EntityFrameworkCore;
+
+    using Models.MyOrders;
+    using Models.MyOrders.Enumerations;
+    using WebShop.Core.Contracts;
+    using WebShop.Core.Models.BookShop;
+    using static ErrorMessages.EmployeeErrors;
+
     public class EmployeeService
     {
         private readonly IEmployeeRepository _repository;
@@ -125,7 +127,7 @@ namespace WebShop.Services.ServiceControllers
 
             if (order == null)
             {
-                throw new InvalidOperationException("Invalid order id.");
+                throw new InvalidOperationException(InvalidOrderId);
             }
 
             order.IsShipped = true;
@@ -143,7 +145,7 @@ namespace WebShop.Services.ServiceControllers
 
             if (order == null)
             {
-                throw new InvalidOperationException("Invalid order id.");
+                throw new InvalidOperationException(InvalidOrderId);
             }
 
             order.DateFulfilled = DateTime.Now;

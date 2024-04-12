@@ -5,6 +5,7 @@
     using WebShop.Core.Models.BookShop;
     using Models.BookShop;
     using WebShop.Core.Contracts;
+    using static ErrorMessages.CartErrors;
 
     public class CartService
     {
@@ -73,7 +74,7 @@
         {
             if (!await IsCartValid(items))
             {
-                throw new InvalidOperationException("Invalid cart info!");
+                throw new InvalidOperationException(InvalidCartInfo);
             }
 
             var order = new PlacedOrder()

@@ -88,7 +88,8 @@
             {
                 foreach (var orderItem in result)
                 {
-                    Assert.IsTrue(validStatus.Contains(orderItem.OrderStatus), $"Expected {string.Join("/ ", validStatus)} but got {orderItem.OrderStatus}");
+                    var expected = string.Join("/ ", validStatus);
+                    Assert.IsTrue(validStatus.Contains(orderItem.OrderStatus), GetErrorMsg(expected, orderItem.OrderStatus.ToString()));
                 }
             }
 

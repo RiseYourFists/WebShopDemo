@@ -6,6 +6,7 @@
     using Core.Repository;
     using Services.ServiceControllers;
     using Services.Models.MyOrders.Enumerations;
+    using static Services.ErrorMessages.EmployeeErrors;
 
     public class EmployeeServiceTests : BaseTestSetup
     {
@@ -178,7 +179,7 @@
 
             Assert.ThrowsAsync<InvalidOperationException>(() => _employeeService.MarkAsShipped(id));
 
-            var expectedMsg = "Invalid order id.";
+            var expectedMsg = InvalidOrderId;
 
             try
             {
@@ -216,7 +217,7 @@
 
             Assert.ThrowsAsync<InvalidOperationException>(() => _employeeService.MarkAsDelivered(id));
 
-            var expectedMsg = "Invalid order id.";
+            var expectedMsg = InvalidOrderId;
 
             try
             {

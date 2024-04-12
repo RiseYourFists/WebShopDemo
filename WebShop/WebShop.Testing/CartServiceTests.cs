@@ -1,13 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using WebShop.Services.Models.BookShop;
-
-namespace WebShop.Testing
+﻿namespace WebShop.Testing
 {
+    using Microsoft.EntityFrameworkCore;
+
     using Datasets;
     using Core.Data;
     using Core.Contracts;
     using Core.Repository;
+    using Services.Models.BookShop;
     using Services.ServiceControllers;
+    using static Services.ErrorMessages.CartErrors;
 
     public class CartServiceTests : BaseTestSetup
     {
@@ -22,7 +23,7 @@ namespace WebShop.Testing
             _service = new CartService(bookShopRepository);
         }
 
-        [TestCase( "1, 1|2, 1", 2, 75.00)]
+        [TestCase("1, 1|2, 1", 2, 75.00)]
         public async Task GetShopItems_ReturnsCorrectData(string data, int expectedItems, decimal expectedTotalPrice)
         {
             var tokens = data.Split('|');
@@ -39,8 +40,10 @@ namespace WebShop.Testing
             await CartServiceDatasetSeeder.SeedFor_GetShopItems_Test(context);
             var result = await _service.GetShopItems(items);
 
-            Assert.That(result.Count == expectedItems, $"Expected: {expectedItems}.\r\n But got: {result.Count}");
-            Assert.That(result.Sum(r => r.TotalPrice) == expectedTotalPrice, $"Expected: {expectedTotalPrice}\r\n But got: {result.Sum(r => r.TotalPrice)}");
+            Assert.That(result.Count == expectedItems, GetErrorMsg(expectedItems, result.Count));
+
+            var totalPrice = result.Sum(r => r.TotalPrice);
+            Assert.That(totalPrice == expectedTotalPrice, GetErrorMsg(expectedTotalPrice, totalPrice));
         }
 
         [TestCase("1, 2|2, 1", 100.00)]
@@ -60,7 +63,7 @@ namespace WebShop.Testing
             await CartServiceDatasetSeeder.SeedFor_GetShopItems_Test(context);
             var result = await _service.GetTotalPrice(items);
 
-            Assert.That(result == expectedTotalPrice, $"Expected: {expectedTotalPrice}\r\n But got: {result}");
+            Assert.That(result == expectedTotalPrice, GetErrorMsg(expectedTotalPrice, result));
         }
 
         [TestCase("1, 1|2, 1", true)]
@@ -82,7 +85,7 @@ namespace WebShop.Testing
             await CartServiceDatasetSeeder.SeedFor_GetShopItems_Test(context);
             var result = await _service.IsCartValid(items);
 
-            Assert.That(result == expected, $"Expected: {expected}\r\nBut got: {result}");
+            Assert.That(result == expected, GetErrorMsg(expected, result));
         }
 
         [Test]
@@ -104,7 +107,7 @@ namespace WebShop.Testing
 
             var userId = Guid.Parse("07fbc9e3-0d5f-4c5d-a1f7-ef1fd67f33c8");
 
-            Assert.ThrowsAsync<InvalidOperationException>(()=> _service.AddNewOrder(items, model, userId));
+            Assert.ThrowsAsync<InvalidOperationException>(() => _service.AddNewOrder(items, model, userId));
 
             try
             {
@@ -112,8 +115,8 @@ namespace WebShop.Testing
             }
             catch (Exception e)
             {
-                var expectedMsg = "Invalid cart info!";
-                Assert.That(e.Message == expectedMsg, $"Expected message: {expectedMsg}\r\n But got: {e.Message}");
+                var expectedMsg = InvalidCartInfo;
+                Assert.That(e.Message == expectedMsg, GetErrorMsg(expectedMsg, e.Message));
             }
         }
 
@@ -168,7 +171,7 @@ namespace WebShop.Testing
         {
             await CartServiceDatasetSeeder.SeedFor_GetInvoice_Test(context);
             var result = await _service.GetCurrentInvoice(Guid.Parse("b596e9c4-9dcb-4826-8712-31d6d9b9e4c2"));
-            Assert.IsNull(result, "The result must be null");
+            Assert.IsNull(result, NullIsExpected);
         }
 
         [Test]
