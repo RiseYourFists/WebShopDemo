@@ -1,5 +1,6 @@
 ﻿namespace WebShop.Testing
 {
+    using Moq;
     using System.Security.Claims;
 
     using Datasets;
@@ -8,6 +9,7 @@
     using Core.Contracts;
     using Core.Data;
     using Core.Repository;
+    using Core.Models.Identity;
 
     using Services.ServiceControllers;
     using Services.Models.MyOrders.Enumerations;
@@ -22,7 +24,13 @@
         {
             base.Setup<ApplicationDbContext>();
             repository = new OrdersRepository((ApplicationDbContext)context);
-            var userHelper = new UserHelperMock();
+
+
+            var userHelperMock = new Mock<UserHelper<ApplicationUser, Guid>>(UserHelperMockSetup.UserManagerMock.Object, UserHelperMockSetup.SignInManagerMock.Object);
+
+            userHelperMock.ConfigureMock();
+
+            var userHelper = userHelperMock.Object;
             _service = new MyOrderService(repository, userHelper);
         }
 

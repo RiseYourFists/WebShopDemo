@@ -1,6 +1,4 @@
-﻿using WebShop.Services.Contracts;
-
-namespace WebShop.App.BuilderConfigurationExtensions
+﻿namespace WebShop.App.BuilderConfigurationExtensions
 {
     using Ganss.Xss;
     using Core.Data;
@@ -8,10 +6,18 @@ namespace WebShop.App.BuilderConfigurationExtensions
     using Core.Repository;
     using Services.ServiceControllers;
     using WebShop.Core.Models.Identity;
+    using Services.Contracts;
     public static class DependencyConfiguration
     {
         public static IServiceCollection AddDependencies(this IServiceCollection services)
         {
+            services.AddScoped<UserHelper<ApplicationUser, Guid>>();
+            services.AddScoped<IBookShopRepository, BookShopRepository>();
+            services.AddScoped<IHtmlSanitizer, HtmlSanitizer>();
+            services.AddScoped<IOrdersRepository, OrdersRepository>();
+            services.AddScoped<IAdminRepository, AdminRepository>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+
             services.AddAutoMapper(typeof(MappingProfile));
             services.AddScoped<ApplicationDbContext>();
             services.AddScoped<BookShopService>();
@@ -19,13 +25,6 @@ namespace WebShop.App.BuilderConfigurationExtensions
             services.AddScoped<MyOrderService>();
             services.AddScoped<AdministrationService>();
             services.AddScoped<EmployeeService>();
-
-            services.AddScoped<IUserHelper<ApplicationUser, Guid>,UserHelper<ApplicationUser, Guid>>();
-            services.AddScoped<IBookShopRepository, BookShopRepository>();
-            services.AddScoped<IHtmlSanitizer, HtmlSanitizer>();
-            services.AddScoped<IOrdersRepository, OrdersRepository>();
-            services.AddScoped<IAdminRepository, AdminRepository>();
-            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             return services;
         }
     }

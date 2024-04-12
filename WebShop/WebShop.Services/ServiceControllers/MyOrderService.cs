@@ -1,5 +1,4 @@
-﻿
-namespace WebShop.Services.ServiceControllers
+﻿namespace WebShop.Services.ServiceControllers
 {
     using System.Security.Claims;
     using Microsoft.EntityFrameworkCore;
@@ -9,12 +8,11 @@ namespace WebShop.Services.ServiceControllers
     using WebShop.Core.Contracts;
     using WebShop.Core.Models.BookShop;
     using WebShop.Core.Models.Identity;
-    using Contracts;
     public class MyOrderService
     {
         private readonly IOrdersRepository _repository;
-        private readonly IUserHelper<ApplicationUser, Guid> _userHelper;
-        public MyOrderService(IOrdersRepository repository, IUserHelper<ApplicationUser, Guid> userHelper)
+        private readonly UserHelper<ApplicationUser, Guid> _userHelper;
+        public MyOrderService(IOrdersRepository repository, UserHelper<ApplicationUser, Guid> userHelper)
         {
             _repository = repository;
             _userHelper = userHelper;
