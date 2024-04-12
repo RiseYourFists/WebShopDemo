@@ -992,6 +992,10 @@ html {
   justify-items: center;
 }
 
+#genres .img-wrapper{
+  padding: 15px;
+}
+
 #genres>* {
   min-width: 85px;
   width: 15rem;

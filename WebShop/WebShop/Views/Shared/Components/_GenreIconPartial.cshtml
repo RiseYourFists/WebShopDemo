@@ -4,7 +4,9 @@
     foreach (var icon in Model)
     {
         <a href="@Url.Action("All", "Home", new{ GenreId = icon.Id })">
-            <img src="@icon.IconLink" alt="">
+            <div class="img-wrapper">
+                <img src="@icon.IconLink" alt="">
+            </div>
             <div class="title">
                 <p>@icon.Name</p>
             </div>
