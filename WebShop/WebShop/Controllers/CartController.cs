@@ -76,7 +76,7 @@
 
         public IActionResult Clear()
         {
-           ClearCart();
+            ClearCart();
 
             return RedirectToAction("Index", "Home");
         }
@@ -110,34 +110,42 @@
         [HttpPost]
         public async Task<IActionResult> Order(OrderModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
+            var isValid = ModelState.IsValid;
             var userId = await _userHelper.GetUserId(User);
-            try
+
+            if (isValid)
             {
-
-                var cart = GetCart();
-
-                if (cart.Count == 0)
+                try
                 {
-                    ModelState.AddModelError("All", "Invalid cart data!");
-                    return View(model);
+
+                    var cart = GetCart();
+
+                    if (cart.Count == 0)
+                    {
+                        ModelState.AddModelError("All", "Invalid cart data!");
+                        isValid = false;
+                    }
+                    else
+                    {
+                        await _cartService.AddNewOrder(cart, model, userId);
+                    }
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("All", e.Message);
+                    isValid = false;
                 }
 
-                await _cartService.AddNewOrder(cart, model, userId);
             }
-            catch (Exception e)
+
+            if (!isValid)
             {
-                ModelState.AddModelError("All", e.Message);
+                model.TotalPrice = await _cartService.GetTotalPrice(GetCart());
                 return View(model);
             }
 
             ClearCart();
             var invoice = await _cartService.GetCurrentInvoice(userId);
-
             return View(nameof(OrderDetails), invoice);
         }
 
