@@ -1,1 +1,1 @@
-# SoftuniWebShop
+# Web Book Shop Demo Project
