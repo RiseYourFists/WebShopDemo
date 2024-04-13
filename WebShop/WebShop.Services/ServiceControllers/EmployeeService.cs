@@ -17,6 +17,21 @@
             _repository = repository;
         }
 
+        /// <summary>
+        /// Gets all orders by specified filters.
+        /// </summary>
+        /// <param name="status">
+        ///     <para>Selects an order by its status. There are 3 possible status types:</para>
+        ///     <para>  -OrderStatus.Pending: When IsShipped is false and there's no Delivery date.</para>
+        ///     <para>  -OrderStatus.Shipped: When IsShipped is true and there's no delivery date.</para>
+        ///     <para>  -OrderStatus.Delivered: When IsShipped is true and there is a delivery date value.</para>
+        /// </param>
+        /// <param name="from">Start day of search.</param>
+        /// <param name="to">End day of search.</param>
+        /// <param name="itemsOnPage">Determines how many items to show in page.</param>
+        /// <param name="currentPage">Page section.</param>
+        /// <param name="orderedBy">Sorting option that can sort Total Price and Order date by Asc/Desc.</param>
+        /// <returns>Task&lt;List&lt;Order&gt;&gt;</returns>
         public async Task<List<Order>> GetOrders(OrderStatus status, DateTime? from, DateTime? to, int itemsOnPage, int currentPage, OrderClause orderedBy)
         {
             var query = _repository
@@ -92,6 +107,19 @@
             return result;
         }
 
+        /// <summary>
+        /// Gets the last possible page of the search result.
+        /// </summary>
+        /// <param name="status">
+        ///     <para>Selects an order by its status. There are 3 possible status types:</para>
+        ///     <para>  -OrderStatus.Pending: When IsShipped is false and there's no Delivery date.</para>
+        ///     <para>  -OrderStatus.Shipped: When IsShipped is true and there's no delivery date.</para>
+        ///     <para>  -OrderStatus.Delivered: When IsShipped is true and there is a delivery date value.</para>
+        /// </param>
+        /// <param name="from">Start day of search.</param>
+        /// <param name="to">End day of search.</param>
+        /// <param name="itemsOnPage">Determines how many items to show in page.</param>
+        /// <returns>Task&lt;int&gt;</returns>
         public async Task<int> GetLastPage(OrderStatus status, DateTime? from, DateTime? to, int itemsOnPage)
         {
             var query = _repository
@@ -102,6 +130,19 @@
             return await query.CountAsync() / itemsOnPage;
         }
 
+        /// <summary>
+        /// An additional filtering query to reduce redundant typing for similar checks.
+        /// </summary>
+        /// <param name="query">Current query.</param>
+        /// <param name="status">
+        ///     <para>Selects an order by its status. There are 3 possible status types:</para>
+        ///     <para>  -OrderStatus.Pending: When IsShipped is false and there's no Delivery date.</para>
+        ///     <para>  -OrderStatus.Shipped: When IsShipped is true and there's no delivery date.</para>
+        ///     <para>  -OrderStatus.Delivered: When IsShipped is true and there is a delivery date value.</para>
+        /// </param>
+        /// <param name="from">Start day of search.</param>
+        /// <param name="to">End day of search.</param>
+        /// <returns>IQueryable&lt;PlacedOrder&gt;</returns>
         private static IQueryable<PlacedOrder> GetFilter(IQueryable<PlacedOrder> query, OrderStatus status, DateTime? from, DateTime? to)
         {
             if (from.HasValue && to.HasValue && from < to)
@@ -119,6 +160,12 @@
             return query;
         }
 
+        /// <summary>
+        /// Flips the IsShipped flag of PlacedOrder to true.
+        /// </summary>
+        /// <param name="id">Key identifier.</param>
+        /// <returns>Task&lt;bool&gt;</returns>
+        /// <exception cref="InvalidOperationException"></exception>
         public async Task<bool> MarkAsShipped(Guid id)
         {
             var order = await _repository
@@ -137,6 +184,12 @@
             return result;
         }
 
+        /// <summary>
+        /// Adds DateTime.Now to DateFulfilled.
+        /// </summary>
+        /// <param name="id">Key identifier.</param>
+        /// <returns>Task&lt;bool&gt;</returns>
+        /// <exception cref="InvalidOperationException"></exception>
         public async Task<bool> MarkAsDelivered(Guid id)
         {
             var order = await _repository
