@@ -18,6 +18,11 @@
             _userHelper = userHelper;
         }
 
+        /// <summary>
+        /// Gets the count of all orders that don't have a DateFulfilled.
+        /// </summary>
+        /// <param name="user">Current user.</param>
+        /// <returns>Task&lt;int&gt;</returns>
         public async Task<int> GetActiveOrderCount(ClaimsPrincipal user)
         {
             var userId = await _userHelper.GetUserId(user);
@@ -29,6 +34,11 @@
 
         }
 
+        /// <summary>
+        /// Checks if there are any orders made by the user.
+        /// </summary>
+        /// <param name="user">Current user.</param>
+        /// <returns>Task&lt;bool&gt;</returns>
         public async Task<bool> AnyUserOrdersPresent(ClaimsPrincipal user)
         {
             var userId = await _userHelper.GetUserId(user);
@@ -36,6 +46,20 @@
                 .AnyAsync(o => o.UserId == userId);
         }
 
+        /// <summary>
+        /// Gets all orders by specified filters.
+        /// </summary>
+        /// <param name="user">Current user.</param>
+        /// <param name="status">
+        ///     <para>Selects an order by its status. There are 3 possible status types:</para>
+        ///     <para>  -OrderStatus.Pending: When IsShipped is false and there's no Delivery date.</para>
+        ///     <para>  -OrderStatus.Shipped: When IsShipped is true and there's no delivery date.</para>
+        ///     <para>  -OrderStatus.Delivered: When IsShipped is true and there is a delivery date value.</para>
+        /// </param>
+        /// <param name="from">Start day of search.</param>
+        /// <param name="to">End day of search.</param>
+        /// <param name="orderedBy">Sorting option that can sort Total Price and Order date by Asc/Desc.</param>
+        /// <returns>Task&lt;List&lt;Order&gt;&gt;</returns>
         public async Task<List<Order>> GetUserOrders(ClaimsPrincipal user, OrderStatus status, OrderClause orderedBy, DateTime? from, DateTime? to)
         {
             var userId = await _userHelper.GetUserId(user);
