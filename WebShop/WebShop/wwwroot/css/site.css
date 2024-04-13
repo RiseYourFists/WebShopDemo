@@ -498,6 +498,10 @@ a:hover {
   justify-content: center;
 }
 
+div.title h2{
+  color: var(--primary-color);
+}
+
 .logo {
   font-size: 1.7rem;
   color: var(--primary-color);

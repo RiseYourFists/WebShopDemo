@@ -33,6 +33,9 @@
             UnfoldButtonContent = "Genres"
         })
         <input type="hidden" asp-for="GenreId"/>
+        <div class="title">
+            <h2>@Model.Genres.First(g => (int)g.Parameters["GenreId"] == Model.GenreId).ButtonContent</h2>
+        </div>
         <section class="filter-bar">
             <div class="select-input">
                 <label asp-for="SortClause">Sort by:</label>
