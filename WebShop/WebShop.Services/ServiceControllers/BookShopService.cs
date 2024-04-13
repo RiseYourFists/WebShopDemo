@@ -1,6 +1,4 @@
-﻿using WebShop.Services.Models.Shared;
-
-namespace WebShop.Services.ServiceControllers
+﻿namespace WebShop.Services.ServiceControllers
 {
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
@@ -9,6 +7,7 @@ namespace WebShop.Services.ServiceControllers
 
     using Contracts;
     using Core.Contracts;
+    using Models.Shared;
     using Models.BookShop;
     using System.Globalization;
     using WebShop.Core.Models.BookShop;
@@ -22,6 +21,10 @@ namespace WebShop.Services.ServiceControllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Gets 5 of the cheapest books. Promotions are being accounted as well.
+        /// </summary>
+        /// <returns>Task&lt;List&lt;ItemCard&gt;&gt;</returns>
         public async Task<List<ItemCard>> GetTopFiveOffers()
         {
             var books = await _repo
@@ -45,6 +48,10 @@ namespace WebShop.Services.ServiceControllers
             return result;
         }
 
+        /// <summary>
+        /// Gets all genres for the home page.
+        /// </summary>
+        /// <returns>Task&lt;List&lt;GenreCategoryIcon&gt;&gt;</returns>
         public async Task<List<GenreCategoryIcon>> GetCategoryIcons()
         {
             var icons = await _repo
@@ -56,6 +63,10 @@ namespace WebShop.Services.ServiceControllers
             return icons;
         }
 
+        /// <summary>
+        /// Gets all the genres and adds a genre with Id of 0 for all genres
+        /// </summary>
+        /// <returns>Task&lt;List&lt;DropdownListElement&gt;&gt;</returns>
         public async Task<List<DropdownListElement>> GetCategoryList()
         {
             var genres = await _repo
@@ -84,6 +95,15 @@ namespace WebShop.Services.ServiceControllers
             return genres;
         }
 
+        /// <summary>
+        /// Gets all books filtered by a set of parameters.
+        /// </summary>
+        /// <param name="searchTerm">Filters books by matching the term with Title and Author name</param>
+        /// <param name="itemsOnPage">Determines how many books a page can have</param>
+        /// <param name="genreId">Takes only matching genreIds, if Id == 0 it skips filtering.</param>
+        /// <param name="sortBy">Sorts the books by name or price asc/desc.</param>
+        /// <param name="currentPage">Gets a corresponding page.</param>
+        /// <returns>Task&lt;List&lt;ItemCard&gt;&gt;</returns>
         public async Task<List<ItemCard>> GetCatalogue(string searchTerm, int itemsOnPage, int genreId, ItemSortClause sortBy, int currentPage)
         {
             var books = _repo.AllReadonly<Book>()
@@ -98,7 +118,6 @@ namespace WebShop.Services.ServiceControllers
             {
                 books = books.Where(b =>
                     EF.Functions.Like(b.Title.ToLower(), $"%{searchTerm}%")
-                    || EF.Functions.Like(b.Description.ToLower(), $"%{searchTerm}%")
                     || EF.Functions.Like(b.Author.Name.ToLower(), $"%{searchTerm}%"));
             }
 
@@ -155,6 +174,13 @@ namespace WebShop.Services.ServiceControllers
             return result;
         }
 
+        /// <summary>
+        /// Returns the last possible page of the search result.
+        /// </summary>
+        /// <param name = "searchTerm" > Filters books by matching the term with Title and Author name</param>
+        /// <param name="itemsOnPage">Determines how many books a page can have</param>
+        /// <param name="genreId">Takes only matching genreIds, if Id == 0 it skips filtering.</param>
+        /// <returns></returns>
         public async Task<int> MaxPages(string searchTerm, int itemsOnPage, int genreId)
         {
             var books = _repo.AllReadonly<Book>();
@@ -168,7 +194,6 @@ namespace WebShop.Services.ServiceControllers
             {
                 books = books.Where(b =>
                     EF.Functions.Like(b.Title.ToLower(), $"%{searchTerm}%")
-                    || EF.Functions.Like(b.Description.ToLower(), $"%{searchTerm}%")
                     || EF.Functions.Like(b.Author.Name.ToLower(), $"%{searchTerm}%"));
             }
 
@@ -177,6 +202,12 @@ namespace WebShop.Services.ServiceControllers
             return int.Parse(itemCount.ToString(CultureInfo.InvariantCulture));
         }
 
+        /// <summary>
+        /// Gets full book info by its key identifier for display.
+        /// Returns null if there are no results.
+        /// </summary>
+        /// <param name="id">Key identifier</param>
+        /// <returns>Task&lt;BookDetail?&gt;</returns>
         public async Task<BookDetail?> GetBookInfo(int id)
         {
             var book = await _repo
@@ -203,6 +234,11 @@ namespace WebShop.Services.ServiceControllers
             return result;
         }
 
+        /// <summary>
+        /// Checks if a book with the specified id exists in the context.
+        /// </summary>
+        /// <param name="id">Key identifier.</param>
+        /// <returns>Task&lt;bool&gt;</returns>
         public async Task<bool> AnyBook(int id)
         {
             return await _repo
@@ -210,6 +246,12 @@ namespace WebShop.Services.ServiceControllers
                 .AnyAsync(b => b.Id == id);
         }
 
+        /// <summary>
+        /// Gets the promotion discount percent if there's an existing promotion otherwise it returns 0.
+        /// </summary>
+        /// <param name="genreId">Book's genre id.</param>
+        /// <param name="authorId">Book's author id</param>
+        /// <returns>Task&lt;decimal&gt;</returns>
         private async Task<decimal> GetPromotion(int genreId, int authorId)
         {
 
