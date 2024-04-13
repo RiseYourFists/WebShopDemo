@@ -1045,11 +1045,11 @@ html {
 }
 
 #search-result .content {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  justify-items: center;
   gap: 20px;
   margin-bottom: 100px;
-  justify-content: center;
   padding: 3em 0;
   max-width: 1200px;
 }

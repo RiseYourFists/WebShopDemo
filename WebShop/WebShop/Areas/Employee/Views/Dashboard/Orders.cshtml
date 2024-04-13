@@ -38,10 +38,10 @@
                     var orderList = (OrderClause[])Enum.GetValues(typeof(OrderClause));
                     var naming = new Dictionary<OrderClause, string>()
                     {
-                        { OrderClause.OrderDateAsc, "Order date ascending"},
-                        { OrderClause.OrderDateDesc, "Order date descending"},
-                        { OrderClause.TotalPriceAsc, "Total price ascending"},
-                        { OrderClause.TotalPriceDesc, "Total price descending"}
+                        { OrderClause.OrderDateAsc, "Order date (Low -> High)"},
+                        { OrderClause.OrderDateDesc, "Order date (High -> Low)"},
+                        { OrderClause.TotalPriceAsc, "Total price (Low -> High)"},
+                        { OrderClause.TotalPriceDesc, "Total price (High -> Low)"}
                     };
 
                     foreach (var clause in orderList)
