@@ -16,6 +16,11 @@
             _repository = repository;
         }
 
+        /// <summary>
+        /// Gets visual information of the cart and calculates the total price of each item.
+        /// </summary>
+        /// <param name="items">A dictionary of Id =&gt; Quantity</param>
+        /// <returns> Task&lt;List&lt;CartListItem&gt;&gt;</returns>
         public async Task<List<CartListItem>> GetShopItems(Dictionary<int, int> items)
         {
             var books = await _repository
@@ -38,6 +43,11 @@
 
         }
 
+        /// <summary>
+        /// Gets the total price of all books from the cart.
+        /// </summary>
+        /// <param name="items">A dictionary of Id =&gt; Quantity</param>
+        /// <returns>Task&lt;decimal&gt;</returns>
         public async Task<decimal> GetTotalPrice(Dictionary<int, int> items)
         {
             var books = await _repository
@@ -51,6 +61,11 @@
             return result;
         }
 
+        /// <summary>
+        /// Checks if all items exist in the context and have enough quantity in stock.
+        /// </summary>
+        /// <param name="items">A dictionary of Id =&gt; Quantity</param>
+        /// <returns>Task&lt;bool&gt;</returns>
         public async Task<bool> IsCartValid(Dictionary<int, int> items)
         {
             var keys = items.Keys;
@@ -70,6 +85,14 @@
             return isValid;
         }
 
+        /// <summary>
+        /// Adds new placed order to the context with Pending status.
+        /// </summary>
+        /// <param name="items"></param>
+        /// <param name="model"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"></exception>
         public async Task AddNewOrder(Dictionary<int, int> items, OrderModel model, Guid userId)
         {
             if (!await IsCartValid(items))
@@ -108,6 +131,12 @@
             await _repository.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// Gets the last PlacedOrder made from the user.
+        /// Returns null if no record is found.
+        /// </summary>
+        /// <param name="userId">User key identifier.</param>
+        /// <returns>Task&lt;Invoice?&gt;</returns>
         public async Task<Invoice?> GetCurrentInvoice(Guid userId)
         {
             var result = await _repository
@@ -131,6 +160,13 @@
             return result;
         }
 
+        /// <summary>
+        /// Gets the promotion discount percent if there's an existing promotion otherwise it returns 0.
+        /// </summary>
+        /// <param name="repository">Repository that holds the promotion.</param>
+        /// <param name="genreId">Book's genre id.</param>
+        /// <param name="authorId">Book's author id</param>
+        /// <returns>Task&lt;decimal&gt;</returns>
         private async Task<decimal> GetPromotion(IRepository repository, int genreId, int authorId)
         {
             var promotion = await repository
