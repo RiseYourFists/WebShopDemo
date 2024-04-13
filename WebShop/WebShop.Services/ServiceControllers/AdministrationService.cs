@@ -30,6 +30,10 @@
             _adminRepository = adminRepository;
         }
 
+        /// <summary>
+        /// Gets all genres and adds a genre with id 0 for all genres.
+        /// </summary>
+        /// <returns>Task&lt;List&lt;GenreListItem&gt;&gt;</returns>
         public async Task<List<GenreListItem>> GetGenres()
         {
             var result = await _adminRepository
@@ -46,6 +50,10 @@
             return result;
         }
 
+        /// <summary>
+        /// Gets all authors and adds an author with id 0 for all authors.
+        /// </summary>
+        /// <returns>Task&lt;List&lt;AuthorListItem&gt;&gt;</returns>
         public async Task<List<AuthorListItem>> GetAuthors()
         {
             var result = await _adminRepository
@@ -62,6 +70,13 @@
             return result;
         }
 
+        /// <summary>
+        /// Returns all books.
+        /// </summary>
+        /// <param name="searchTerm">Filter that's compared with book titles. (optional)</param>
+        /// <param name="authorId">Author id for filtering (optional)</param>
+        /// <param name="genreId">Genre id for filtering (optional)</param>
+        /// <returns>Task&lt;List&lt;BookListItem&gt;&gt;</returns>
         public async Task<List<BookListItem>> GetBooks(string searchTerm, int? authorId, int? genreId)
         {
             var query = _adminRepository
@@ -100,6 +115,10 @@
             return result;
         }
 
+        /// <summary>
+        /// Gets all genres for the custom select element.
+        /// </summary>
+        /// <returns>Task&lt;List&lt;SelectionItemModel&gt;&gt;</returns>
         public async Task<List<SelectionItemModel>> GetGenresSelectionItem()
         {
             var genres = await _adminRepository
@@ -114,6 +133,10 @@
             return genres;
         }
 
+        /// <summary>
+        /// Gets all authors for the custom select element.
+        /// </summary>
+        /// <returns>Task&lt;List&lt;SelectionItemModel&gt;&gt;</returns>
         public async Task<List<SelectionItemModel>> GetAuthorsSelectionItem()
         {
             var authors = await _adminRepository
@@ -128,6 +151,12 @@
             return authors;
         }
 
+        /// <summary>
+        /// Gets whole info of a book by its corresponding id.
+        /// If nothing is found null is returned
+        /// </summary>
+        /// <param name="id">Key identifier.</param>
+        /// <returns>Task&lt;BookInfoModel?&gt;</returns>
         public async Task<BookInfoModel?> GetBookInfo(int id)
         {
             var book = await _adminRepository
@@ -138,6 +167,11 @@
             return book;
         }
 
+        /// <summary>
+        /// Checks if a genre with the specified id exists.
+        /// </summary>
+        /// <param name="id">Key identifier.</param>
+        /// <returns>Task&lt;bool&gt;</returns>
         public async Task<bool> AnyGenre(int id)
         {
             return await _adminRepository
@@ -145,6 +179,11 @@
                 .AnyAsync(g => g.Id == id);
         }
 
+        /// <summary>
+        /// Checks if an author with the specified id exists.
+        /// </summary>
+        /// <param name="id">Key identifier.</param>
+        /// <returns>Task&lt;bool&gt;</returns>
         public async Task<bool> AnyAuthor(int id)
         {
             return await _adminRepository
@@ -152,6 +191,12 @@
                 .AnyAsync(a => a.Id == id);
         }
 
+        /// <summary>
+        /// Gets a book by its specified identifier and returns a tracked entity that's ready for editing.
+        /// Returns null if no book with the specified id is found.
+        /// </summary>
+        /// <param name="id">Key identifier.</param>
+        /// <returns>Task&lt;Book?&gt;</returns>
         public async Task<Book?> GetBook(int id)
         {
             return await _adminRepository
@@ -159,6 +204,13 @@
                 .FirstOrDefaultAsync(b => b.Id == id);
         }
 
+        /// <summary>
+        /// Edits the info of the whole book.
+        /// Returns true if all the changes have been applied successfully.
+        /// </summary>
+        /// <param name="model">DTO model to map the info to the entity.</param>
+        /// <returns>Task&lt;bool&gt;</returns>
+        /// <exception cref="InvalidOperationException"></exception>
         public async Task<bool> EditBookInfo(BookInfoModel model)
         {
             var book = await GetBook(model.Id);
@@ -188,6 +240,12 @@
             return result;
         }
 
+        /// <summary>
+        /// Gets the whole info of a genre with a specified id.
+        /// Returns null if nothing is found.
+        /// </summary>
+        /// <param name="id">Key identifier</param>
+        /// <returns>Task&lt;GenreEditorModel?&gt;</returns>
         public async Task<GenreEditorModel?> GetGenreInfo(int id)
         {
             return await _adminRepository
@@ -196,6 +254,12 @@
                 .FirstOrDefaultAsync(g => g.Id == id);
         }
 
+        /// <summary>
+        /// Adds a new genre to the context.
+        /// Returns true if it's successfully added.
+        /// </summary>
+        /// <param name="model">DTO model to map the info to the entity.</param>
+        /// <returns>Task&lt;bool&gt;</returns>
         public async Task<bool> AddNewGenre(GenreEditorModel model)
         {
             var genre = _mapper.Map<Genre>(model);
@@ -205,6 +269,13 @@
             return result;
         }
 
+        /// <summary>
+        /// Edits the info of an existing genre.
+        /// Returns true if changes are applied successfully.
+        /// </summary>
+        /// <param name="model">DTO model to map the info to the entity.</param>
+        /// <returns>Task&lt;bool&gt;</returns>
+        /// <exception cref="InvalidOperationException"></exception>
         public async Task<bool> EditGenre(GenreEditorModel model)
         {
             var doesGenreExist = await AnyGenre(model.Id);
@@ -224,6 +295,12 @@
             return result;
         }
 
+        /// <summary>
+        /// Gets the whole info of an author with a specified id.
+        /// Returns null if nothing is found.
+        /// </summary>
+        /// <param name="id">Key identifier</param>
+        /// <returns>Task&lt;AuthorEditorModel?&gt;</returns>
         public async Task<AuthorEditorModel?> GetAuthorInfo(int id)
         {
             return await _adminRepository
@@ -232,6 +309,13 @@
                 .FirstOrDefaultAsync(a => a.Id == id);
         }
 
+
+        /// <summary>
+        /// Adds new author to the context.
+        /// Returns true if added successfully.
+        /// </summary>
+        /// <param name="model">DTO model to map the info to the entity.</param>
+        /// <returns>Task&lt;bool&gt;</returns>
         public async Task<bool> AddNewAuthor(AuthorEditorModel model)
         {
             var author = _mapper.Map<Author>(model);
@@ -241,6 +325,13 @@
             return result;
         }
 
+        /// <summary>
+        /// Edits the info of an existing author.
+        /// Returns true if changes are applied successfully.
+        /// </summary>
+        /// <param name="model">DTO model to map the info to the entity.</param>
+        /// <returns>Task&lt;bool&gt;</returns>
+        /// <exception cref="InvalidOperationException"></exception>
         public async Task<bool> EditAuthor(AuthorEditorModel model)
         {
             var doesAuthorExist = await AnyAuthor(model.Id);
@@ -259,6 +350,13 @@
             return result;
         }
 
+        /// <summary>
+        /// Adds a new genre to the context.
+        /// Returns true if it's successfully added.
+        /// </summary>
+        /// <param name="model">DTO model to map the info to the entity.</param>
+        /// <returns>Task&lt;bool&gt;</returns>
+        /// <exception cref="InvalidOperationException"></exception>
         public async Task<bool> AddNewBook(BookInfoModel model)
         {
             var doesGenreExist = await AnyGenre(model.GenreId);
@@ -276,6 +374,11 @@
             return result;
         }
 
+        /// <summary>
+        /// Gets all promotions.
+        /// </summary>
+        /// <param name="searchTerm">Checks if there's containing element in promotions name</param>
+        /// <returns>Task&lt;List&lt;PromotionListItem&gt;&gt;</returns>
         public async Task<List<PromotionListItem>> GetPromotions(string? searchTerm)
         {
             var result = _adminRepository
@@ -290,6 +393,12 @@
             return await result.ToListAsync();
         }
 
+        /// <summary>
+        /// Gets the whole info of a promotion with a specified id.
+        /// Returns null if nothing is found.
+        /// </summary>
+        /// <param name="id">Key identifier</param>
+        /// <returns>Task&lt;PromotionEditorModel?&gt;</returns>
         public async Task<PromotionEditorModel?> GetPromotion(int id)
         {
             var result = await _adminRepository
@@ -302,6 +411,11 @@
             return result;
         }
 
+        /// <summary>
+        /// Gets all authors and maps them to custom select element.
+        /// All ids are with 'author-' prefix
+        /// </summary>
+        /// <returns>Task&lt;List&lt;SelectionItemModel&gt;&gt;</returns>
         public async Task<List<SelectionItemModel>> GetPromotionAuthors()
         {
             var authors = await _adminRepository
@@ -316,6 +430,11 @@
             return authors;
         }
 
+        /// <summary>
+        /// Gets all genres and maps them to custom select element.
+        /// All ids are with 'genre-' prefix
+        /// </summary>
+        /// <returns>Task&lt;List&lt;SelectionItemModel&gt;&gt;</returns>
         public async Task<List<SelectionItemModel>> GetPromotionGenres()
         {
             var genres = await _adminRepository
@@ -330,6 +449,13 @@
             return genres;
         }
 
+
+        /// <summary>
+        /// Removes all mappings from a promotion by specified id.
+        /// Returns true if the action is completed successfully.
+        /// </summary>
+        /// <param name="promotionId">Key identifier</param>
+        /// <returns>Task&lt;bool&gt;</returns>
         public async Task<bool> RemovePromotions(int promotionId)
         {
             var genrePromotions = await _adminRepository
@@ -353,6 +479,18 @@
             return result;
         }
 
+        /// <summary>
+        /// Applies changes to the whole promotion.
+        /// Returns true if changes are applied successfully.
+        /// <para>Restrictions:</para>
+        /// <para>  -The promotion cannot be added if there are no books to the genre/author assigned.</para>
+        /// <para>  -The promotion cannot be added if the books already have other active promotions.</para>
+        /// <para>  -The promotion type can only be author/genre-[ID] only can be picked.</para>
+        /// </summary>
+        /// <param name="model">DTO model to map the info to the entity.</param>
+        /// <returns>Task&lt;bool&gt;</returns>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="InvalidOperationException"></exception>
         public async Task<bool> EditPromotion(PromotionEditorModel model)
         {
             var promotiontokens = model.PromotionType.Split("-");
@@ -429,6 +567,18 @@
             return result;
         }
 
+        /// <summary>
+        /// Add new promotion to the context.
+        /// Returns true if changes are applied successfully.
+        /// <para>Restrictions:</para>
+        /// <para>  -The promotion cannot be added if there are no books to the genre/author assigned.</para>
+        /// <para>  -The promotion cannot be added if the books already have other active promotions.</para>
+        /// <para>  -The promotion type can only be author/genre-[ID] only can be picked.</para>
+        /// </summary>
+        /// <param name="model">DTO model to map the info to the entity.</param>
+        /// <returns>Task&lt;bool&gt;</returns>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="InvalidOperationException"></exception>
         public async Task<bool> AddPromotion(PromotionEditorModel model)
         {
             var promotiontokens = model.PromotionType.Split("-");
@@ -498,6 +648,11 @@
             return result;
         }
 
+        /// <summary>
+        /// Gets all users
+        /// </summary>
+        /// <param name="searchTerm">Checks if the First/Last name, Roles or the Email has a containing element</param>
+        /// <returns>Task&lt;List&lt;UserListItem&gt;&gt;</returns>
         public async Task<List<UserListItem>> GetUsers(string searchTerm)
         {
 
@@ -529,6 +684,18 @@
             return await result.ToListAsync();
         }
 
+        /// <summary>
+        /// Promotes the user as follows Guest &gt; Employee &gt; Admin.
+        /// Returns true if the action is performed successfully.
+        /// <para>Restrictions:
+        ///     <para>  -The user cannot perform promotions on him self.</para>
+        /// </para>
+        /// </summary>
+        /// <param name="userId">User for promotion.</param>
+        /// <param name="currentUserId">The user who's performing the promotion</param>
+        /// <returns>Task&lt;bool&gt;</returns>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="InvalidOperationException"></exception>
         public async Task<bool> PromoteUser(string userId, Guid currentUserId)
         {
             var isUserIdValid = Guid.TryParse(userId, out var userGuid);
@@ -579,6 +746,18 @@
             return result.Succeeded;
         }
 
+        /// <summary>
+        /// Demotes the user as follows Guest &lt; Employee &lt; Admin.
+        /// Returns true if the action is performed successfully.
+        /// <para>Restrictions:
+        ///     <para>  -The user cannot perform promotions on him self.</para>
+        /// </para>
+        /// </summary>
+        /// <param name="userId">User for promotion.</param>
+        /// <param name="currentUserId">The user who's performing the promotion</param>
+        /// <returns>Task&lt;bool&gt;</returns>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="InvalidOperationException"></exception>
         public async Task<bool> DemoteUser(string userId, Guid currentUserId)
         {
             var isUserIdValid = Guid.TryParse(userId, out var userGuid);
@@ -629,6 +808,13 @@
             return result.Succeeded;
         }
 
+
+        /// <summary>
+        /// Checks if a not persisted promotion is intersecting with other promotions.
+        /// </summary>
+        /// <param name="promotion">Promotion for validation.</param>
+        /// <returns>Task&lt;bool&gt;</returns>
+        /// <exception cref="InvalidOperationException"></exception>
         private async Task<bool> IsPreExistingPromotionInvalid(Promotion promotion)
         {
             bool result = true;
@@ -674,6 +860,12 @@
             return result;
         }
 
+        /// <summary>
+        /// Checks if an existing promotion is intersecting with other promotions.
+        /// </summary>
+        /// <param name="promotion">Promotion for validation.</param>
+        /// <returns>Task&lt;bool&gt;</returns>
+        /// <exception cref="InvalidOperationException"></exception>
         private async Task<bool> IsExistingPromotionInvalid(Promotion promotion)
         {
             if (promotion.StartDate > promotion.EndDate)
@@ -714,7 +906,13 @@
             return result;
         }
 
-
+        /// <summary>
+        /// Gets the promotion discount percent if there's an existing promotion otherwise it returns 0.
+        /// </summary>
+        /// <param name="repository">Repository that holds the promotion.</param>
+        /// <param name="genreId">Book's genre id.</param>
+        /// <param name="authorId">Book's author id</param>
+        /// <returns>Task&lt;decimal&gt;</returns>
         private static async Task<decimal> GetPromotion(IRepository repository, int genreId, int authorId)
         {
             var promotion = await repository
