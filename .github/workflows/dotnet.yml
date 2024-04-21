@@ -5,9 +5,9 @@ name: .NET
 
 on:
   push:
-    branches: [ "master/WebShop/WebShop.sln" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "master/WebShop/WebShop.sln" ]
+    branches: [ "master" ]
 
 jobs:
   build:
@@ -21,8 +21,8 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore ./WebShopDemo/WebShop/WebShop.sln
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build ./WebShopDemo/WebShop/WebShop.sln --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test ./WebShopDemo/WebShop/WebShop.Testing.csproj --no-build --verbosity normal
