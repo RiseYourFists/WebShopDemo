@@ -21,8 +21,8 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Restore dependencies
-      run: dotnet restore ./WebShopDemo/WebShop/WebShop.sln
+      run: dotnet restore ./WebShop/WebShop.sln
     - name: Build
-      run: dotnet build ./WebShopDemo/WebShop/WebShop.sln --no-restore
+      run: dotnet build ./WebShop/WebShop.sln --no-restore
     - name: Test
-      run: dotnet test ./WebShopDemo/WebShop/WebShop.Testing.csproj --no-build --verbosity normal
+      run: dotnet test ./WebShop/WebShop.Testing.csproj --no-build --verbosity normal
