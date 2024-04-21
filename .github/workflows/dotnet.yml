@@ -25,4 +25,4 @@ jobs:
     - name: Build
       run: dotnet build ./WebShop/WebShop.sln --no-restore
     - name: Test
-      run: dotnet test ./WebShop/WebShop.Testing.csproj --no-build --verbosity normal
+      run: dotnet test ./WebShop.Testing.csproj --no-build --verbosity normal
