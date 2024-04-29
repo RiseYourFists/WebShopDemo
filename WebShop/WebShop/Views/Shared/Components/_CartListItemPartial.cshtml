@@ -7,6 +7,7 @@
         <div class="list-row">
             <div class="action-holder">
                 <form asp-controller="Cart" asp-action="Remove" asp-route-id="@item.Id" method="post">
+                    @Html.AntiForgeryToken()
                     <input type="hidden" name="returnUrl" value="@returnUrl" />
                     <button type="submit" class="remove-btn far fa-times-circle"></button>
                 </form>
@@ -18,7 +19,7 @@
                 @{
                     var price = $"{item.TotalPrice:f2}";
 
-                    <h3 title="@item.Title" >@item.Title</h3>
+                    <h3 title="@item.Title">@item.Title</h3>
                     <p>Quantity: @item.Quantity</p>
                     <span>@price$</span>
                 }

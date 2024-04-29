@@ -48,6 +48,7 @@
                 if (invoice.OrderStatus == OrderStatus.Pending)
                 {
                     <form asp-action="MarkAsShipped" method="post" class="action-bar">
+                        @Html.AntiForgeryToken()
                         <input type="hidden" name="Id" value="@invoice.Id"/>
                         <button class="generic-action">Mark as Shipped</button>
                     </form>
@@ -55,6 +56,7 @@
                 else if (invoice.OrderStatus == OrderStatus.Shipped)
                 {
                     <form asp-action="MarkAsDelivered" method="post" class="action-bar">
+                        @Html.AntiForgeryToken()
                         <input type="hidden" name="Id" value="@invoice.Id" />
                         <button class="confirm">Mark as Delivered</button>
                     </form>

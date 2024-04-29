@@ -15,13 +15,14 @@
         else
         {
             <form class="filter-bar">
+                @Html.AntiForgeryToken()
                 <div class="display-status">
                     @{
                         var statusList = (OrderStatus[])Enum.GetValues(typeof(OrderStatus));
                         foreach (var status in statusList)
                         {
                             var selection = Model.OrderStatus == status ? "selected" : string.Empty;
-                            var parameters =  new
+                            var parameters = new
                             {
                                 Status = status,
                                 Model.From,
@@ -44,12 +45,12 @@
                         @{
                             var orderList = (OrderClause[])Enum.GetValues(typeof(OrderClause));
                             var naming = new Dictionary<OrderClause, string>()
-                            {
-                                { OrderClause.OrderDateAsc, "Order date ascending"},
-                                { OrderClause.OrderDateDesc, "Order date descending"},
-                                { OrderClause.TotalPriceAsc, "Total price ascending"},
-                                { OrderClause.TotalPriceDesc, "Total price descending"}
-                            };
+                {
+                { OrderClause.OrderDateAsc, "Order date ascending"},
+                { OrderClause.OrderDateDesc, "Order date descending"},
+                { OrderClause.TotalPriceAsc, "Total price ascending"},
+                { OrderClause.TotalPriceDesc, "Total price descending"}
+                };
 
                             foreach (var clause in orderList)
                             {
@@ -57,7 +58,7 @@
                             }
                         }
                     </select>
-                    <input type="hidden" name="status" value="@Model.OrderStatus"/>
+                    <input type="hidden" name="status" value="@Model.OrderStatus" />
                     <button type="submit" class="fas fa-check"></button>
                 </div>
             </form>

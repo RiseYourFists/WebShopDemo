@@ -14,6 +14,7 @@
 
 <section id="my-orders">
     <form class="filter-bar">
+        @Html.AntiForgeryToken()
         <div class="display-status">
             @{
                 var statusList = (OrderStatus[])Enum.GetValues(typeof(OrderStatus));

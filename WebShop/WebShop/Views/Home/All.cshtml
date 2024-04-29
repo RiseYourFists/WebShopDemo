@@ -16,6 +16,7 @@
 
 <section id="search-result">
     <form class="search-header" method="get">
+        @Html.AntiForgeryToken()
         @{
             foreach (var genre in Model.Genres)
             {

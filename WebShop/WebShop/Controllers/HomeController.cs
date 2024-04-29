@@ -10,6 +10,7 @@
     using Services.Models.BookShop;
     using Services.ServiceControllers;
 
+    [AutoValidateAntiforgeryToken]
     public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;

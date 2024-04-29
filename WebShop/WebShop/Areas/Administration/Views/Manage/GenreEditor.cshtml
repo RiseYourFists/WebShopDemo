@@ -12,6 +12,7 @@
             <img src="@previewImg" alt="icon">
         </div>
         <form action="@action" method="post" class="form-list">
+            @Html.AntiForgeryToken()
             <div class="title">
                 <h1>@ViewData["Title"] Info</h1>
             </div>

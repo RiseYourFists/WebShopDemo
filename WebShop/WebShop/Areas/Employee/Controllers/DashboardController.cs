@@ -12,6 +12,7 @@
     using WebShop.Services.Models.MyOrders.Enumerations;
 
     [Area(nameof(Employee))]
+    [AutoValidateAntiforgeryToken]
     [Authorize(Roles = "Admin, Employee")]
     public class DashboardController : Controller
     {

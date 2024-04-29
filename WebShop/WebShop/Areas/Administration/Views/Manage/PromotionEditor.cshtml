@@ -6,6 +6,7 @@
 
     <section id="edit">
         <form action="@action" method="post" class="form-list">
+            @Html.AntiForgeryToken()
             <div class="title">
                 <h1>@ViewData["Title"]</h1>
             </div>

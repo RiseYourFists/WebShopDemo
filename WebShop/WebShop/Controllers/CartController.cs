@@ -6,6 +6,7 @@
     using Services.ServiceControllers;
     using WebShop.Core.Models.Identity;
 
+    [AutoValidateAntiforgeryToken]
     public class CartController : BaseController
     {
         private readonly BookShopService _service;

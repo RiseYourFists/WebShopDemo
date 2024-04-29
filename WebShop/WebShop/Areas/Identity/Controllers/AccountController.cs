@@ -11,6 +11,7 @@
     using static Services.ErrorMessages.AccountErrorMsgs.LoginErrors;
 
     [Authorize]
+    [AutoValidateAntiforgeryToken]
     [Area(nameof(Identity))]
     public class AccountController : Controller
     {
@@ -90,6 +91,7 @@
             return View(model);
         }
 
+        [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterModel model)
         {

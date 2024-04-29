@@ -28,7 +28,7 @@ builder.Services
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDependencies();
-builder.Services.AddAntiforgery();
+builder.Services.AddAntiforgery(options => options.ConfigureOptions());
 builder.Services.AddRazorPages();
 builder.Services.AddCors();
 builder.AddConfigurations();

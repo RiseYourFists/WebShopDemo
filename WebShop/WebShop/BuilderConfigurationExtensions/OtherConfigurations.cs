@@ -1,4 +1,5 @@
-﻿using WebShop.App.ModelBinders;
+﻿using Microsoft.AspNetCore.Mvc;
+using WebShop.App.ModelBinders;
 
 namespace WebShop.App.BuilderConfigurationExtensions
 {
@@ -8,7 +9,10 @@ namespace WebShop.App.BuilderConfigurationExtensions
         {
 
             builder.Services
-                .AddControllersWithViews()
+                .AddControllersWithViews(options =>
+                {
+                    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                })
                 .AddMvcOptions(options =>
                 {
                     options.ModelBinderProviders.Insert(0, new FloatingPointBinderProvider());

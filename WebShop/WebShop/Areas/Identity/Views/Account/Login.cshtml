@@ -9,6 +9,7 @@
     </div>
 
     <form class="form-list" method="post">
+        @Html.AntiForgeryToken()
         <div class="text-danger" asp-validation-summary="All"></div>
         <input type="hidden" asp-for="ReturnUrl"/>
         <div class="form-field">

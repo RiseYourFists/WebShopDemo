@@ -15,6 +15,7 @@ namespace WebShop.App.Areas.Administration.Controllers
     using Services.ServiceControllers;
 
     [Area(nameof(Administration))]
+    [AutoValidateAntiforgeryToken]
     [Authorize(Roles = "Admin")]
     public class ManageController : Controller
     {

@@ -5,6 +5,8 @@
     using Services.ServiceControllers;
     using WebShop.Services.Models.MyOrders;
     using WebShop.Services.Models.MyOrders.Enumerations;
+
+    [AutoValidateAntiforgeryToken]
     public class MyOrdersController : BaseController
     {
         private readonly MyOrderService _myOrderService;

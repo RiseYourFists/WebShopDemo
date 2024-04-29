@@ -8,6 +8,7 @@
         <h1 class="title">Order placement</h1>
     </div>
     <form asp-controller="Cart" asp-action="Order" method="post" class="form-list">
+        @Html.AntiForgeryToken()
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-field">
             <input type="text" asp-for="Country" placeholder="">

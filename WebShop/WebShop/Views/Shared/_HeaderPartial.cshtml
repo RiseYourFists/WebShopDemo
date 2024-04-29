@@ -7,6 +7,7 @@
     <header @centered class="main-header" id="top">
         <div class="search-bar">
             <form class="search-bar-wrapper" asp-controller="Home" asp-action="All" method="get">
+                @Html.AntiForgeryToken()
                 <input type="search" name="searchTerm" placeholder="Search..." value="@ViewBag.SearchTerm">
                 <button class="fas fa-search"></button>
             </form>
