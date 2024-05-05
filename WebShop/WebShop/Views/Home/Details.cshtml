@@ -4,7 +4,14 @@
 @model BookDetail;
 @{
     var returnRoute = ViewBag.ReturnRoute;
-    returnRoute = returnRoute.Replace("amp;", "");
+    if (returnRoute != null)
+    {
+        returnRoute = returnRoute.Replace("amp;", "");
+    }
+    else
+    {
+        returnRoute = "/";
+    }
 
     <section id="book-info">
         <article class="wrapper">

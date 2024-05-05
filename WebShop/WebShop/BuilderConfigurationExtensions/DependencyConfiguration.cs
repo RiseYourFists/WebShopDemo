@@ -17,6 +17,7 @@
             services.AddScoped<IOrdersRepository, OrdersRepository>();
             services.AddScoped<IAdminRepository, AdminRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IBookShopUtilityRepository, BookShopUtilityRepository>();
 
             services.AddAutoMapper(typeof(MappingProfile));
             services.AddScoped<ApplicationDbContext>();
@@ -25,6 +26,7 @@
             services.AddScoped<MyOrderService>();
             services.AddScoped<AdministrationService>();
             services.AddScoped<EmployeeService>();
+            services.AddScoped<IBookShopUtilityService, BookShopUtilityService>();
             return services;
         }
     }

@@ -27,10 +27,10 @@ builder.Services
     .AddDefaultTokenProviders();
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-builder.Services.AddDependencies();
 builder.Services.AddAntiforgery(options => options.ConfigureOptions());
+builder.Services.AddCors(options => options.ConfigureOptions());
+builder.Services.AddDependencies();
 builder.Services.AddRazorPages();
-builder.Services.AddCors();
 builder.AddConfigurations();
 
 
