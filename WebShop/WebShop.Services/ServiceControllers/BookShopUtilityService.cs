@@ -19,7 +19,7 @@
 
         public async Task<string> GetSearchResults(string searchTerm)
         {
-            var itemsOnList = 10;
+            var itemsOnList = 5;
 
             if (string.IsNullOrWhiteSpace(searchTerm))
             {
